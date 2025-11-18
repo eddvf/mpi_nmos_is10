@@ -1,0 +1,1164 @@
+[
+         {
+              "id"           : "service",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "HTTP"
+          }
+,         {
+              "id"           : "pre_128cipher",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "No 128 cipher limit bug"
+          }
+,         {
+              "id"           : "SSLv2",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "not offered"
+          }
+,         {
+              "id"           : "SSLv3",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "not offered"
+          }
+,         {
+              "id"           : "TLS1",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "not offered"
+          }
+,         {
+              "id"           : "TLS1_1",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "not offered"
+          }
+,         {
+              "id"           : "TLS1_2",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "offered"
+          }
+,         {
+              "id"           : "TLS1_3",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "offered with final"
+          }
+,         {
+              "id"           : "NPN",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "not offered"
+          }
+,         {
+              "id"           : "ALPN",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "http/1.1"
+          }
+,         {
+              "id"           : "cipherlist_NULL",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cwe"          : "CWE-327",
+              "finding"      : "not offered"
+          }
+,         {
+              "id"           : "cipherlist_aNULL",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cwe"          : "CWE-327",
+              "finding"      : "not offered"
+          }
+,         {
+              "id"           : "cipherlist_EXPORT",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cwe"          : "CWE-327",
+              "finding"      : "not offered"
+          }
+,         {
+              "id"           : "cipherlist_LOW",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cwe"          : "CWE-327",
+              "finding"      : "not offered"
+          }
+,         {
+              "id"           : "cipherlist_3DES_IDEA",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "cwe"          : "CWE-310",
+              "finding"      : "not offered"
+          }
+,         {
+              "id"           : "cipherlist_AVERAGE",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "LOW",
+              "cwe"          : "CWE-310",
+              "finding"      : "offered"
+          }
+,         {
+              "id"           : "cipherlist_STRONG",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "offered"
+          }
+,         {
+              "id"           : "PFS",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "offered"
+          }
+,         {
+              "id"           : "PFS_ciphers",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 ECDHE-RSA-AES256-GCM-SHA384 ECDHE-RSA-AES256-SHA384 ECDHE-RSA-AES256-SHA ECDHE-RSA-CHACHA20-POLY1305 ECDHE-RSA-CAMELLIA256-SHA384 ECDHE-ARIA256-GCM-SHA384 TLS_AES_128_GCM_SHA256 ECDHE-RSA-AES128-GCM-SHA256 ECDHE-RSA-AES128-SHA256 ECDHE-RSA-AES128-SHA ECDHE-RSA-CAMELLIA128-SHA256 ECDHE-ARIA128-GCM-SHA256"
+          }
+,         {
+              "id"           : "PFS_ECDHE_curves",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "prime256v1 secp384r1 secp521r1 X25519 X448"
+          }
+,         {
+              "id"           : "DH_groups",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "ffdhe2048 ffdhe3072"
+          }
+,         {
+              "id"           : "cipher_order",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "HIGH",
+              "finding"      : "NOT a cipher order configured"
+          }
+,         {
+              "id"           : "protocol_negotiated",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "Default protocol TLS1.3"
+          }
+,         {
+              "id"           : "cipher_negotiated",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "TLS_AES_256_GCM_SHA384, 253 bit ECDH (X25519)  (limited sense as client will pick)"
+          }
+,         {
+              "id"           : "cipher_order_",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "at   (limited sense as client will pick)"
+          }
+,         {
+              "id"           : "cipher_order_",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "at   (limited sense as client will pick)"
+          }
+,         {
+              "id"           : "cipher_order_",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "at   (limited sense as client will pick)"
+          }
+,         {
+              "id"           : "cipher_order_",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "at   (limited sense as client will pick)"
+          }
+,         {
+              "id"           : "cipher_order_TLSv1.2",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "ECDHE-RSA-AES256-GCM-SHA384 at TLSv1.2  (limited sense as client will pick)"
+          }
+,         {
+              "id"           : "cipher_order_TLSv1.3",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLS_AES_128_GCM_SHA256 at TLSv1.3  (limited sense as client will pick)"
+          }
+,         {
+              "id"           : "TLS_extensions",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "'renegotiation info/#65281' 'server name/#0' 'EC point formats/#11' 'session ticket/#35' 'supported versions/#43' 'key share/#51' 'supported_groups/#10' 'max fragment length/#1' 'application layer protocol negotiation/#16' 'encrypt-then-mac/#22' 'extended master secret/#23'"
+          }
+,         {
+              "id"           : "TLS_session_ticket",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "valid for 300 seconds only (<daily)"
+          }
+,         {
+              "id"           : "SSL_sessionID_support",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "yes"
+          }
+,         {
+              "id"           : "sessionresumption_ticket",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "supported"
+          }
+,         {
+              "id"           : "sessionresumption_ID",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "not supported"
+          }
+,         {
+              "id"           : "TLS_timestamp",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "random"
+          }
+,         {
+              "id"           : "cert_numbers",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "1"
+          }
+,         {
+              "id"           : "cert_signatureAlgorithm",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "SHA256 with RSA"
+          }
+,         {
+              "id"           : "cert_keySize",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "RSA 2048 bits"
+          }
+,         {
+              "id"           : "cert_keyUsage",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "No server key usage information"
+          }
+,         {
+              "id"           : "cert_extKeyUsage",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "No server extended key usage information"
+          }
+,         {
+              "id"           : "cert_serialNumber",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "17A1244D57951D4A64AC92FCECF9B8B2269E5CDB"
+          }
+,         {
+              "id"           : "cert_serialNumberLen",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "20"
+          }
+,         {
+              "id"           : "cert_fingerprintSHA1",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "E9CCA5A5BE5ADE389BB8B55E589E756131D75433"
+          }
+,         {
+              "id"           : "cert_fingerprintSHA256",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "39205D5D4C9BDB3AD6D3D9037361D6D5DA9E4D3DCB92B54A0535F48B948584EB"
+          }
+,         {
+              "id"           : "cert",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "-----BEGIN CERTIFICATE----- MIIEzzCCAregAwIBAgIUF6EkTVeVHUpkrJL87Pm4siaeXNswDQYJKoZIhvcNAQEL BQAwVzELMAkGA1UEBhMCQkUxETAPBgNVBAgMCEJydXNzZWxzMREwDwYDVQQHDAhC cnVzc2VsczEMMAoGA1UECgwDRUJVMRQwEgYDVQQDDAtFQlUgTk1PUyBDQTAeFw0y NTA3MzExMzU2MjNaFw0yNjA3MzExMzU2MjNaMGUxCzAJBgNVBAYTAkJFMREwDwYD VQQIDAhCcnVzc2VsczERMA8GA1UEBwwIQnJ1c3NlbHMxDDAKBgNVBAoMA0VCVTEi MCAGA1UEAwwZbm1vcy1yZWdpc3RyeS5lYXN5ZWJ1LmNvbTCCASIwDQYJKoZIhvcN AQEBBQADggEPADCCAQoCggEBAJo0FLR5Op6+ARqdkJx+DWhBK4PE7tJPCtT4TfXi tUnLN9HOpUaBcYloR+iO/fGdbjf9kMUB0Vg7G4YxkLcnVweO2FWoZL5ANSXwRcU9 QiWngT9Y5s/9AXXtxqjs5isydc1SPRkOWHis9SQ/DIdRGEd+b1ckasGFcxJXZz6O xoXPx3IZIjjZzmuVsUw7ZC6ArmoMl9wZSGufZL/kSIjuvNnXX22AwEAtpKOOVd8j 8YWdnRFJnslFAQWOVr137z2ZQWWIfiFVXkQ83vGcMVeaMs4Sm4YoqxYdJQMs9vqm 6mhaxSJxJN/elJI3ihX0C7vvdHLP3c4lv4J1AcYPPQUcXjsCAwEAAaOBhDCBgTA/ BgNVHREEODA2ghlubW9zLXJlZ2lzdHJ5LmVhc3llYnUuY29tgg0qLmVhc3llYnUu Y29thwTAqFnJhwTAqFnKMB0GA1UdDgQWBBTCVxuhlWqZeA12qyKvnuiQqitsWDAf BgNVHSMEGDAWgBT48twh70DbRc5vY7RkyG3NO+uK1DANBgkqhkiG9w0BAQsFAAOC AgEAmWYyvlRuO4emz89lYnX39CTjxvBSHFwBqZJbYzoVwqWNAQqNZ0Zp7b8oPGp+ oWAqiMK4+0Aq2rCGIdyysjiwgqkSMNEMfOTNAxFvQGStaErvnB5Tu8qz3g9JiOH2 tZVobnInD3ln6lcJddh4l8SUfCefrU9iOea1UsMSTjDKDLaQ2XYJVmZoCIrUmf/H jNKxH19qWK3mnd+Wx5TLchiRm4K8o8n/jw7fof7wjD6wKVQ9J8+lNQrRF4UB7n9F kDmKkbLlfonrU9fIcWdTZF2yPrWIx0dI0hK7fjad+pTI4ZZ0eiynbMPlnm1VZIck KZFAT3lIDUwEA0uJupkvoopzOQi9KYioNSuYnUZTp4C0wYs4QCvc0IfJKd/9mta5 XlDBJzPhcMnr+t7N9ncLncyDwbbuyoSuwzTbZisYJLO64MfS709BalwBz8igrmML GmtYAufe0RNTPNFwSrkOMXbldg2KXTiHzhVzrIWShyCNVBKHLEQVUY1kTl2adr6E nsYXYWOxE67TjSZlb3bAOEzA8KZz9iz9u5HOeJ3TS85cygq3QxkFXfu/bKeMIiJ5 Q9iZFDoZ7NMirj1s3a4x+xIAuzFJrMzLAdLqj/rpvQpofFawAvUm2a0a2bXhzhYR p9dc1afmRWRAmascw4VgFPISCFtyKw1XhNN7tLANQAsah1c= -----END CERTIFICATE-----"
+          }
+,         {
+              "id"           : "cert_commonName",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "nmos-registry.easyebu.com"
+          }
+,         {
+              "id"           : "cert_commonName_wo_SNI",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "nmos-registry.easyebu.com"
+          }
+,         {
+              "id"           : "cert_subjectAltName",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "nmos-registry.easyebu.com *.easyebu.com 192.168.89.201 192.168.89.202"
+          }
+,         {
+              "id"           : "cert_caIssuers",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "EBU NMOS CA (EBU from BE)"
+          }
+,         {
+              "id"           : "cert_trust",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "Ok via SAN wildcard (same w/o SNI)"
+          }
+,         {
+              "id"           : "cert_chain_of_trust",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "CRITICAL",
+              "finding"      : "failed (chain incomplete)."
+          }
+,         {
+              "id"           : "cert_certificatePolicies_EV",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "no"
+          }
+,         {
+              "id"           : "cert_eTLS",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "not present"
+          }
+,         {
+              "id"           : "cert_expirationStatus",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "364 >= 60 days"
+          }
+,         {
+              "id"           : "cert_notBefore",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "2025-07-31 13:56"
+          }
+,         {
+              "id"           : "cert_notAfter",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "2026-07-31 13:56"
+          }
+,         {
+              "id"           : "cert_validityPeriod",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "No finding"
+          }
+,         {
+              "id"           : "certs_countServer",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "1"
+          }
+,         {
+              "id"           : "certs_list_ordering_problem",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "no"
+          }
+,         {
+              "id"           : "cert_crlDistributionPoints",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "--"
+          }
+,         {
+              "id"           : "cert_ocspURL",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "--"
+          }
+,         {
+              "id"           : "cert_revocation",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "HIGH",
+              "finding"      : "Neither CRL nor OCSP URI provided"
+          }
+,         {
+              "id"           : "OCSP_stapling",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "not offered"
+          }
+,         {
+              "id"           : "cert_mustStapleExtension",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "--"
+          }
+,         {
+              "id"           : "DNS_CAArecord",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "LOW",
+              "finding"      : "--"
+          }
+,         {
+              "id"           : "certificate_transparency",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "--"
+          }
+,         {
+              "id"           : "HTTP_status_code",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "200 OK ('/')"
+          }
+,         {
+              "id"           : "HTTP_clock_skew",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "0 seconds from localtime"
+          }
+,         {
+              "id"           : "HSTS",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "LOW",
+              "finding"      : "not offered"
+          }
+,         {
+              "id"           : "HPKP",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "No support for HTTP Public Key Pinning"
+          }
+,         {
+              "id"           : "banner_server",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "nginx/1.29.0 Server-Timing: proc;dur=0.859"
+          }
+,         {
+              "id"           : "banner_application",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "No application banner found"
+          }
+,         {
+              "id"           : "cookie_count",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "0 at '/'"
+          }
+,         {
+              "id"           : "Access-Control-Allow-Origin",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "*"
+          }
+,         {
+              "id"           : "banner_reverseproxy",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "cwe"          : "CWE-200",
+              "finding"      : "--"
+          }
+,         {
+              "id"           : "heartbleed",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cve"          : "CVE-2014-0160",
+              "cwe"          : "CWE-119",
+              "finding"      : "not vulnerable, no heartbeat extension"
+          }
+,         {
+              "id"           : "CCS",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cve"          : "CVE-2014-0224",
+              "cwe"          : "CWE-310",
+              "finding"      : "not vulnerable"
+          }
+,         {
+              "id"           : "ticketbleed",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cve"          : "CVE-2016-9244",
+              "cwe"          : "CWE-200",
+              "finding"      : "not vulnerable"
+          }
+,         {
+              "id"           : "ROBOT",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cve"          : "CVE-2017-17382 CVE-2017-17427 CVE-2017-17428 CVE-2017-13098 CVE-2017-1000385 CVE-2017-13099 CVE-2016-6883 CVE-2012-5081 CVE-2017-6168",
+              "cwe"          : "CWE-203",
+              "finding"      : "not vulnerable"
+          }
+,         {
+              "id"           : "secure_renego",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cwe"          : "CWE-310",
+              "finding"      : "supported"
+          }
+,         {
+              "id"           : "secure_client_renego",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cve"          : "CVE-2011-1473",
+              "cwe"          : "CWE-310",
+              "finding"      : "not vulnerable"
+          }
+,         {
+              "id"           : "CRIME_TLS",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cve"          : "CVE-2012-4929",
+              "cwe"          : "CWE-310",
+              "finding"      : "not vulnerable"
+          }
+,         {
+              "id"           : "BREACH",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cve"          : "CVE-2013-3587",
+              "cwe"          : "CWE-310",
+              "finding"      : "not vulnerable, no HTTP compression  - only supplied '/' tested"
+          }
+,         {
+              "id"           : "POODLE_SSL",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cve"          : "CVE-2014-3566",
+              "cwe"          : "CWE-310",
+              "finding"      : "not vulnerable, no SSLv3"
+          }
+,         {
+              "id"           : "fallback_SCSV",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "no protocol below TLS 1.2 offered"
+          }
+,         {
+              "id"           : "SWEET32",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cve"          : "CVE-2016-2183 CVE-2016-6329",
+              "cwe"          : "CWE-327",
+              "finding"      : "not vulnerable"
+          }
+,         {
+              "id"           : "FREAK",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cve"          : "CVE-2015-0204",
+              "cwe"          : "CWE-310",
+              "finding"      : "not vulnerable"
+          }
+,         {
+              "id"           : "DROWN",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cve"          : "CVE-2016-0800 CVE-2016-0703",
+              "cwe"          : "CWE-310",
+              "finding"      : "not vulnerable on this host and port"
+          }
+,         {
+              "id"           : "DROWN_hint",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "cve"          : "CVE-2016-0800 CVE-2016-0703",
+              "cwe"          : "CWE-310",
+              "finding"      : "Make sure you don't use this certificate elsewhere with SSLv2 enabled services, see https://censys.io/ipv4?q=39205D5D4C9BDB3AD6D3D9037361D6D5DA9E4D3DCB92B54A0535F48B948584EB"
+          }
+,         {
+              "id"           : "LOGJAM",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cve"          : "CVE-2015-4000",
+              "cwe"          : "CWE-310",
+              "finding"      : "not vulnerable, no DH EXPORT ciphers,"
+          }
+,         {
+              "id"           : "LOGJAM-common_primes",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cve"          : "CVE-2015-4000",
+              "cwe"          : "CWE-310",
+              "finding"      : "no DH key with <= TLS 1.2"
+          }
+,         {
+              "id"           : "BEAST",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cve"          : "CVE-2011-3389",
+              "cwe"          : "CWE-20",
+              "finding"      : "not vulnerable, no SSL3 or TLS1"
+          }
+,         {
+              "id"           : "LUCKY13",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "LOW",
+              "cve"          : "CVE-2013-0169",
+              "cwe"          : "CWE-310",
+              "finding"      : "potentially vulnerable, uses TLS CBC ciphers"
+          }
+,         {
+              "id"           : "RC4",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "OK",
+              "cve"          : "CVE-2013-2566 CVE-2015-2808",
+              "cwe"          : "CWE-310",
+              "finding"      : "not vulnerable"
+          }
+,         {
+              "id"           : "cipher_x1302",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x1302   TLS_AES_256_GCM_SHA384            ECDH 253   AESGCM      256      TLS_AES_256_GCM_SHA384"
+          }
+,         {
+              "id"           : "cipher_x1303",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x1303   TLS_CHACHA20_POLY1305_SHA256      ECDH 253   ChaCha20    256      TLS_CHACHA20_POLY1305_SHA256"
+          }
+,         {
+              "id"           : "cipher_xc030",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc030   ECDHE-RSA-AES256-GCM-SHA384       ECDH 521   AESGCM      256      TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+          }
+,         {
+              "id"           : "cipher_xc028",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc028   ECDHE-RSA-AES256-SHA384           ECDH 521   AES         256      TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384"
+          }
+,         {
+              "id"           : "cipher_xc014",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc014   ECDHE-RSA-AES256-SHA              ECDH 521   AES         256      TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
+          }
+,         {
+              "id"           : "cipher_xcca8",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xcca8   ECDHE-RSA-CHACHA20-POLY1305       ECDH 521   ChaCha20    256      TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+          }
+,         {
+              "id"           : "cipher_xc077",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc077   ECDHE-RSA-CAMELLIA256-SHA384      ECDH 521   Camellia    256      TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384"
+          }
+,         {
+              "id"           : "cipher_x9d",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x9d     AES256-GCM-SHA384                 RSA        AESGCM      256      TLS_RSA_WITH_AES_256_GCM_SHA384"
+          }
+,         {
+              "id"           : "cipher_xc09d",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc09d   AES256-CCM                        RSA        AESCCM      256      TLS_RSA_WITH_AES_256_CCM"
+          }
+,         {
+              "id"           : "cipher_x3d",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x3d     AES256-SHA256                     RSA        AES         256      TLS_RSA_WITH_AES_256_CBC_SHA256"
+          }
+,         {
+              "id"           : "cipher_x35",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x35     AES256-SHA                        RSA        AES         256      TLS_RSA_WITH_AES_256_CBC_SHA"
+          }
+,         {
+              "id"           : "cipher_xc0",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc0     CAMELLIA256-SHA256                RSA        Camellia    256      TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256"
+          }
+,         {
+              "id"           : "cipher_x84",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x84     CAMELLIA256-SHA                   RSA        Camellia    256      TLS_RSA_WITH_CAMELLIA_256_CBC_SHA"
+          }
+,         {
+              "id"           : "cipher_xc051",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc051   ARIA256-GCM-SHA384                RSA        ARIAGCM     256      TLS_RSA_WITH_ARIA_256_GCM_SHA384"
+          }
+,         {
+              "id"           : "cipher_xc061",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc061   ECDHE-ARIA256-GCM-SHA384          ECDH 521   ARIAGCM     256      TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384"
+          }
+,         {
+              "id"           : "cipher_x1301",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x1301   TLS_AES_128_GCM_SHA256            ECDH 253   AESGCM      128      TLS_AES_128_GCM_SHA256"
+          }
+,         {
+              "id"           : "cipher_xc02f",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc02f   ECDHE-RSA-AES128-GCM-SHA256       ECDH 521   AESGCM      128      TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+          }
+,         {
+              "id"           : "cipher_xc027",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc027   ECDHE-RSA-AES128-SHA256           ECDH 521   AES         128      TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+          }
+,         {
+              "id"           : "cipher_xc013",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc013   ECDHE-RSA-AES128-SHA              ECDH 521   AES         128      TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+          }
+,         {
+              "id"           : "cipher_xc09c",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc09c   AES128-CCM                        RSA        AESCCM      128      TLS_RSA_WITH_AES_128_CCM"
+          }
+,         {
+              "id"           : "cipher_xc076",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc076   ECDHE-RSA-CAMELLIA128-SHA256      ECDH 521   Camellia    128      TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+          }
+,         {
+              "id"           : "cipher_x9c",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x9c     AES128-GCM-SHA256                 RSA        AESGCM      128      TLS_RSA_WITH_AES_128_GCM_SHA256"
+          }
+,         {
+              "id"           : "cipher_x3c",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x3c     AES128-SHA256                     RSA        AES         128      TLS_RSA_WITH_AES_128_CBC_SHA256"
+          }
+,         {
+              "id"           : "cipher_x2f",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x2f     AES128-SHA                        RSA        AES         128      TLS_RSA_WITH_AES_128_CBC_SHA"
+          }
+,         {
+              "id"           : "cipher_xba",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xba     CAMELLIA128-SHA256                RSA        Camellia    128      TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+          }
+,         {
+              "id"           : "cipher_x41",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x41     CAMELLIA128-SHA                   RSA        Camellia    128      TLS_RSA_WITH_CAMELLIA_128_CBC_SHA"
+          }
+,         {
+              "id"           : "cipher_xc050",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc050   ARIA128-GCM-SHA256                RSA        ARIAGCM     128      TLS_RSA_WITH_ARIA_128_GCM_SHA256"
+          }
+,         {
+              "id"           : "cipher_xc060",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc060   ECDHE-ARIA128-GCM-SHA256          ECDH 521   ARIAGCM     128      TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256"
+          }
+,         {
+              "id"           : "clientsimulation-android_442",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384"
+          }
+,         {
+              "id"           : "clientsimulation-android_500",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES256-SHA"
+          }
+,         {
+              "id"           : "clientsimulation-android_60",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES128-GCM-SHA256"
+          }
+,         {
+              "id"           : "clientsimulation-android_70",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES128-GCM-SHA256"
+          }
+,         {
+              "id"           : "clientsimulation-android_81",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES128-GCM-SHA256"
+          }
+,         {
+              "id"           : "clientsimulation-android_90",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.3 TLS_AES_128_GCM_SHA256"
+          }
+,         {
+              "id"           : "clientsimulation-android_X",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.3 TLS_AES_128_GCM_SHA256"
+          }
+,         {
+              "id"           : "clientsimulation-chrome_74_win10",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.3 TLS_AES_128_GCM_SHA256"
+          }
+,         {
+              "id"           : "clientsimulation-chrome_79_win10",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.3 TLS_AES_128_GCM_SHA256"
+          }
+,         {
+              "id"           : "clientsimulation-firefox_66_win81",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.3 TLS_AES_128_GCM_SHA256"
+          }
+,         {
+              "id"           : "clientsimulation-firefox_71_win10",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.3 TLS_AES_128_GCM_SHA256"
+          }
+,         {
+              "id"           : "clientsimulation-ie_6_xp",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "No connection"
+          }
+,         {
+              "id"           : "clientsimulation-ie_8_win7",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "No connection"
+          }
+,         {
+              "id"           : "clientsimulation-ie_8_xp",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "No connection"
+          }
+,         {
+              "id"           : "clientsimulation-ie_11_win7",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "clientsimulation-ie_11_win81",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "clientsimulation-ie_11_winphone81",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 AES128-SHA256"
+          }
+,         {
+              "id"           : "clientsimulation-ie_11_win10",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384"
+          }
+,         {
+              "id"           : "clientsimulation-edge_15_win10",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384"
+          }
+,         {
+              "id"           : "clientsimulation-edge_17_win10",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384"
+          }
+,         {
+              "id"           : "clientsimulation-opera_66_win10",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.3 TLS_AES_128_GCM_SHA256"
+          }
+,         {
+              "id"           : "clientsimulation-safari_9_ios9",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384"
+          }
+,         {
+              "id"           : "clientsimulation-safari_9_osx1011",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384"
+          }
+,         {
+              "id"           : "clientsimulation-safari_10_osx1012",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384"
+          }
+,         {
+              "id"           : "clientsimulation-safari_121_ios_122",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.3 TLS_CHACHA20_POLY1305_SHA256"
+          }
+,         {
+              "id"           : "clientsimulation-safari_130_osx_10146",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.3 TLS_CHACHA20_POLY1305_SHA256"
+          }
+,         {
+              "id"           : "clientsimulation-apple_ats_9_ios9",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384"
+          }
+,         {
+              "id"           : "clientsimulation-java_6u45",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "No connection"
+          }
+,         {
+              "id"           : "clientsimulation-java_7u25",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "No connection"
+          }
+,         {
+              "id"           : "clientsimulation-java_8u161",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "clientsimulation-java1102",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.3 TLS_AES_128_GCM_SHA256"
+          }
+,         {
+              "id"           : "clientsimulation-java1201",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.3 TLS_AES_128_GCM_SHA256"
+          }
+,         {
+              "id"           : "clientsimulation-openssl_102e",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384"
+          }
+,         {
+              "id"           : "clientsimulation-openssl_110l",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384"
+          }
+,         {
+              "id"           : "clientsimulation-openssl_111d",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.3 TLS_AES_256_GCM_SHA384"
+          }
+,         {
+              "id"           : "clientsimulation-thunderbird_68_3_1",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.3 TLS_AES_128_GCM_SHA256"
+          }
+,         {
+              "id"           : "scanTime",
+              "ip"           : "proxy.easyebu.com/192.168.89.200",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "93"
+          }
+]

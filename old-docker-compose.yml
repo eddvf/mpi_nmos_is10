@@ -1,0 +1,154 @@
+version: '3.8'
+
+services:
+  bind9:
+    image: ubuntu/bind9:latest
+    container_name: bind9
+    hostname: vorfaj2025-10  # Official hostname
+    restart: always
+    volumes:
+      - ./bind/config/named.conf.options:/etc/bind/named.conf.options
+      - ./bind/config/named.conf.local:/etc/bind/named.conf.local
+      - ./bind/config/db.easyebu.com:/etc/bind/db.easyebu.com
+      - ./bind/config/db.10.100.64:/etc/bind/db.10.100.64  # Reverse DNS
+    networks:
+      external:
+        ipv4_address: '10.100.64.20'
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-proxy
+    hostname: vorfaj2025-01  # Official hostname
+    restart: always
+    dns: 10.100.64.20
+    dns_search: easyebu.com
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+    ports:
+      - "443:443"
+      - "80:80"
+    networks:
+      public:
+      external:
+        ipv4_address: '10.100.64.11'
+    depends_on:
+      bind9:
+        condition: service_started
+      keycloak:
+        condition: service_healthy
+
+  nmos-registry:
+    image: endritv98/nmos-is10:basic_cred
+    container_name: nmos-registry
+    hostname: vorfaj2025-02  # Official hostname
+    dns: 10.100.64.20
+    dns_search: easyebu.com
+    volumes:
+      - "./json_configs/registry.json:/home/registry.json"
+      - "./nginx/certs:/home/certs:ro"
+    environment:
+      - RUN_NODE=FALSE
+    networks:
+      external:
+        ipv4_address: '10.100.64.12'
+    depends_on:
+      keycloak:
+        condition: service_healthy
+      bind9:
+        condition: service_started
+
+  nmos-virtnode:
+    image: endritv98/nmos-is10:basic_cred
+    container_name: nmos-virtnode
+    hostname: vorfaj2025-03  # Official hostname
+    dns: 10.100.64.20
+    dns_search: easyebu.com
+    volumes:
+      - "./json_configs/node.json:/home/node.json"
+      - "./nginx/certs:/home/certs:ro"
+    environment:
+      - RUN_NODE=TRUE
+    networks:
+      external:
+        ipv4_address: '10.100.64.13'
+    depends_on:
+      nmos-registry:
+        condition: service_started
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    hostname: vorfaj2025-04  # Official hostname
+    restart: always
+    dns: 10.100.64.20
+    dns_search: easyebu.com
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Named volume for backup exclusion
+    networks:
+      external:
+        ipv4_address: '10.100.64.14'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U keycloak"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    hostname: vorfaj2025-05  # Official hostname
+    restart: always
+    dns: 10.100.64.20
+    dns_search: easyebu.com
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_DB=postgres
+      - KC_DB_URL=jdbc:postgresql://10.100.64.14:5432/keycloak  
+      - KC_DB_USERNAME=keycloak
+      - KC_DB_PASSWORD=keycloak_password
+      - KC_PROXY_HEADERS=xforwarded
+      - KC_HOSTNAME=keycloak.easyebu.com
+      - KC_HOSTNAME_STRICT=false
+      - KC_HTTP_ENABLED=true
+      - KC_HTTP_PORT=8080
+      - KC_FEATURES=token-exchange,admin-fine-grained-authz
+      - KC_HEALTH_ENABLED=true
+    volumes:
+      - ./nginx/certs:/opt/keycloak/certs:ro
+      - ./keycloak/themes:/opt/keycloak/themes
+    command: start
+    networks:
+      external:
+        ipv4_address: '10.100.64.15'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      bind9:
+        condition: service_started
+    healthcheck: 
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/localhost/8080"] 
+      interval: 30s 
+      timeout: 3s 
+      retries: 5
+
+networks:
+  public:
+    driver: bridge
+  external:
+    driver: macvlan
+    driver_opts:
+      parent: enp1s0
+    ipam:
+      config:
+        - subnet: 10.100.64.0/24
+          gateway: 10.100.64.254
+
+volumes:
+  postgres_data:
+    driver: local

@@ -1,0 +1,31 @@
+# User-specific config
+.env
+.env.*
+
+# Certificates / keys
+nginx/certs/
+*.key
+*.pem
+*.srl
+
+# Keycloak / DB backups
+keycloak_backup*.sql
+postgres/data/
+
+# Local docker runtime artefacts (optional)
+docker-ip
+docker-mac
+docker-pid
+
+# Build tree not needed by users
+build-nmos-cpp/
+
+# Editor / OS junk
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.tmp
+*.bak
+EOF
+

@@ -1,0 +1,605 @@
+ebu-nuc-1@ebu-nuc-1:~/Desktop/nmos-is10$ docker logs nmos-registry 
+
+Start of container entrypoint.sh BASH script...
+
+Reading global parameters and setting defaults
+Using Registry JSON file /home/registry.json
+Using Node JSON file /home/node.json
+
+Checking for update_label parameter
+Insert/Replace label: with nmos-registry.easyebu.com hostname in /home/registry.json file
+mv: cannot move '/home/registry.json.tmp' to '/home/registry.json': Device or resource busy
+Insert/Replace label: with nmos-registry.easyebu.com hostname in /home/node.json file
+
+Checking for update_ptp_domain parameter
+Sending JSON: {"username": "admin", "password": "admin", "cmd": "show ptp", "execution_type": "sync"}
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (7) Failed to connect to localhost port 443 after 0 ms: Connection refused
+updata_ptp_domain set but not running on a Mellanox switch - not updating ptp_domain_number in /home/registry.json
+
+Starting mDNSResponder service
+Starting Apple Darwin Multicast DNS / DNS Service Discovery daemon: mdnsd.
+
+Setting MQTT Broker port to 1883
+
+Starting MQTT Broker Service
+ * Starting network daemon: mosquitto
+   ...done.
+
+Advertising MQTT Broker using mDNS instance: nmos-cpp_mqtt_192.168.89.201:1883
+
+Starting Sony Registry Application with following config
+{
+  "logging_level": -40,
+  "client_secure": true,
+  "server_secure": false,
+  "host_name": "nmos-registry.easyebu.com",
+  "domain": "easyebu.com",
+  "pri": 99,
+  "label": "easy-nmos-registry",
+  "http_port": 80,
+  "registration_expiry_interval": 12,
+  "is04_versions": ["v1.3"],
+  "is10_versions": ["v1.0"],
+  "ca_certificate_file": "/home/certs/ca.pem",
+
+  "authorization_endpoint": "https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/auth",
+  "token_endpoint": "https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/token",
+  "jwks_uri": "https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/certs",
+
+  "server_authorization": true,
+  "client_authorization": false
+}
+Starting with output to console
+2025-08-14 14:40:02.456: info: 123722813568832: Starting nmos-cpp registry
+2025-08-14 14:40:02.457: info: 123722813568832: Process ID: 193
+2025-08-14 14:40:02.457: info: 123722813568832: Build settings: cpprestsdk/2.10.19 (listener=asio; client=asio); WebSocket++/0.8.2; Boost 1.83.0; OpenSSL 3.2.1 30 Jan 2024
+2025-08-14 14:40:02.457: info: 123722813568832: Initial settings: {"admin_port":80,"authorization_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/auth","authorization_redirect_port":80,"ca_certificate_file":"/home/certs/ca.pem","client_authorization":false,"client_secure":true,"domain":"easyebu.com","host_address":"192.168.89.201","host_addresses":["192.168.89.201"],"host_name":"nmos-registry.easyebu.com","http_port":80,"is04_versions":["v1.3"],"is10_versions":["v1.0"],"jwks_uri":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/certs","jwks_uri_port":80,"label":"easy-nmos-registry","logging_level":-40,"logging_port":80,"mdns_port":80,"node_port":80,"pri":99,"query_port":80,"query_ws_port":81,"registration_expiry_interval":12,"registration_port":80,"schemas_port":80,"seed_id":"eb42eeaa-7641-459c-8882-29bf3bbee9ae","server_authorization":true,"server_secure":false,"settings_port":80,"system_port":80,"token_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/token"}
+2025-08-14 14:40:02.457: info: 123722813568832: Configuring nmos-cpp registry with its primary Node API at: https://nmos-registry.easyebu.com:80/x-nmos/node/v1.3
+2025-08-14 14:40:02.457: info: 123722813568832: Configuring nmos-cpp registry with its primary Registration API at: https://nmos-registry.easyebu.com:80/x-nmos/registration/v1.3
+2025-08-14 14:40:02.457: info: 123722813568832: Configuring nmos-cpp registry with its primary Query API at: https://nmos-registry.easyebu.com:80/x-nmos/query/v1.3
+2025-08-14 14:40:02.458: more info: 123722813568832: Make authorization validation
+2025-08-14 14:40:02.459: more info: 123722813568832: Make authorization validation
+2025-08-14 14:40:02.469: more info: 123722813568832: Make authorization validation
+2025-08-14 14:40:02.483: info: 123722813568832: Preparing for connections
+2025-08-14 14:40:02.484: too much info: 123722396444224: Got notification on query websockets thread
+2025-08-14 14:40:02.485: more info: 123722295928384: Trying Authorization API discovery
+2025-08-14 14:40:02.485: too much info: 123722404836928: asio::init_asio
+2025-08-14 14:40:02.485: info: 123722295928384: Attempting discovery of a Authorization API in domain: easyebu.com
+2025-08-14 14:40:02.485: too much info: 123722404836928: set_validate_handler
+2025-08-14 14:40:02.485: too much info: 123722404836928: set_open_handler
+2025-08-14 14:40:02.485: too much info: 123722404836928: set_close_handler
+2025-08-14 14:40:02.485: too much info: 123722404836928: set_message_handler
+2025-08-14 14:40:02.485: too much info: 123722404836928: asio::listen
+2025-08-14 14:40:02.485: too much info: 123722404836928: create_connection
+2025-08-14 14:40:02.485: too much info: 123722404836928: asio con transport constructor
+2025-08-14 14:40:02.485: too much info: 123722404836928: connection constructor
+2025-08-14 14:40:02.485: too much info: 123722404836928: transport::asio::init
+2025-08-14 14:40:02.485: too much info: 123722404836928: asio::async_accept
+2025-08-14 14:40:02.485: more info: 123722404836928: DNSServiceBrowse for regtype: _nmos-auth._tcp domain: easyebu.com on interface: 0
+2025-08-14 14:40:02.485: too much info: 123722404836928: DNSServiceProcessResult for 999ms
+2025-08-14 14:40:02.485: info: 123722813568832: Ready for connections
+2025-08-14 14:40:02.487: more info: 123722698581568: After DNSServiceRegisterRecord, DNSServiceRegisterRecordReply received no error
+2025-08-14 14:40:02.487: too much info: 123722698581568: After DNSServiceRegisterRecord, DNSServiceProcessResult succeeded
+2025-08-14 14:40:02.487: info: 123722698581568: Registered address: 192.168.89.201 for hostname: nmos-registry.local.
+2025-08-14 14:40:02.487: more info: 123722581083712: After DNSServiceRegisterRecord, DNSServiceRegisterRecordReply received no error
+2025-08-14 14:40:02.487: too much info: 123722581083712: After DNSServiceRegisterRecord, DNSServiceProcessResult succeeded
+2025-08-14 14:40:02.487: info: 123722581083712: Registered address: 192.168.89.201 for hostname: nmos-registry.easyebu.com
+2025-08-14 14:40:02.487: info: 123722572691008: Registered advertisement for: nmos-cpp_query_nmos-registry-easyebu-com:80._nmos-query._tcp
+2025-08-14 14:40:02.488: info: 123722564298304: Registered advertisement for: nmos-cpp_query_nmos-registry-easyebu-com:80._nmos-query._tcp.easyebu.com
+2025-08-14 14:40:02.491: info: 123722555905600: Registered advertisement for: nmos-cpp_registration_nmos-registry-easyebu-com:80._nmos-register._tcp
+2025-08-14 14:40:02.492: info: 123722547512896: Registered advertisement for: nmos-cpp_registration_nmos-registry-easyebu-com:80._nmos-register._tcp.easyebu.com
+2025-08-14 14:40:02.494: info: 123722539120192: Registered advertisement for: nmos-cpp_system_nmos-registry-easyebu-com:80._nmos-system._tcp
+2025-08-14 14:40:02.494: info: 123722530727488: Registered advertisement for: nmos-cpp_system_nmos-registry-easyebu-com:80._nmos-system._tcp.easyebu.com
+Registering Service nmos-cpp_mqtt_192.168.89.201:1883._nmos-mqtt._tcp.local port 1883 TXT api_proto=mqtt api_auth=false
+DATE: ---Thu 14 Aug 2025---
+14:40:02.433  ...STARTING...
+14:40:03.135  Got a reply for service nmos-cpp_mqtt_192.168.89.201:1883._nmos-mqtt._tcp.local.: Name now registered and active
+2025-08-14 14:40:03.485: more info: 123722404836928: After DNSServiceBrowse, DNSServiceProcessResult timed out or was cancelled
+2025-08-14 14:40:03.486: warning: 123722295928384: Did not discover a suitable Authorization API via DNS-SD
+2025-08-14 14:40:03.486: info: 123722295928384: Adopting background discovery of an Authorization API
+2025-08-14 14:40:04.486: more info: 123722665010752: Trying Authorization API discovery
+2025-08-14 14:40:04.486: info: 123722665010752: Attempting discovery of a Authorization API in domain: easyebu.com
+2025-08-14 14:40:04.487: more info: 123722455193152: DNSServiceBrowse for regtype: _nmos-auth._tcp domain: easyebu.com on interface: 0
+2025-08-14 14:40:04.487: too much info: 123722455193152: DNSServiceProcessResult for 29999ms
+2025-08-14 14:40:07.993: more info: 123722455193152: After DNSServiceBrowse, DNSServiceBrowseReply got service: auth-api-1 for regtype: _nmos-auth._tcp. domain: easyebu.com. on interface: 0
+2025-08-14 14:40:07.994: more info: 123722421622336: DNSServiceResolve for name: auth-api-1 regtype: _nmos-auth._tcp. domain: easyebu.com. on interface: 0
+2025-08-14 14:40:07.994: too much info: 123722421622336: DNSServiceProcessResult for 26492ms
+2025-08-14 14:40:07.995: more info: 123722421622336: After DNSServiceResolve, DNSServiceResolveReply got host: keycloak.easyebu.com. port: 443
+2025-08-14 14:40:07.995: more info: 123722421622336: DNSServiceGetAddrInfo for hostname: keycloak.easyebu.com. on interface: 0
+2025-08-14 14:40:07.996: too much info: 123722421622336: DNSServiceProcessResult for 26492ms
+2025-08-14 14:40:07.996: more info: 123722421622336: After DNSServiceGetAddrInfo, DNSServiceGetAddrInfoReply got address: 192.168.89.200 for host: keycloak.easyebu.com.
+2025-08-14 14:40:07.996: too much info: 123722421622336: After DNSServiceGetAddrInfo, DNSServiceProcessResult succeeded
+2025-08-14 14:40:07.996: too much info: 123722421622336: After DNSServiceResolve, DNSServiceProcessResult succeeded
+2025-08-14 14:40:07.996: too much info: 123722455193152: After DNSServiceBrowse, DNSServiceProcessResult succeeded
+2025-08-14 14:40:07.996: info: 123722665010752: Discovered 1 Authorization API(s)
+2025-08-14 14:40:07.996: more info: 123722665010752: Using the Authorization API(s):
+	https://keycloak.easyebu.com@192.168.89.200:443/.well-known/oauth-authorization-server/x-nmos/auth/v1.0
+2025-08-14 14:40:07.997: info: 123722295928384: Attempting authorization server metadata fetch
+2025-08-14 14:40:07.997: too much info: 123722295928384: Requesting authorization server metadata at https://keycloak.easyebu.com@192.168.89.200:443/.well-known/oauth-authorization-server/x-nmos/auth/v1.0
+2025-08-14 14:40:07.997: too much info: 123722295928384: Sending request
+2025-08-14 14:40:08.007: more info: 123722295928384: Load certification authorities
+2025-08-14 14:40:08.044: too much info: 123722589476416: Received request
+2025-08-14 14:40:08.045: error: 123722539120192: Authorization error: missing Authorization header
+2025-08-14 14:40:08.045: more info: 123722690188864: Sending response after 0.592ms
+2025-08-14 14:40:08.261: too much info: 123722698581568: Response received after 264.095ms
+2025-08-14 14:40:08.263: too much info: 123722530727488: Received authorization server metadata: {"acr_values_supported":["0","1"],"authorization_encryption_alg_values_supported":["ECDH-ES+A256KW","ECDH-ES+A192KW","ECDH-ES+A128KW","RSA-OAEP","RSA-OAEP-256","RSA1_5","ECDH-ES"],"authorization_encryption_enc_values_supported":["A256GCM","A192GCM","A128GCM","A128CBC-HS256","A192CBC-HS384","A256CBC-HS512"],"authorization_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/auth","authorization_response_iss_parameter_supported":true,"authorization_signing_alg_values_supported":["PS384","RS384","EdDSA","ES384","HS256","HS512","ES256","RS256","HS384","ES512","PS256","PS512","RS512"],"backchannel_authentication_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/ext/ciba/auth","backchannel_authentication_request_signing_alg_values_supported":["PS384","RS384","EdDSA","ES384","ES256","RS256","ES512","PS256","PS512","RS512"],"backchannel_logout_session_supported":true,"backchannel_logout_supported":true,"backchannel_token_delivery_modes_supported":["poll","ping"],"check_session_iframe":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/login-status-iframe.html","claim_types_supported":["normal"],"claims_parameter_supported":true,"claims_supported":["aud","sub","iss","auth_time","name","given_name","family_name","preferred_username","email","acr"],"code_challenge_methods_supported":["plain","S256"],"device_authorization_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/auth/device","end_session_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/logout","frontchannel_logout_session_supported":true,"frontchannel_logout_supported":true,"grant_types_supported":["authorization_code","client_credentials","implicit","password","refresh_token","urn:ietf:params:oauth:grant-type:device_code","urn:ietf:params:oauth:grant-type:token-exchange","urn:ietf:params:oauth:grant-type:uma-ticket","urn:openid:params:grant-type:ciba"],"id_token_encryption_alg_values_supported":["ECDH-ES+A256KW","ECDH-ES+A192KW","ECDH-ES+A128KW","RSA-OAEP","RSA-OAEP-256","RSA1_5","ECDH-ES"],"id_token_encryption_enc_values_supported":["A256GCM","A192GCM","A128GCM","A128CBC-HS256","A192CBC-HS384","A256CBC-HS512"],"id_token_signing_alg_values_supported":["PS384","RS384","EdDSA","ES384","HS256","HS512","ES256","RS256","HS384","ES512","PS256","PS512","RS512"],"introspection_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/token/introspect","introspection_endpoint_auth_methods_supported":["private_key_jwt","client_secret_basic","client_secret_post","tls_client_auth","client_secret_jwt"],"introspection_endpoint_auth_signing_alg_values_supported":["PS384","RS384","EdDSA","ES384","HS256","HS512","ES256","RS256","HS384","ES512","PS256","PS512","RS512"],"issuer":"https://keycloak.easyebu.com/realms/easyebu-nmos","jwks_uri":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/certs","mtls_endpoint_aliases":{"backchannel_authentication_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/ext/ciba/auth","device_authorization_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/auth/device","introspection_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/token/introspect","pushed_authorization_request_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/ext/par/request","registration_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/clients-registrations/openid-connect","revocation_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/revoke","token_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/token","userinfo_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/userinfo"},"prompt_values_supported":["none","login","consent"],"pushed_authorization_request_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/ext/par/request","registration_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/clients-registrations/openid-connect","request_object_encryption_alg_values_supported":["ECDH-ES+A256KW","ECDH-ES+A192KW","ECDH-ES+A128KW","RSA-OAEP","RSA-OAEP-256","RSA1_5","ECDH-ES"],"request_object_encryption_enc_values_supported":["A256GCM","A192GCM","A128GCM","A128CBC-HS256","A192CBC-HS384","A256CBC-HS512"],"request_object_signing_alg_values_supported":["PS384","RS384","EdDSA","ES384","HS256","HS512","ES256","RS256","HS384","ES512","PS256","PS512","RS512","none"],"request_parameter_supported":true,"request_uri_parameter_supported":true,"require_pushed_authorization_requests":false,"require_request_uri_registration":true,"response_modes_supported":["query","fragment","form_post","query.jwt","fragment.jwt","form_post.jwt","jwt"],"response_types_supported":["code","none","id_token","token","id_token token","code id_token","code token","code id_token token"],"revocation_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/revoke","revocation_endpoint_auth_methods_supported":["private_key_jwt","client_secret_basic","client_secret_post","tls_client_auth","client_secret_jwt"],"revocation_endpoint_auth_signing_alg_values_supported":["PS384","RS384","EdDSA","ES384","HS256","HS512","ES256","RS256","HS384","ES512","PS256","PS512","RS512"],"scopes_supported":["openid","offline_access","query","registration"],"subject_types_supported":["public","pairwise"],"tls_client_certificate_bound_access_tokens":true,"token_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/token","token_endpoint_auth_methods_supported":["private_key_jwt","client_secret_basic","client_secret_post","tls_client_auth","client_secret_jwt"],"token_endpoint_auth_signing_alg_values_supported":["PS384","RS384","EdDSA","ES384","HS256","HS512","ES256","RS256","HS384","ES512","PS256","PS512","RS512"],"userinfo_encryption_alg_values_supported":["ECDH-ES+A256KW","ECDH-ES+A192KW","ECDH-ES+A128KW","RSA-OAEP","RSA-OAEP-256","RSA1_5","ECDH-ES"],"userinfo_encryption_enc_values_supported":["A256GCM","A192GCM","A128GCM","A128CBC-HS256","A192CBC-HS384","A256CBC-HS512"],"userinfo_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/userinfo","userinfo_signing_alg_values_supported":["PS384","RS384","EdDSA","ES384","HS256","HS512","ES256","RS256","HS384","ES512","PS256","PS512","RS512","none"]}
+2025-08-14 14:40:08.263: info: 123722295928384: Attempting authorization operation: fetch token at next interval
+2025-08-14 14:40:08.263: more info: 123722555905600: Requesting authorization public keys (jwks) for about 0 seconds
+2025-08-14 14:40:08.263: too much info: 123722446800448: Requesting authorization jwks at https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/certs
+2025-08-14 14:40:08.264: too much info: 123722446800448: Sending request
+2025-08-14 14:40:08.264: more info: 123722446800448: Load certification authorities
+2025-08-14 14:40:08.356: too much info: 123722606261824: Response received after 92.803ms
+2025-08-14 14:40:08.357: too much info: 123722547512896: Received authorization jwks: [{"alg":"RSA-OAEP","e":"AQAB","kid":"OU8WM-bcpU0eCn2pgaWJwyTuRVOMwuD4F9fI1UpzHF0","kty":"RSA","n":"v2NwY_kGcwbYRrtkBfcxbZg6y_viYg-sf21nw4vz0CDBN0WP4rRUp1J84ZGkdnL-15r27K_xkH5vmYFqRYTGuMdK_q3waQUPO8GTuOmqVUKUFKVPwmMA9yEKjZJFLfn8GJ2St01xdQo2nWp6g8G0vubMa5xjd2apfvQ_akyet21jPpDuqowK8w2nETXRI1j1DSb1Gv84aE7PQR1kBoekFlmDTUC5jltmkf5bKL79XlD94U1BUJvZIXsnHavtcNgB8LH5KW8pk9xnSyRYHfHFupHYN0OposoxzwkoS4odiCzMR9kx0HIuumdB1dRGgp75cZtWepOFqa55pAicWUsjXw","use":"enc","x5c":["MIICpzCCAY8CBgGYmGIhTDANBgkqhkiG9w0BAQsFADAXMRUwEwYDVQQDDAxlYXN5ZWJ1LW5tb3MwHhcNMjUwODExMDkwNTI0WhcNMzUwODExMDkwNzA0WjAXMRUwEwYDVQQDDAxlYXN5ZWJ1LW5tb3MwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC/Y3Bj+QZzBthGu2QF9zFtmDrL++JiD6x/bWfDi/PQIME3RY/itFSnUnzhkaR2cv7Xmvbsr/GQfm+ZgWpFhMa4x0r+rfBpBQ87wZO46apVQpQUpU/CYwD3IQqNkkUt+fwYnZK3TXF1CjadanqDwbS+5sxrnGN3Zql+9D9qTJ63bWM+kO6qjArzDacRNdEjWPUNJvUa/zhoTs9BHWQGh6QWWYNNQLmOW2aR/lsovv1eUP3hTUFQm9kheycdq+1w2AHwsfkpbymT3GdLJFgd8cW6kdg3Q6miyjHPCShLih2ILMxH2THQci66Z0HV1EaCnvlxm1Z6k4WprnmkCJxZSyNfAgMBAAEwDQYJKoZIhvcNAQELBQADggEBACO1wykWVX3s+9xrdhYIpjLllxMs0Q9uY6hTYi4TUo+7Xvz+2m7Tng1hUydaTiGu/SJX8YrkWA555r0ApGHBMqYov9TmdURkhPRhJO6QFsI0losP6T7JHqigOgSXKjhOS7svkiapvMmsMmuEuvy6mJvgursSWSQJS66C+0qiuz7L0u5AmODntqvW20anlDawptHLB38PVtnvnPM+g2qcnY+wx6NaK+B91jtbIMFVNJhs4EIPqDHAWSazqLSEgJx6Pis/RKd7z9SOxL5v2ZrukY//qyfNo8kO7PZ6Bvu+ZMwVs/Q3lqCj7UK95yK7JiNXCGo5YkKA32HGvf1eiTYS0LA="],"x5t":"7DmJeBmbUi26x1wt3a00o7JhJSE","x5t#S256":"a8KwsXr_oyrXaTYUO0luB5HzQt_QqpW06JxUnZ6tjo4"},{"alg":"RS256","e":"AQAB","kid":"z7JzqedKSHeD2Ng-DZMWldUxbZAZ5sOUL9t10MMiJd0","kty":"RSA","n":"vfDVnlb9iqiFGK-4jnE4AX5n14SHbmcrhxpU5ApnhpQTMuuZXX4xv6n3kaldzMvLNSTfv5IJeZ6LdtfxtilT8dNxBgPdVSl7mDR2Ej7BV0oOHee1ixHYneK9oZi4PGGvnLGtjhMTofHUN0NBClzrC4BQGjHusGHmykpDjSryQz882BRcohQbUuxjOmjtbrlQmbKCgImk343Kcz7GpAvI6kox49UQpdChTM_nXxpOzMKp0Q5d0IO3c1P5C5u2meU3mlUhVZWgTmVisWouqXWUKwi7OhS3mRp9IFknPZziJ84SB8YqzZeZQmHhoz05SUcxMnfUwqySxIVmhJSaBzMNeQ","use":"sig","x5c":["MIICpzCCAY8CBgGYmGIipzANBgkqhkiG9w0BAQsFADAXMRUwEwYDVQQDDAxlYXN5ZWJ1LW5tb3MwHhcNMjUwODExMDkwNTI1WhcNMzUwODExMDkwNzA0WjAXMRUwEwYDVQQDDAxlYXN5ZWJ1LW5tb3MwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC98NWeVv2KqIUYr7iOcTgBfmfXhIduZyuHGlTkCmeGlBMy65ldfjG/qfeRqV3My8s1JN+/kgl5not21/G2KVPx03EGA91VKXuYNHYSPsFXSg4d57WLEdid4r2hmLg8Ya+csa2OExOh8dQ3Q0EKXOsLgFAaMe6wYebKSkONKvJDPzzYFFyiFBtS7GM6aO1uuVCZsoKAiaTfjcpzPsakC8jqSjHj1RCl0KFMz+dfGk7MwqnRDl3Qg7dzU/kLm7aZ5TeaVSFVlaBOZWKxai6pdZQrCLs6FLeZGn0gWSc9nOInzhIHxirNl5lCYeGjPTlJRzEyd9TCrJLEhWaElJoHMw15AgMBAAEwDQYJKoZIhvcNAQELBQADggEBADTZNlJ3r47s/hdkof50HffgjVbsDGY3v8Tq2bTmd97nKo9Zr7aHhFKpPbe3FOGhbs2diMQV4s2uAkPd72u2Nocy0Sh40BK1mYde9lY0lNjedKEcTiPVgOR80llEQQi5faBNyZSoQRCDSNRBKcycefmZsQsuwJj1GzY8anFFs+YoHAOY8nz4Sb+iIS4AQorshYxoW8Q7b812105oC8grWXLrXquiUmGQSgx/CRl4W1okskoHod1qN5S8HBgEiaG6tEFuVIy5WyXEfohwdRx6o5C+P5UzECjzNTwkaFdnFmsayWcVY+uYeRxmy4FSlRtW71pLT3duBFqDGIYQQ5HgESQ="],"x5t":"D4x12HnlT5tBxX35FDmKX7p3GHQ","x5t#S256":"oh8reaatXBvMwit2fthnt5oOx6Ec_wutzURaaBcraQw"},{"alg":"RS512","e":"AQAB","kid":"SpzvBwd4oeGC-6b_kFOWaLpbilmL5Oo9Zq63QxTPmZE","kty":"RSA","n":"szfVLKCGsOqVBix44j5hkiMCYHzSO1w2CPo8seI7ZQNxVzPUw_o996jfho_mZJ53M4TwXMMJzae43fkAhE0-TlzPUAa1D7qB0TPaOZjhAH4i0CbosQt6YWQ4TFT-GykQC9z-8qUlc4uB6utACgZhJz5kJTepoU1bgIjRUAFu3BmCFEnb4oY4EdnyPokr5Bky4BIRP8USnG6piU6zSbdvz1Ofm-FuQkGFLD2zAYQeZO26NwDkuHYO6NzSMWoWjbJX2IwZX8aBuTF3PJChCXEJbyBYjN0D_PIOIZiKpvOHwUOhmiUvqftuLW6zKtCzgTWkjHAJEPLi3_LqkOIZO8ixYw","use":"sig","x5c":["MIICpzCCAY8CBgGYmGIhyjANBgkqhkiG9w0BAQsFADAXMRUwEwYDVQQDDAxlYXN5ZWJ1LW5tb3MwHhcNMjUwODExMDkwNTI0WhcNMzUwODExMDkwNzA0WjAXMRUwEwYDVQQDDAxlYXN5ZWJ1LW5tb3MwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCzN9UsoIaw6pUGLHjiPmGSIwJgfNI7XDYI+jyx4jtlA3FXM9TD+j33qN+Gj+ZknnczhPBcwwnNp7jd+QCETT5OXM9QBrUPuoHRM9o5mOEAfiLQJuixC3phZDhMVP4bKRAL3P7ypSVzi4Hq60AKBmEnPmQlN6mhTVuAiNFQAW7cGYIUSdvihjgR2fI+iSvkGTLgEhE/xRKcbqmJTrNJt2/PU5+b4W5CQYUsPbMBhB5k7bo3AOS4dg7o3NIxahaNslfYjBlfxoG5MXc8kKEJcQlvIFiM3QP88g4hmIqm84fBQ6GaJS+p+24tbrMq0LOBNaSMcAkQ8uLf8uqQ4hk7yLFjAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAHcg8KHatT7W3mIxwqlIwXEmFt5LstExeM910BhX//I9t+oV+guaFm8Ue+C7BGeQYaGHYyyOtSOWo90On1hPZHD4rMAK0wgjIpMThxNmyi7JljWonAJ0i9nCqHQjo7HFi9DOIx7Ush4trPvBQbijPFHBUBqFxJBr7DyyPgzPdubog4PLiRrJn4C/0tAG3odjJTfLPqxpl1aAUadMoNF5MsQpY59Y2bGeBVdBXpYCJuYKqwC0RPN+3VC/n9Dcv3cC26Tkwq24bcpg7sLvUcl6PYuqJ9foziPD/24JU7Gn73KTqdAJyoG3N95fa3YewLVxbcopRi3g6HaIXRn7HG09yyA="],"x5t":"VqOC2OKnJVo3GfYXs2KE5X0bfSE","x5t#S256":"xaULdjxUX2RVbkewabvzF4kqJnPzbDsh1XEc8Qkv7VI"}]
+2025-08-14 14:40:08.357: warning: 123722547512896: Invalid jwk from https://keycloak.easyebu.com/realms/easyebu-nmos JWK error: jwk contains invalid 'use': {"alg":"RSA-OAEP","e":"AQAB","kid":"OU8WM-bcpU0eCn2pgaWJwyTuRVOMwuD4F9fI1UpzHF0","kty":"RSA","n":"v2NwY_kGcwbYRrtkBfcxbZg6y_viYg-sf21nw4vz0CDBN0WP4rRUp1J84ZGkdnL-15r27K_xkH5vmYFqRYTGuMdK_q3waQUPO8GTuOmqVUKUFKVPwmMA9yEKjZJFLfn8GJ2St01xdQo2nWp6g8G0vubMa5xjd2apfvQ_akyet21jPpDuqowK8w2nETXRI1j1DSb1Gv84aE7PQR1kBoekFlmDTUC5jltmkf5bKL79XlD94U1BUJvZIXsnHavtcNgB8LH5KW8pk9xnSyRYHfHFupHYN0OposoxzwkoS4odiCzMR9kx0HIuumdB1dRGgp75cZtWepOFqa55pAicWUsjXw","use":"enc","x5c":["MIICpzCCAY8CBgGYmGIhTDANBgkqhkiG9w0BAQsFADAXMRUwEwYDVQQDDAxlYXN5ZWJ1LW5tb3MwHhcNMjUwODExMDkwNTI0WhcNMzUwODExMDkwNzA0WjAXMRUwEwYDVQQDDAxlYXN5ZWJ1LW5tb3MwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC/Y3Bj+QZzBthGu2QF9zFtmDrL++JiD6x/bWfDi/PQIME3RY/itFSnUnzhkaR2cv7Xmvbsr/GQfm+ZgWpFhMa4x0r+rfBpBQ87wZO46apVQpQUpU/CYwD3IQqNkkUt+fwYnZK3TXF1CjadanqDwbS+5sxrnGN3Zql+9D9qTJ63bWM+kO6qjArzDacRNdEjWPUNJvUa/zhoTs9BHWQGh6QWWYNNQLmOW2aR/lsovv1eUP3hTUFQm9kheycdq+1w2AHwsfkpbymT3GdLJFgd8cW6kdg3Q6miyjHPCShLih2ILMxH2THQci66Z0HV1EaCnvlxm1Z6k4WprnmkCJxZSyNfAgMBAAEwDQYJKoZIhvcNAQELBQADggEBACO1wykWVX3s+9xrdhYIpjLllxMs0Q9uY6hTYi4TUo+7Xvz+2m7Tng1hUydaTiGu/SJX8YrkWA555r0ApGHBMqYov9TmdURkhPRhJO6QFsI0losP6T7JHqigOgSXKjhOS7svkiapvMmsMmuEuvy6mJvgursSWSQJS66C+0qiuz7L0u5AmODntqvW20anlDawptHLB38PVtnvnPM+g2qcnY+wx6NaK+B91jtbIMFVNJhs4EIPqDHAWSazqLSEgJx6Pis/RKd7z9SOxL5v2ZrukY//qyfNo8kO7PZ6Bvu+ZMwVs/Q3lqCj7UK95yK7JiNXCGo5YkKA32HGvf1eiTYS0LA="],"x5t":"7DmJeBmbUi26x1wt3a00o7JhJSE","x5t#S256":"a8KwsXr_oyrXaTYUO0luB5HzQt_QqpW06JxUnZ6tjo4"}
+2025-08-14 14:40:08.357: info: 123722547512896: JSON Web Token validator updated using an new set of public keys for https://keycloak.easyebu.com/realms/easyebu-nmos
+2025-08-14 14:40:08.357: more info: 123722547512896: Requesting authorization public keys (jwks) for about 3602 seconds
+2025-08-14 14:40:09.051: too much info: 123722497156672: Received request
+2025-08-14 14:40:09.052: error: 123722631439936: Authorization error: missing Authorization header
+2025-08-14 14:40:09.053: more info: 123722505549376: Sending response after 1.828ms
+2025-08-14 14:40:10.808: too much info: 123722639832640: Received request
+2025-08-14 14:40:10.808: more info: 123722430015040: Validate access token against https://keycloak.easyebu.com/realms/easyebu-nmos public keys
+2025-08-14 14:40:10.809: info: 123722656618048: Registration requested for node: 3a7c546e-2736-5602-9be7-9eb8527ee776
+2025-08-14 14:40:10.809: more info: 123722656618048: At 1755182447:808840797, the registry contains 2 resources (2 nodes, 0 devices, 0 sources, 0 flows, 0 senders, 0 receivers, 0 subscriptions, 0 grains), most recent update: 1755182447:808835263, least health: 1755182447, 0 non-extant resources
+2025-08-14 14:40:10.809: too much info: 123722656618048: Notifying query websockets thread
+2025-08-14 14:40:10.809: too much info: 123722396444224: Got notification on query websockets thread
+2025-08-14 14:40:10.809: more info: 123722606261824: Sending response after 1.526ms
+2025-08-14 14:40:10.813: too much info: 123722665010752: Received request
+2025-08-14 14:40:10.814: more info: 123722606261824: Validate access token against https://keycloak.easyebu.com/realms/easyebu-nmos public keys
+2025-08-14 14:40:10.814: too much info: 123722606261824: Heartbeat received for node: 3a7c546e-2736-5602-9be7-9eb8527ee776
+2025-08-14 14:40:10.814: more info: 123722631439936: Sending response after 1.008ms
+2025-08-14 14:40:10.818: too much info: 123722480371264: Received request
+2025-08-14 14:40:10.818: more info: 123722796779072: Validate access token against https://keycloak.easyebu.com/realms/easyebu-nmos public keys
+2025-08-14 14:40:10.819: info: 123722513942080: Registration requested for device: 70953a20-6554-502e-8d89-530205abe758 on node: 3a7c546e-2736-5602-9be7-9eb8527ee776
+2025-08-14 14:40:10.819: warning: 123722513942080: Registration requested for device: 70953a20-6554-502e-8d89-530205abe758 with unknown sender: 0867149a-a7bf-54b4-b574-59f81e2ddc49
+2025-08-14 14:40:10.819: warning: 123722513942080: Registration requested for device: 70953a20-6554-502e-8d89-530205abe758 with unknown sender: 8c13668a-90cf-51bc-a3ec-cc803696b9af
+2025-08-14 14:40:10.819: warning: 123722513942080: Registration requested for device: 70953a20-6554-502e-8d89-530205abe758 with unknown receiver: 68ea88e6-54ff-516b-a442-cf53f3b781d4
+2025-08-14 14:40:10.819: warning: 123722513942080: Registration requested for device: 70953a20-6554-502e-8d89-530205abe758 with unknown receiver: 4bfc9732-e278-53f8-a8e4-832793a95635
+2025-08-14 14:40:10.820: more info: 123722513942080: At 1755182447:819590829, the registry contains 3 resources (2 nodes, 1 devices, 0 sources, 0 flows, 0 senders, 0 receivers, 0 subscriptions, 0 grains), most recent update: 1755182447:819583726, least health: 1755182447, 0 non-extant resources
+2025-08-14 14:40:10.820: too much info: 123722513942080: Notifying query websockets thread
+2025-08-14 14:40:10.820: too much info: 123722396444224: Got notification on query websockets thread
+2025-08-14 14:40:10.820: more info: 123722648225344: Sending response after 1.725ms
+2025-08-14 14:40:10.821: too much info: 123722455193152: Received request
+2025-08-14 14:40:10.821: more info: 123722698581568: Validate access token against https://keycloak.easyebu.com/realms/easyebu-nmos public keys
+2025-08-14 14:40:10.822: info: 123722698581568: Registration requested for source: 6f5aaa9a-3267-5283-83fb-d48ddcdb9310 on device: 70953a20-6554-502e-8d89-530205abe758
+2025-08-14 14:40:10.822: more info: 123722698581568: At 1755182447:821991325, the registry contains 4 resources (2 nodes, 1 devices, 1 sources, 0 flows, 0 senders, 0 receivers, 0 subscriptions, 0 grains), most recent update: 1755182447:821985522, least health: 1755182447, 0 non-extant resources
+2025-08-14 14:40:10.822: too much info: 123722698581568: Notifying query websockets thread
+2025-08-14 14:40:10.822: too much info: 123722396444224: Got notification on query websockets thread
+2025-08-14 14:40:10.822: more info: 123722656618048: Sending response after 1.462ms
+2025-08-14 14:40:10.823: too much info: 123722463585856: Received request
+2025-08-14 14:40:10.823: more info: 123722555905600: Validate access token against https://keycloak.easyebu.com/realms/easyebu-nmos public keys
+2025-08-14 14:40:10.824: info: 123722656618048: Registration requested for source: bddf10e1-560e-50a6-8893-3c5bbf86d0ba on device: 70953a20-6554-502e-8d89-530205abe758
+2025-08-14 14:40:10.824: more info: 123722656618048: At 1755182447:824333863, the registry contains 5 resources (2 nodes, 1 devices, 2 sources, 0 flows, 0 senders, 0 receivers, 0 subscriptions, 0 grains), most recent update: 1755182447:824327403, least health: 1755182447, 0 non-extant resources
+2025-08-14 14:40:10.824: too much info: 123722656618048: Notifying query websockets thread
+2025-08-14 14:40:10.824: too much info: 123722396444224: Got notification on query websockets thread
+2025-08-14 14:40:10.825: more info: 123722805171776: Sending response after 1.429ms
+2025-08-14 14:40:10.826: too much info: 123722623047232: Received request
+2025-08-14 14:40:10.826: more info: 123722665010752: Validate access token against https://keycloak.easyebu.com/realms/easyebu-nmos public keys
+2025-08-14 14:40:10.827: info: 123722665010752: Registration requested for source: 653cfd06-56ac-5656-b14f-60b32eeeb2ff on device: 70953a20-6554-502e-8d89-530205abe758
+2025-08-14 14:40:10.827: more info: 123722665010752: At 1755182447:826913068, the registry contains 6 resources (2 nodes, 1 devices, 3 sources, 0 flows, 0 senders, 0 receivers, 0 subscriptions, 0 grains), most recent update: 1755182447:826906877, least health: 1755182447, 0 non-extant resources
+2025-08-14 14:40:10.827: too much info: 123722665010752: Notifying query websockets thread
+2025-08-14 14:40:10.827: too much info: 123722396444224: Got notification on query websockets thread
+2025-08-14 14:40:10.827: more info: 123722446800448: Sending response after 1.613ms
+2025-08-14 14:40:10.828: too much info: 123722690188864: Received request
+2025-08-14 14:40:10.828: more info: 123722648225344: Validate access token against https://keycloak.easyebu.com/realms/easyebu-nmos public keys
+2025-08-14 14:40:10.829: info: 123722614654528: Registration requested for flow: f0e04e63-502d-5698-987a-9e761eb9863d on device: 70953a20-6554-502e-8d89-530205abe758
+2025-08-14 14:40:10.829: more info: 123722614654528: At 1755182447:829313724, the registry contains 7 resources (2 nodes, 1 devices, 3 sources, 1 flows, 0 senders, 0 receivers, 0 subscriptions, 0 grains), most recent update: 1755182447:829306624, least health: 1755182447, 0 non-extant resources
+2025-08-14 14:40:10.829: too much info: 123722614654528: Notifying query websockets thread
+2025-08-14 14:40:10.830: too much info: 123722396444224: Got notification on query websockets thread
+2025-08-14 14:40:10.830: more info: 123722530727488: Sending response after 1.423ms
+2025-08-14 14:40:10.831: too much info: 123722455193152: Received request
+2025-08-14 14:40:10.831: more info: 123722430015040: Validate access token against https://keycloak.easyebu.com/realms/easyebu-nmos public keys
+2025-08-14 14:40:10.832: info: 123722505549376: Registration requested for flow: 298a6fbd-3889-5cd1-9f20-4b4a64cd162b on device: 70953a20-6554-502e-8d89-530205abe758
+2025-08-14 14:40:10.832: more info: 123722505549376: At 1755182447:831701789, the registry contains 8 resources (2 nodes, 1 devices, 3 sources, 2 flows, 0 senders, 0 receivers, 0 subscriptions, 0 grains), most recent update: 1755182447:831694722, least health: 1755182447, 0 non-extant resources
+2025-08-14 14:40:10.832: too much info: 123722505549376: Notifying query websockets thread
+2025-08-14 14:40:10.832: too much info: 123722396444224: Got notification on query websockets thread
+2025-08-14 14:40:10.832: more info: 123722513942080: Sending response after 1.44ms
+2025-08-14 14:40:10.833: too much info: 123722681796160: Received request
+2025-08-14 14:40:10.833: more info: 123722698581568: Validate access token against https://keycloak.easyebu.com/realms/easyebu-nmos public keys
+2025-08-14 14:40:10.834: info: 123722656618048: Registration requested for sender: 0867149a-a7bf-54b4-b574-59f81e2ddc49 on device: 70953a20-6554-502e-8d89-530205abe758
+2025-08-14 14:40:10.834: more info: 123722656618048: Registration requested for sender: 0867149a-a7bf-54b4-b574-59f81e2ddc49 of flow: f0e04e63-502d-5698-987a-9e761eb9863d
+2025-08-14 14:40:10.834: more info: 123722656618048: Registration requested for sender: 0867149a-a7bf-54b4-b574-59f81e2ddc49 subscribed to receiver: null
+2025-08-14 14:40:10.834: more info: 123722656618048: At 1755182447:834079396, the registry contains 9 resources (2 nodes, 1 devices, 3 sources, 2 flows, 1 senders, 0 receivers, 0 subscriptions, 0 grains), most recent update: 1755182447:834072374, least health: 1755182447, 0 non-extant resources
+2025-08-14 14:40:10.834: too much info: 123722656618048: Notifying query websockets thread
+2025-08-14 14:40:10.834: too much info: 123722396444224: Got notification on query websockets thread
+2025-08-14 14:40:10.834: more info: 123722446800448: Sending response after 1.443ms
+2025-08-14 14:40:10.835: too much info: 123722522334784: Received request
+2025-08-14 14:40:10.836: more info: 123722497156672: Validate access token against https://keycloak.easyebu.com/realms/easyebu-nmos public keys
+2025-08-14 14:40:10.836: info: 123722805171776: Registration requested for sender: 8c13668a-90cf-51bc-a3ec-cc803696b9af on device: 70953a20-6554-502e-8d89-530205abe758
+2025-08-14 14:40:10.836: more info: 123722805171776: Registration requested for sender: 8c13668a-90cf-51bc-a3ec-cc803696b9af of flow: 298a6fbd-3889-5cd1-9f20-4b4a64cd162b
+2025-08-14 14:40:10.836: more info: 123722805171776: Registration requested for sender: 8c13668a-90cf-51bc-a3ec-cc803696b9af subscribed to receiver: null
+2025-08-14 14:40:10.837: more info: 123722805171776: At 1755182447:836518864, the registry contains 10 resources (2 nodes, 1 devices, 3 sources, 2 flows, 2 senders, 0 receivers, 0 subscriptions, 0 grains), most recent update: 1755182447:836511650, least health: 1755182447, 0 non-extant resources
+2025-08-14 14:40:10.837: too much info: 123722805171776: Notifying query websockets thread
+2025-08-14 14:40:10.837: too much info: 123722396444224: Got notification on query websockets thread
+2025-08-14 14:40:10.837: more info: 123722480371264: Sending response after 1.494ms
+2025-08-14 14:40:10.838: too much info: 123722648225344: Received request
+2025-08-14 14:40:10.838: more info: 123722681796160: Validate access token against https://keycloak.easyebu.com/realms/easyebu-nmos public keys
+2025-08-14 14:40:10.839: info: 123722614654528: Registration requested for receiver: 68ea88e6-54ff-516b-a442-cf53f3b781d4 on device: 70953a20-6554-502e-8d89-530205abe758
+2025-08-14 14:40:10.839: more info: 123722614654528: Registration requested for receiver: 68ea88e6-54ff-516b-a442-cf53f3b781d4 subscribed to sender: null
+2025-08-14 14:40:10.839: more info: 123722614654528: At 1755182447:839161361, the registry contains 11 resources (2 nodes, 1 devices, 3 sources, 2 flows, 2 senders, 1 receivers, 0 subscriptions, 0 grains), most recent update: 1755182447:839153813, least health: 1755182447, 0 non-extant resources
+2025-08-14 14:40:10.839: too much info: 123722614654528: Notifying query websockets thread
+2025-08-14 14:40:10.839: too much info: 123722396444224: Got notification on query websockets thread
+2025-08-14 14:40:10.839: more info: 123722673403456: Sending response after 1.722ms
+2025-08-14 14:40:10.840: too much info: 123722606261824: Received request
+2025-08-14 14:40:10.841: more info: 123722589476416: Validate access token against https://keycloak.easyebu.com/realms/easyebu-nmos public keys
+2025-08-14 14:40:10.842: info: 123722597869120: Registration requested for receiver: 4bfc9732-e278-53f8-a8e4-832793a95635 on device: 70953a20-6554-502e-8d89-530205abe758
+2025-08-14 14:40:10.842: more info: 123722597869120: Registration requested for receiver: 4bfc9732-e278-53f8-a8e4-832793a95635 subscribed to sender: null
+2025-08-14 14:40:10.842: more info: 123722597869120: At 1755182447:841809876, the registry contains 12 resources (2 nodes, 1 devices, 3 sources, 2 flows, 2 senders, 2 receivers, 0 subscriptions, 0 grains), most recent update: 1755182447:841802549, least health: 1755182447, 0 non-extant resources
+2025-08-14 14:40:10.842: too much info: 123722597869120: Notifying query websockets thread
+2025-08-14 14:40:10.842: too much info: 123722396444224: Got notification on query websockets thread
+2025-08-14 14:40:10.842: more info: 123722530727488: Sending response after 1.66ms
+ebu-nuc-1@ebu-nuc-1:~/Desktop/nmos-is10$ 
+ebu-nuc-1@ebu-nuc-1:~/Desktop/nmos-is10$ docker logs nmos-virtnode 
+
+Start of container entrypoint.sh BASH script...
+
+Reading global parameters and setting defaults
+Using Registry JSON file /home/registry.json
+Using Node JSON file /home/node.json
+
+Checking for update_label parameter
+Insert/Replace label: with nmos-virtnode.easyebu.com hostname in /home/registry.json file
+Insert/Replace label: with nmos-virtnode.easyebu.com hostname in /home/node.json file
+mv: cannot move '/home/node.json.tmp' to '/home/node.json': Device or resource busy
+
+Checking for update_ptp_domain parameter
+Sending JSON: {"username": "admin", "password": "admin", "cmd": "show ptp", "execution_type": "sync"}
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (7) Failed to connect to localhost port 443 after 0 ms: Connection refused
+updata_ptp_domain set but not running on a Mellanox switch - not updating ptp_domain_number in /home/registry.json
+
+Starting mDNSResponder service
+Starting Apple Darwin Multicast DNS / DNS Service Discovery daemon: mdnsd.
+
+Starting Sony Node Application with following config
+{
+  "logging_level": -40,
+  "client_secure": true,
+  "server_secure": false,
+  "host_name": "nmos-virtnode.easyebu.com",
+  "domain": "easyebu.com",
+  "label": "easy-nmos-node",
+  "how_many": 2,
+  "senders": ["v"],
+  "receivers": ["v"],
+  "http_port": 80,
+  "is04_versions": ["v1.3"],
+  "is10_versions": ["v1.0"],
+  "ca_certificate_file": "/home/certs/ca.pem",
+
+  "authorization_endpoint": "https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/auth",
+  "token_endpoint": "https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/token",
+  "jwks_uri": "https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/certs",
+
+  "client_authorization": true,
+  "server_authorization": true,
+
+  "initial_access_token": "eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI1ZTA3N2E3OS01NzFiLTQzNjItOGE4OS0yYTI4ZGRiNjQwYWYifQ.eyJleHAiOjE3ODY3MTgyMDksImlhdCI6MTc1NTE4MjIwOSwianRpIjoiYTdkODdjOTgtZWMxMS00NjBiLTg4NGYtODMwNGM0NDU5MWU3IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay5lYXN5ZWJ1LmNvbS9yZWFsbXMvZWFzeWVidS1ubW9zIiwiYXVkIjoiaHR0cHM6Ly9rZXljbG9hay5lYXN5ZWJ1LmNvbS9yZWFsbXMvZWFzeWVidS1ubW9zIiwidHlwIjoiSW5pdGlhbEFjY2Vzc1Rva2VuIn0.Idnn13Q3yIOJJdlAwPwrEmQY93c1joxuNQeo8bvNxunxd7u5MyHxxQiQd-FEbU9OVoR98ZwarFoCJLUCaOn4jw",
+  "authorization_flow": "client_credentials",
+  "authorization_scopes": ["registration"],
+  "token_endpoint_auth_method": "client_secret_basic",
+
+  "fetch_authorization_public_keys_interval_min": 3600,
+  "fetch_authorization_public_keys_interval_max": 3660,
+  "authorization_request_max": 30,
+  "validate_openid_client": true
+}
+Starting with output to console
+2025-08-14 14:40:02.505: info: 136191035705152: Starting nmos-cpp node
+2025-08-14 14:40:02.505: info: 136191035705152: Process ID: 131
+2025-08-14 14:40:02.505: info: 136191035705152: Build settings: cpprestsdk/2.10.19 (listener=asio; client=asio); WebSocket++/0.8.2; Boost 1.83.0; OpenSSL 3.2.1 30 Jan 2024
+2025-08-14 14:40:02.505: info: 136191035705152: Initial settings: {"authorization_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/auth","authorization_flow":"client_credentials","authorization_redirect_port":80,"authorization_request_max":30,"authorization_scopes":["registration"],"ca_certificate_file":"/home/certs/ca.pem","channelmapping_port":80,"client_authorization":true,"client_secure":true,"connection_port":80,"domain":"easyebu.com","events_port":80,"events_ws_port":81,"fetch_authorization_public_keys_interval_max":3660,"fetch_authorization_public_keys_interval_min":3600,"host_address":"192.168.89.202","host_addresses":["192.168.89.202"],"host_name":"nmos-virtnode.easyebu.com","how_many":2,"http_port":80,"initial_access_token":"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI1ZTA3N2E3OS01NzFiLTQzNjItOGE4OS0yYTI4ZGRiNjQwYWYifQ.eyJleHAiOjE3ODY3MTgyMDksImlhdCI6MTc1NTE4MjIwOSwianRpIjoiYTdkODdjOTgtZWMxMS00NjBiLTg4NGYtODMwNGM0NDU5MWU3IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay5lYXN5ZWJ1LmNvbS9yZWFsbXMvZWFzeWVidS1ubW9zIiwiYXVkIjoiaHR0cHM6Ly9rZXljbG9hay5lYXN5ZWJ1LmNvbS9yZWFsbXMvZWFzeWVidS1ubW9zIiwidHlwIjoiSW5pdGlhbEFjY2Vzc1Rva2VuIn0.Idnn13Q3yIOJJdlAwPwrEmQY93c1joxuNQeo8bvNxunxd7u5MyHxxQiQd-FEbU9OVoR98ZwarFoCJLUCaOn4jw","is04_versions":["v1.3"],"is10_versions":["v1.0"],"jwks_uri":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/certs","jwks_uri_port":80,"label":"easy-nmos-node","logging_level":-40,"logging_port":80,"manifest_port":80,"node_port":80,"receivers":["v"],"seed_id":"0ee77315-b304-4883-b513-a9ff609b1b20","senders":["v"],"server_authorization":true,"server_secure":false,"settings_port":80,"token_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/token","token_endpoint_auth_method":"client_secret_basic","validate_openid_client":true}
+2025-08-14 14:40:02.505: info: 136191035705152: Configuring nmos-cpp node with its primary Node API at: https://nmos-virtnode.easyebu.com:80/x-nmos/node/v1.3
+2025-08-14 14:40:02.505: more info: 136191035705152: Make authorization validation
+2025-08-14 14:40:02.509: more info: 136191035705152: Make authorization validation
+2025-08-14 14:40:02.511: more info: 136191035705152: Make authorization validation
+2025-08-14 14:40:02.511: more info: 136191035705152: Make authorization validation
+2025-08-14 14:40:02.512: info: 136191035705152: Preparing for connections
+2025-08-14 14:40:02.513: more info: 136190502094400: Trying System API discovery
+2025-08-14 14:40:02.513: info: 136190502094400: Attempting discovery of a System API in domain: easyebu.com
+2025-08-14 14:40:02.514: more info: 136190627788352: DNSServiceBrowse for regtype: _nmos-system._tcp domain: easyebu.com on interface: 0
+2025-08-14 14:40:02.514: more info: 136190485308992: Load authorization clients from non-volatile memory: 0ee77315-b304-4883-b513-a9ff609b1b20.json
+2025-08-14 14:40:02.514: too much info: 136190485308992: Retrieved authorization clients: [] from non-volatile memory
+2025-08-14 14:40:02.514: too much info: 136191010522688: asio::init_asio
+2025-08-14 14:40:02.514: too much info: 136191010522688: set_validate_handler
+2025-08-14 14:40:02.514: too much info: 136191010522688: set_open_handler
+2025-08-14 14:40:02.514: too much info: 136191010522688: set_close_handler
+2025-08-14 14:40:02.514: too much info: 136191010522688: set_message_handler
+2025-08-14 14:40:02.514: too much info: 136191010522688: asio::listen
+2025-08-14 14:40:02.514: too much info: 136191010522688: create_connection
+2025-08-14 14:40:02.514: too much info: 136191010522688: asio con transport constructor
+2025-08-14 14:40:02.514: too much info: 136191010522688: connection constructor
+2025-08-14 14:40:02.514: too much info: 136191010522688: transport::asio::init
+2025-08-14 14:40:02.514: too much info: 136191010522688: asio::async_accept
+2025-08-14 14:40:02.514: more info: 136191018915392: After DNSServiceRegisterRecord, DNSServiceRegisterRecordReply received no error
+2025-08-14 14:40:02.514: too much info: 136191018915392: After DNSServiceRegisterRecord, DNSServiceProcessResult succeeded
+2025-08-14 14:40:02.514: more info: 136190485308992: Trying Authorization API discovery
+2025-08-14 14:40:02.514: info: 136191018915392: Registered address: 192.168.89.202 for hostname: nmos-virtnode.local.
+2025-08-14 14:40:02.514: info: 136190485308992: Attempting discovery of a Authorization API in domain: easyebu.com
+2025-08-14 14:40:02.514: more info: 136190913140288: DNSServiceBrowse for regtype: _nmos-auth._tcp domain: easyebu.com on interface: 0
+2025-08-14 14:40:02.514: too much info: 136190913140288: DNSServiceProcessResult for 999ms
+2025-08-14 14:40:02.514: too much info: 136190627788352: DNSServiceProcessResult for 999ms
+2025-08-14 14:40:02.514: info: 136191035705152: Ready for connections
+2025-08-14 14:40:02.514: more info: 136191010522688: After DNSServiceRegisterRecord, DNSServiceRegisterRecordReply received no error
+2025-08-14 14:40:02.514: too much info: 136191010522688: After DNSServiceRegisterRecord, DNSServiceProcessResult succeeded
+2025-08-14 14:40:02.514: info: 136191010522688: Registered address: 192.168.89.202 for hostname: nmos-virtnode.easyebu.com
+2025-08-14 14:40:02.514: more info: 136190619395648: Trying Registration API discovery
+2025-08-14 14:40:02.514: info: 136190619395648: Attempting discovery of a Registration API in domain: easyebu.com
+2025-08-14 14:40:02.514: more info: 136190787249728: DNSServiceBrowse for regtype: _nmos-register._tcp domain: easyebu.com on interface: 0
+2025-08-14 14:40:02.514: info: 136190493701696: Updated model with node: 3a7c546e-2736-5602-9be7-9eb8527ee776
+2025-08-14 14:40:02.514: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.514: too much info: 136190787249728: DNSServiceProcessResult for 999ms
+2025-08-14 14:40:02.515: info: 136190493701696: Updated model with device: 70953a20-6554-502e-8d89-530205abe758
+2025-08-14 14:40:02.515: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.516: info: 136190493701696: Updated model with source: 6f5aaa9a-3267-5283-83fb-d48ddcdb9310
+2025-08-14 14:40:02.516: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.516: info: 136190493701696: Updated model with flow: f0e04e63-502d-5698-987a-9e761eb9863d
+2025-08-14 14:40:02.516: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.517: info: 136190493701696: Updated model with sender: 0867149a-a7bf-54b4-b574-59f81e2ddc49
+2025-08-14 14:40:02.517: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.517: info: 136190493701696: Updated model with sender: 0867149a-a7bf-54b4-b574-59f81e2ddc49
+2025-08-14 14:40:02.517: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.518: info: 136190518879808: Processing scheduled activation for sender: 0867149a-a7bf-54b4-b574-59f81e2ddc49
+2025-08-14 14:40:02.520: info: 136190518879808: Activating sender: 0867149a-a7bf-54b4-b574-59f81e2ddc49
+2025-08-14 14:40:02.520: too much info: 136190518879808: Notifying node behaviour thread
+2025-08-14 14:40:02.520: info: 136190493701696: Updated model with source: bddf10e1-560e-50a6-8893-3c5bbf86d0ba
+2025-08-14 14:40:02.520: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.520: info: 136190493701696: Updated model with flow: 298a6fbd-3889-5cd1-9f20-4b4a64cd162b
+2025-08-14 14:40:02.520: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.521: info: 136190493701696: Updated model with sender: 8c13668a-90cf-51bc-a3ec-cc803696b9af
+2025-08-14 14:40:02.521: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.521: info: 136190493701696: Updated model with sender: 8c13668a-90cf-51bc-a3ec-cc803696b9af
+2025-08-14 14:40:02.521: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.521: info: 136190493701696: Updated model with receiver: 68ea88e6-54ff-516b-a442-cf53f3b781d4
+2025-08-14 14:40:02.521: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.521: info: 136190493701696: Updated model with receiver: 68ea88e6-54ff-516b-a442-cf53f3b781d4
+2025-08-14 14:40:02.521: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.521: info: 136190493701696: Updated model with receiver: 4bfc9732-e278-53f8-a8e4-832793a95635
+2025-08-14 14:40:02.521: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.521: info: 136190518879808: Processing scheduled activation for sender: 8c13668a-90cf-51bc-a3ec-cc803696b9af
+2025-08-14 14:40:02.522: info: 136190518879808: Activating sender: 8c13668a-90cf-51bc-a3ec-cc803696b9af
+2025-08-14 14:40:02.523: too much info: 136190518879808: Notifying node behaviour thread
+2025-08-14 14:40:02.523: info: 136190493701696: Updated model with receiver: 4bfc9732-e278-53f8-a8e4-832793a95635
+2025-08-14 14:40:02.523: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.523: info: 136190493701696: Updated model with input: input:inputA
+2025-08-14 14:40:02.523: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.523: info: 136190493701696: Updated model with output: output:outputX
+2025-08-14 14:40:02.523: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.523: info: 136190493701696: Updated model with source: 653cfd06-56ac-5656-b14f-60b32eeeb2ff
+2025-08-14 14:40:02.523: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.523: info: 136190493701696: Updated model with input: input:inputX
+2025-08-14 14:40:02.523: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:02.524: info: 136190493701696: Updated model with output: output:outputB
+2025-08-14 14:40:02.524: too much info: 136190493701696: Notifying node behaviour thread
+2025-08-14 14:40:03.513: more info: 136190913140288: After DNSServiceBrowse, DNSServiceProcessResult timed out or was cancelled
+2025-08-14 14:40:03.514: warning: 136190485308992: Did not discover a suitable Authorization API via DNS-SD
+2025-08-14 14:40:03.514: info: 136190485308992: Adopting background discovery of an Authorization API
+2025-08-14 14:40:03.514: more info: 136190627788352: After DNSServiceBrowse, DNSServiceProcessResult timed out or was cancelled
+2025-08-14 14:40:03.514: more info: 136190787249728: After DNSServiceBrowse, DNSServiceProcessResult timed out or was cancelled
+2025-08-14 14:40:03.514: warning: 136190502094400: Did not discover a suitable System API via DNS-SD
+2025-08-14 14:40:03.515: info: 136190502094400: Adopting background discovery of a System API
+2025-08-14 14:40:03.515: warning: 136190619395648: Did not discover a suitable Registration API via DNS-SD
+2025-08-14 14:40:03.515: info: 136190619395648: Adopting peer-to-peer operation
+2025-08-14 14:40:03.515: more info: 136190619395648: Updating the 'ver_' TXT records
+2025-08-14 14:40:04.514: more info: 136190921532992: Trying Authorization API discovery
+2025-08-14 14:40:04.514: info: 136190921532992: Attempting discovery of a Authorization API in domain: easyebu.com
+2025-08-14 14:40:04.515: more info: 136190896354880: DNSServiceBrowse for regtype: _nmos-auth._tcp domain: easyebu.com on interface: 0
+2025-08-14 14:40:04.515: too much info: 136190896354880: DNSServiceProcessResult for 29999ms
+2025-08-14 14:40:04.515: more info: 136190879569472: Trying System API discovery
+2025-08-14 14:40:04.515: info: 136190879569472: Attempting discovery of a System API in domain: easyebu.com
+2025-08-14 14:40:04.516: more info: 136190652966464: DNSServiceBrowse for regtype: _nmos-system._tcp domain: easyebu.com on interface: 0
+2025-08-14 14:40:04.516: too much info: 136190652966464: DNSServiceProcessResult for 29999ms
+2025-08-14 14:40:04.516: more info: 136190820820544: Trying Registration API discovery
+2025-08-14 14:40:04.516: info: 136190820820544: Attempting discovery of a Registration API in domain: easyebu.com
+2025-08-14 14:40:04.516: more info: 136190770464320: DNSServiceBrowse for regtype: _nmos-register._tcp domain: easyebu.com on interface: 0
+2025-08-14 14:40:04.517: too much info: 136190770464320: DNSServiceProcessResult for 29999ms
+2025-08-14 14:40:07.102: more info: 136190762071616: Temperature updated: 18.1 (number/temperature/C)
+2025-08-14 14:40:08.022: more info: 136190770464320: After DNSServiceBrowse, DNSServiceBrowseReply got service: reg-api-1 for regtype: _nmos-register._tcp. domain: easyebu.com. on interface: 0
+2025-08-14 14:40:08.022: more info: 136190652966464: After DNSServiceBrowse, DNSServiceBrowseReply got service: sys-api-1 for regtype: _nmos-system._tcp. domain: easyebu.com. on interface: 0
+2025-08-14 14:40:08.022: more info: 136190703322688: DNSServiceResolve for name: reg-api-1 regtype: _nmos-register._tcp. domain: easyebu.com. on interface: 0
+2025-08-14 14:40:08.023: too much info: 136190703322688: DNSServiceProcessResult for 26493ms
+2025-08-14 14:40:08.023: more info: 136190694929984: DNSServiceResolve for name: sys-api-1 regtype: _nmos-system._tcp. domain: easyebu.com. on interface: 0
+2025-08-14 14:40:08.024: too much info: 136190694929984: DNSServiceProcessResult for 26491ms
+2025-08-14 14:40:08.025: more info: 136190896354880: After DNSServiceBrowse, DNSServiceBrowseReply got service: auth-api-1 for regtype: _nmos-auth._tcp. domain: easyebu.com. on interface: 0
+2025-08-14 14:40:08.025: more info: 136190686537280: DNSServiceResolve for name: auth-api-1 regtype: _nmos-auth._tcp. domain: easyebu.com. on interface: 0
+2025-08-14 14:40:08.025: too much info: 136190686537280: DNSServiceProcessResult for 26489ms
+2025-08-14 14:40:08.027: more info: 136190703322688: After DNSServiceResolve, DNSServiceResolveReply got host: nmos-registry.easyebu.com. port: 443
+2025-08-14 14:40:08.027: more info: 136190703322688: DNSServiceGetAddrInfo for hostname: nmos-registry.easyebu.com. on interface: 0
+2025-08-14 14:40:08.028: too much info: 136190703322688: DNSServiceProcessResult for 26492ms
+2025-08-14 14:40:08.028: more info: 136190686537280: After DNSServiceResolve, DNSServiceResolveReply got host: keycloak.easyebu.com. port: 443
+2025-08-14 14:40:08.028: more info: 136190686537280: DNSServiceGetAddrInfo for hostname: keycloak.easyebu.com. on interface: 0
+2025-08-14 14:40:08.028: more info: 136190703322688: After DNSServiceGetAddrInfo, DNSServiceGetAddrInfoReply got address: 192.168.89.200 for host: nmos-registry.easyebu.com.
+2025-08-14 14:40:08.028: too much info: 136190703322688: After DNSServiceGetAddrInfo, DNSServiceProcessResult succeeded
+2025-08-14 14:40:08.029: too much info: 136190703322688: After DNSServiceResolve, DNSServiceProcessResult succeeded
+2025-08-14 14:40:08.029: too much info: 136190770464320: After DNSServiceBrowse, DNSServiceProcessResult succeeded
+2025-08-14 14:40:08.029: too much info: 136190686537280: DNSServiceProcessResult for 26488ms
+2025-08-14 14:40:08.030: more info: 136190686537280: After DNSServiceGetAddrInfo, DNSServiceGetAddrInfoReply got address: 192.168.89.200 for host: keycloak.easyebu.com.
+2025-08-14 14:40:08.030: too much info: 136190686537280: After DNSServiceGetAddrInfo, DNSServiceProcessResult succeeded
+2025-08-14 14:40:08.030: info: 136190820820544: Discovered 1 Registration API(s)
+2025-08-14 14:40:08.030: more info: 136190820820544: Using the Registration API(s):
+	https://nmos-registry.easyebu.com@192.168.89.200:443/x-nmos/registration/v1.3
+2025-08-14 14:40:08.030: too much info: 136190686537280: After DNSServiceResolve, DNSServiceProcessResult succeeded
+2025-08-14 14:40:08.030: more info: 136190694929984: After DNSServiceResolve, DNSServiceResolveReply got host: nmos-registry.easyebu.com. port: 443
+2025-08-14 14:40:08.030: more info: 136190694929984: DNSServiceGetAddrInfo for hostname: nmos-registry.easyebu.com. on interface: 0
+2025-08-14 14:40:08.030: too much info: 136190896354880: After DNSServiceBrowse, DNSServiceProcessResult succeeded
+2025-08-14 14:40:08.030: info: 136190921532992: Discovered 1 Authorization API(s)
+2025-08-14 14:40:08.030: more info: 136190921532992: Using the Authorization API(s):
+	https://keycloak.easyebu.com@192.168.89.200:443/.well-known/oauth-authorization-server/x-nmos/auth/v1.0
+2025-08-14 14:40:08.030: more info: 136190619395648: Withdrawing the 'ver_' TXT records
+2025-08-14 14:40:08.030: info: 136190619395648: Attempting initial registration
+2025-08-14 14:40:08.031: more info: 136190619395648: Retrieve bearer token from cache
+2025-08-14 14:40:08.031: info: 136190619395648: Registering nmos-cpp node with the Registration API at: https://nmos-registry.easyebu.com@192.168.89.200:443/x-nmos/registration/v1.3
+2025-08-14 14:40:08.031: info: 136190619395648: Requesting registration creation for node: 3a7c546e-2736-5602-9be7-9eb8527ee776
+2025-08-14 14:40:08.031: too much info: 136190619395648: Sending request
+2025-08-14 14:40:08.032: too much info: 136190694929984: DNSServiceProcessResult for 26491ms
+2025-08-14 14:40:08.032: more info: 136190694929984: After DNSServiceGetAddrInfo, DNSServiceGetAddrInfoReply got address: 192.168.89.200 for host: nmos-registry.easyebu.com.
+2025-08-14 14:40:08.032: too much info: 136190694929984: After DNSServiceGetAddrInfo, DNSServiceProcessResult succeeded
+2025-08-14 14:40:08.032: too much info: 136190694929984: After DNSServiceResolve, DNSServiceProcessResult succeeded
+2025-08-14 14:40:08.032: too much info: 136190652966464: After DNSServiceBrowse, DNSServiceProcessResult succeeded
+2025-08-14 14:40:08.032: too much info: 136190652966464: DNSServiceProcessResult for 26483ms
+2025-08-14 14:40:08.038: more info: 136190619395648: Load certification authorities
+2025-08-14 14:40:08.039: info: 136190485308992: Attempting authorization server metadata fetch
+2025-08-14 14:40:08.039: too much info: 136190485308992: Requesting authorization server metadata at https://keycloak.easyebu.com@192.168.89.200:443/.well-known/oauth-authorization-server/x-nmos/auth/v1.0
+2025-08-14 14:40:08.039: too much info: 136190485308992: Sending request
+2025-08-14 14:40:08.039: more info: 136190485308992: Load certification authorities
+2025-08-14 14:40:08.046: too much info: 136190778857024: Response received after 15.358ms (server-timing: proc;dur=0.592)
+2025-08-14 14:40:08.046: error: 136190778857024: Registration creation error: 401 Unauthorized
+2025-08-14 14:40:08.047: more info: 136190619395648: Trying Registration API discovery
+2025-08-14 14:40:08.047: info: 136190619395648: Attempting discovery of a Registration API in domain: easyebu.com
+2025-08-14 14:40:08.047: more info: 136190787249728: DNSServiceBrowse for regtype: _nmos-register._tcp domain: easyebu.com on interface: 0
+2025-08-14 14:40:08.047: too much info: 136190787249728: DNSServiceProcessResult for 999ms
+2025-08-14 14:40:08.047: more info: 136190787249728: After DNSServiceBrowse, DNSServiceBrowseReply got service: reg-api-1 for regtype: _nmos-register._tcp. domain: easyebu.com. on interface: 0
+2025-08-14 14:40:08.047: more info: 136190896354880: DNSServiceResolve for name: reg-api-1 regtype: _nmos-register._tcp. domain: easyebu.com. on interface: 0
+2025-08-14 14:40:08.047: too much info: 136190896354880: DNSServiceProcessResult for 999ms
+2025-08-14 14:40:08.047: more info: 136190896354880: After DNSServiceResolve, DNSServiceResolveReply got host: nmos-registry.easyebu.com. port: 443
+2025-08-14 14:40:08.047: more info: 136190896354880: DNSServiceGetAddrInfo for hostname: nmos-registry.easyebu.com. on interface: 0
+2025-08-14 14:40:08.047: too much info: 136190896354880: DNSServiceProcessResult for 999ms
+2025-08-14 14:40:08.047: more info: 136190896354880: After DNSServiceGetAddrInfo, DNSServiceGetAddrInfoReply got address: 192.168.89.200 for host: nmos-registry.easyebu.com.
+2025-08-14 14:40:08.047: too much info: 136190896354880: After DNSServiceGetAddrInfo, DNSServiceProcessResult succeeded
+2025-08-14 14:40:08.047: too much info: 136190896354880: After DNSServiceResolve, DNSServiceProcessResult succeeded
+2025-08-14 14:40:08.047: too much info: 136190787249728: After DNSServiceBrowse, DNSServiceProcessResult succeeded
+2025-08-14 14:40:08.047: too much info: 136190787249728: DNSServiceProcessResult for 999ms
+2025-08-14 14:40:08.260: too much info: 136190820820544: Response received after 221.797ms
+2025-08-14 14:40:08.263: too much info: 136190845998656: Received authorization server metadata: {"acr_values_supported":["0","1"],"authorization_encryption_alg_values_supported":["ECDH-ES+A256KW","ECDH-ES+A192KW","ECDH-ES+A128KW","RSA-OAEP","RSA-OAEP-256","RSA1_5","ECDH-ES"],"authorization_encryption_enc_values_supported":["A256GCM","A192GCM","A128GCM","A128CBC-HS256","A192CBC-HS384","A256CBC-HS512"],"authorization_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/auth","authorization_response_iss_parameter_supported":true,"authorization_signing_alg_values_supported":["PS384","RS384","EdDSA","ES384","HS256","HS512","ES256","RS256","HS384","ES512","PS256","PS512","RS512"],"backchannel_authentication_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/ext/ciba/auth","backchannel_authentication_request_signing_alg_values_supported":["PS384","RS384","EdDSA","ES384","ES256","RS256","ES512","PS256","PS512","RS512"],"backchannel_logout_session_supported":true,"backchannel_logout_supported":true,"backchannel_token_delivery_modes_supported":["poll","ping"],"check_session_iframe":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/login-status-iframe.html","claim_types_supported":["normal"],"claims_parameter_supported":true,"claims_supported":["aud","sub","iss","auth_time","name","given_name","family_name","preferred_username","email","acr"],"code_challenge_methods_supported":["plain","S256"],"device_authorization_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/auth/device","end_session_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/logout","frontchannel_logout_session_supported":true,"frontchannel_logout_supported":true,"grant_types_supported":["authorization_code","client_credentials","implicit","password","refresh_token","urn:ietf:params:oauth:grant-type:device_code","urn:ietf:params:oauth:grant-type:token-exchange","urn:ietf:params:oauth:grant-type:uma-ticket","urn:openid:params:grant-type:ciba"],"id_token_encryption_alg_values_supported":["ECDH-ES+A256KW","ECDH-ES+A192KW","ECDH-ES+A128KW","RSA-OAEP","RSA-OAEP-256","RSA1_5","ECDH-ES"],"id_token_encryption_enc_values_supported":["A256GCM","A192GCM","A128GCM","A128CBC-HS256","A192CBC-HS384","A256CBC-HS512"],"id_token_signing_alg_values_supported":["PS384","RS384","EdDSA","ES384","HS256","HS512","ES256","RS256","HS384","ES512","PS256","PS512","RS512"],"introspection_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/token/introspect","introspection_endpoint_auth_methods_supported":["private_key_jwt","client_secret_basic","client_secret_post","tls_client_auth","client_secret_jwt"],"introspection_endpoint_auth_signing_alg_values_supported":["PS384","RS384","EdDSA","ES384","HS256","HS512","ES256","RS256","HS384","ES512","PS256","PS512","RS512"],"issuer":"https://keycloak.easyebu.com/realms/easyebu-nmos","jwks_uri":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/certs","mtls_endpoint_aliases":{"backchannel_authentication_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/ext/ciba/auth","device_authorization_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/auth/device","introspection_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/token/introspect","pushed_authorization_request_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/ext/par/request","registration_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/clients-registrations/openid-connect","revocation_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/revoke","token_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/token","userinfo_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/userinfo"},"prompt_values_supported":["none","login","consent"],"pushed_authorization_request_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/ext/par/request","registration_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/clients-registrations/openid-connect","request_object_encryption_alg_values_supported":["ECDH-ES+A256KW","ECDH-ES+A192KW","ECDH-ES+A128KW","RSA-OAEP","RSA-OAEP-256","RSA1_5","ECDH-ES"],"request_object_encryption_enc_values_supported":["A256GCM","A192GCM","A128GCM","A128CBC-HS256","A192CBC-HS384","A256CBC-HS512"],"request_object_signing_alg_values_supported":["PS384","RS384","EdDSA","ES384","HS256","HS512","ES256","RS256","HS384","ES512","PS256","PS512","RS512","none"],"request_parameter_supported":true,"request_uri_parameter_supported":true,"require_pushed_authorization_requests":false,"require_request_uri_registration":true,"response_modes_supported":["query","fragment","form_post","query.jwt","fragment.jwt","form_post.jwt","jwt"],"response_types_supported":["code","none","id_token","token","id_token token","code id_token","code token","code id_token token"],"revocation_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/revoke","revocation_endpoint_auth_methods_supported":["private_key_jwt","client_secret_basic","client_secret_post","tls_client_auth","client_secret_jwt"],"revocation_endpoint_auth_signing_alg_values_supported":["PS384","RS384","EdDSA","ES384","HS256","HS512","ES256","RS256","HS384","ES512","PS256","PS512","RS512"],"scopes_supported":["openid","offline_access","query","registration"],"subject_types_supported":["public","pairwise"],"tls_client_certificate_bound_access_tokens":true,"token_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/token","token_endpoint_auth_methods_supported":["private_key_jwt","client_secret_basic","client_secret_post","tls_client_auth","client_secret_jwt"],"token_endpoint_auth_signing_alg_values_supported":["PS384","RS384","EdDSA","ES384","HS256","HS512","ES256","RS256","HS384","ES512","PS256","PS512","RS512"],"userinfo_encryption_alg_values_supported":["ECDH-ES+A256KW","ECDH-ES+A192KW","ECDH-ES+A128KW","RSA-OAEP","RSA-OAEP-256","RSA1_5","ECDH-ES"],"userinfo_encryption_enc_values_supported":["A256GCM","A192GCM","A128GCM","A128CBC-HS256","A192CBC-HS384","A256CBC-HS512"],"userinfo_endpoint":"https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/userinfo","userinfo_signing_alg_values_supported":["PS384","RS384","EdDSA","ES384","HS256","HS512","ES256","RS256","HS384","ES512","PS256","PS512","RS512","none"]}
+2025-08-14 14:40:08.263: info: 136190485308992: Attempting authorization client registration
+2025-08-14 14:40:08.263: too much info: 136190485308992: Requesting authorization client registration at https://keycloak.easyebu.com/realms/easyebu-nmos/clients-registrations/openid-connect
+2025-08-14 14:40:08.263: too much info: 136190485308992: Request to register client metadata: {"client_name":"easy-nmos-node","grant_types":["client_credentials"],"response_types":["none"],"scope":"registration","token_endpoint_auth_method":"client_secret_basic"} at https://keycloak.easyebu.com/realms/easyebu-nmos/clients-registrations/openid-connect
+2025-08-14 14:40:08.263: too much info: 136190485308992: Sending request
+2025-08-14 14:40:08.264: more info: 136190485308992: Load certification authorities
+2025-08-14 14:40:08.710: too much info: 136190762071616: Response received after 446.99ms
+2025-08-14 14:40:08.711: too much info: 136190812427840: Registered client metadata: {"backchannel_logout_session_required":false,"client_id":"42343402-8ca9-4d55-b60a-7a4f1dd67b31","client_id_issued_at":1755182408,"client_name":"easy-nmos-node","client_secret":"CRKP8gdqkebRAK5lNup9bJTYC0kAJJ6Y","client_secret_expires_at":0,"dpop_bound_access_tokens":false,"frontchannel_logout_session_required":false,"grant_types":["authorization_code","client_credentials"],"id_token_signed_response_alg":"RS512","post_logout_redirect_uris":[],"redirect_uris":[],"registration_access_token":"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI1ZTA3N2E3OS01NzFiLTQzNjItOGE4OS0yYTI4ZGRiNjQwYWYifQ.eyJleHAiOjAsImlhdCI6MTc1NTE4MjQwOCwianRpIjoiMTVhZmJmMmQtZmE3NC0wNGJhLTVjYWUtNGQ2YzUwOWEwZTc5IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay5lYXN5ZWJ1LmNvbS9yZWFsbXMvZWFzeWVidS1ubW9zIiwiYXVkIjoiaHR0cHM6Ly9rZXljbG9hay5lYXN5ZWJ1LmNvbS9yZWFsbXMvZWFzeWVidS1ubW9zIiwidHlwIjoiUmVnaXN0cmF0aW9uQWNjZXNzVG9rZW4iLCJyZWdpc3RyYXRpb25fYXV0aCI6ImF1dGhlbnRpY2F0ZWQifQ.iXLfn1qS_SFuNAXFKLLZ5hEh6gHxEi5T2uhujkDWtplc1Ukl7DKqJYCu5Nmzj54Kxiq5mX9KEmR7kR-5S_zxRA","registration_client_uri":"https://keycloak.easyebu.com/realms/easyebu-nmos/clients-registrations/openid-connect/42343402-8ca9-4d55-b60a-7a4f1dd67b31","request_uris":[],"require_pushed_authorization_requests":false,"response_types":["code","none"],"scope":"registration","subject_type":"public","tls_client_certificate_bound_access_tokens":false,"token_endpoint_auth_method":"client_secret_basic"}
+2025-08-14 14:40:08.711: more info: 136190812427840: Save authorization clients to non-volatile memory: 0ee77315-b304-4883-b513-a9ff609b1b20.json
+2025-08-14 14:40:08.711: info: 136190485308992: Attempting authorization operation: fetch token at next interval
+2025-08-14 14:40:08.712: more info: 136190929925696: Requesting authorization public keys (jwks) for about 0 seconds
+2025-08-14 14:40:08.712: more info: 136190711715392: Requesting 'registration' bearer token for about 0 seconds
+2025-08-14 14:40:08.712: info: 136190703322688: Requesting 'registration' bearer token using client_credentials grant at https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/token
+2025-08-14 14:40:08.712: too much info: 136190703322688: Requesting 'registration' bearer token at https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/token
+2025-08-14 14:40:08.712: too much info: 136190703322688: Sending request
+2025-08-14 14:40:08.712: too much info: 136191027308096: Requesting authorization jwks at https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/certs
+2025-08-14 14:40:08.712: too much info: 136191027308096: Sending request
+2025-08-14 14:40:08.712: more info: 136191027308096: Load certification authorities
+2025-08-14 14:40:08.712: more info: 136190703322688: Load certification authorities
+2025-08-14 14:40:08.767: too much info: 136190896354880: Response received after 55.718ms
+2025-08-14 14:40:08.768: too much info: 136191018915392: Received authorization jwks: [{"alg":"RSA-OAEP","e":"AQAB","kid":"OU8WM-bcpU0eCn2pgaWJwyTuRVOMwuD4F9fI1UpzHF0","kty":"RSA","n":"v2NwY_kGcwbYRrtkBfcxbZg6y_viYg-sf21nw4vz0CDBN0WP4rRUp1J84ZGkdnL-15r27K_xkH5vmYFqRYTGuMdK_q3waQUPO8GTuOmqVUKUFKVPwmMA9yEKjZJFLfn8GJ2St01xdQo2nWp6g8G0vubMa5xjd2apfvQ_akyet21jPpDuqowK8w2nETXRI1j1DSb1Gv84aE7PQR1kBoekFlmDTUC5jltmkf5bKL79XlD94U1BUJvZIXsnHavtcNgB8LH5KW8pk9xnSyRYHfHFupHYN0OposoxzwkoS4odiCzMR9kx0HIuumdB1dRGgp75cZtWepOFqa55pAicWUsjXw","use":"enc","x5c":["MIICpzCCAY8CBgGYmGIhTDANBgkqhkiG9w0BAQsFADAXMRUwEwYDVQQDDAxlYXN5ZWJ1LW5tb3MwHhcNMjUwODExMDkwNTI0WhcNMzUwODExMDkwNzA0WjAXMRUwEwYDVQQDDAxlYXN5ZWJ1LW5tb3MwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC/Y3Bj+QZzBthGu2QF9zFtmDrL++JiD6x/bWfDi/PQIME3RY/itFSnUnzhkaR2cv7Xmvbsr/GQfm+ZgWpFhMa4x0r+rfBpBQ87wZO46apVQpQUpU/CYwD3IQqNkkUt+fwYnZK3TXF1CjadanqDwbS+5sxrnGN3Zql+9D9qTJ63bWM+kO6qjArzDacRNdEjWPUNJvUa/zhoTs9BHWQGh6QWWYNNQLmOW2aR/lsovv1eUP3hTUFQm9kheycdq+1w2AHwsfkpbymT3GdLJFgd8cW6kdg3Q6miyjHPCShLih2ILMxH2THQci66Z0HV1EaCnvlxm1Z6k4WprnmkCJxZSyNfAgMBAAEwDQYJKoZIhvcNAQELBQADggEBACO1wykWVX3s+9xrdhYIpjLllxMs0Q9uY6hTYi4TUo+7Xvz+2m7Tng1hUydaTiGu/SJX8YrkWA555r0ApGHBMqYov9TmdURkhPRhJO6QFsI0losP6T7JHqigOgSXKjhOS7svkiapvMmsMmuEuvy6mJvgursSWSQJS66C+0qiuz7L0u5AmODntqvW20anlDawptHLB38PVtnvnPM+g2qcnY+wx6NaK+B91jtbIMFVNJhs4EIPqDHAWSazqLSEgJx6Pis/RKd7z9SOxL5v2ZrukY//qyfNo8kO7PZ6Bvu+ZMwVs/Q3lqCj7UK95yK7JiNXCGo5YkKA32HGvf1eiTYS0LA="],"x5t":"7DmJeBmbUi26x1wt3a00o7JhJSE","x5t#S256":"a8KwsXr_oyrXaTYUO0luB5HzQt_QqpW06JxUnZ6tjo4"},{"alg":"RS256","e":"AQAB","kid":"z7JzqedKSHeD2Ng-DZMWldUxbZAZ5sOUL9t10MMiJd0","kty":"RSA","n":"vfDVnlb9iqiFGK-4jnE4AX5n14SHbmcrhxpU5ApnhpQTMuuZXX4xv6n3kaldzMvLNSTfv5IJeZ6LdtfxtilT8dNxBgPdVSl7mDR2Ej7BV0oOHee1ixHYneK9oZi4PGGvnLGtjhMTofHUN0NBClzrC4BQGjHusGHmykpDjSryQz882BRcohQbUuxjOmjtbrlQmbKCgImk343Kcz7GpAvI6kox49UQpdChTM_nXxpOzMKp0Q5d0IO3c1P5C5u2meU3mlUhVZWgTmVisWouqXWUKwi7OhS3mRp9IFknPZziJ84SB8YqzZeZQmHhoz05SUcxMnfUwqySxIVmhJSaBzMNeQ","use":"sig","x5c":["MIICpzCCAY8CBgGYmGIipzANBgkqhkiG9w0BAQsFADAXMRUwEwYDVQQDDAxlYXN5ZWJ1LW5tb3MwHhcNMjUwODExMDkwNTI1WhcNMzUwODExMDkwNzA0WjAXMRUwEwYDVQQDDAxlYXN5ZWJ1LW5tb3MwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC98NWeVv2KqIUYr7iOcTgBfmfXhIduZyuHGlTkCmeGlBMy65ldfjG/qfeRqV3My8s1JN+/kgl5not21/G2KVPx03EGA91VKXuYNHYSPsFXSg4d57WLEdid4r2hmLg8Ya+csa2OExOh8dQ3Q0EKXOsLgFAaMe6wYebKSkONKvJDPzzYFFyiFBtS7GM6aO1uuVCZsoKAiaTfjcpzPsakC8jqSjHj1RCl0KFMz+dfGk7MwqnRDl3Qg7dzU/kLm7aZ5TeaVSFVlaBOZWKxai6pdZQrCLs6FLeZGn0gWSc9nOInzhIHxirNl5lCYeGjPTlJRzEyd9TCrJLEhWaElJoHMw15AgMBAAEwDQYJKoZIhvcNAQELBQADggEBADTZNlJ3r47s/hdkof50HffgjVbsDGY3v8Tq2bTmd97nKo9Zr7aHhFKpPbe3FOGhbs2diMQV4s2uAkPd72u2Nocy0Sh40BK1mYde9lY0lNjedKEcTiPVgOR80llEQQi5faBNyZSoQRCDSNRBKcycefmZsQsuwJj1GzY8anFFs+YoHAOY8nz4Sb+iIS4AQorshYxoW8Q7b812105oC8grWXLrXquiUmGQSgx/CRl4W1okskoHod1qN5S8HBgEiaG6tEFuVIy5WyXEfohwdRx6o5C+P5UzECjzNTwkaFdnFmsayWcVY+uYeRxmy4FSlRtW71pLT3duBFqDGIYQQ5HgESQ="],"x5t":"D4x12HnlT5tBxX35FDmKX7p3GHQ","x5t#S256":"oh8reaatXBvMwit2fthnt5oOx6Ec_wutzURaaBcraQw"},{"alg":"RS512","e":"AQAB","kid":"SpzvBwd4oeGC-6b_kFOWaLpbilmL5Oo9Zq63QxTPmZE","kty":"RSA","n":"szfVLKCGsOqVBix44j5hkiMCYHzSO1w2CPo8seI7ZQNxVzPUw_o996jfho_mZJ53M4TwXMMJzae43fkAhE0-TlzPUAa1D7qB0TPaOZjhAH4i0CbosQt6YWQ4TFT-GykQC9z-8qUlc4uB6utACgZhJz5kJTepoU1bgIjRUAFu3BmCFEnb4oY4EdnyPokr5Bky4BIRP8USnG6piU6zSbdvz1Ofm-FuQkGFLD2zAYQeZO26NwDkuHYO6NzSMWoWjbJX2IwZX8aBuTF3PJChCXEJbyBYjN0D_PIOIZiKpvOHwUOhmiUvqftuLW6zKtCzgTWkjHAJEPLi3_LqkOIZO8ixYw","use":"sig","x5c":["MIICpzCCAY8CBgGYmGIhyjANBgkqhkiG9w0BAQsFADAXMRUwEwYDVQQDDAxlYXN5ZWJ1LW5tb3MwHhcNMjUwODExMDkwNTI0WhcNMzUwODExMDkwNzA0WjAXMRUwEwYDVQQDDAxlYXN5ZWJ1LW5tb3MwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCzN9UsoIaw6pUGLHjiPmGSIwJgfNI7XDYI+jyx4jtlA3FXM9TD+j33qN+Gj+ZknnczhPBcwwnNp7jd+QCETT5OXM9QBrUPuoHRM9o5mOEAfiLQJuixC3phZDhMVP4bKRAL3P7ypSVzi4Hq60AKBmEnPmQlN6mhTVuAiNFQAW7cGYIUSdvihjgR2fI+iSvkGTLgEhE/xRKcbqmJTrNJt2/PU5+b4W5CQYUsPbMBhB5k7bo3AOS4dg7o3NIxahaNslfYjBlfxoG5MXc8kKEJcQlvIFiM3QP88g4hmIqm84fBQ6GaJS+p+24tbrMq0LOBNaSMcAkQ8uLf8uqQ4hk7yLFjAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAHcg8KHatT7W3mIxwqlIwXEmFt5LstExeM910BhX//I9t+oV+guaFm8Ue+C7BGeQYaGHYyyOtSOWo90On1hPZHD4rMAK0wgjIpMThxNmyi7JljWonAJ0i9nCqHQjo7HFi9DOIx7Ush4trPvBQbijPFHBUBqFxJBr7DyyPgzPdubog4PLiRrJn4C/0tAG3odjJTfLPqxpl1aAUadMoNF5MsQpY59Y2bGeBVdBXpYCJuYKqwC0RPN+3VC/n9Dcv3cC26Tkwq24bcpg7sLvUcl6PYuqJ9foziPD/24JU7Gn73KTqdAJyoG3N95fa3YewLVxbcopRi3g6HaIXRn7HG09yyA="],"x5t":"VqOC2OKnJVo3GfYXs2KE5X0bfSE","x5t#S256":"xaULdjxUX2RVbkewabvzF4kqJnPzbDsh1XEc8Qkv7VI"}]
+2025-08-14 14:40:08.768: warning: 136191018915392: Invalid jwk from https://keycloak.easyebu.com/realms/easyebu-nmos JWK error: jwk contains invalid 'use': {"alg":"RSA-OAEP","e":"AQAB","kid":"OU8WM-bcpU0eCn2pgaWJwyTuRVOMwuD4F9fI1UpzHF0","kty":"RSA","n":"v2NwY_kGcwbYRrtkBfcxbZg6y_viYg-sf21nw4vz0CDBN0WP4rRUp1J84ZGkdnL-15r27K_xkH5vmYFqRYTGuMdK_q3waQUPO8GTuOmqVUKUFKVPwmMA9yEKjZJFLfn8GJ2St01xdQo2nWp6g8G0vubMa5xjd2apfvQ_akyet21jPpDuqowK8w2nETXRI1j1DSb1Gv84aE7PQR1kBoekFlmDTUC5jltmkf5bKL79XlD94U1BUJvZIXsnHavtcNgB8LH5KW8pk9xnSyRYHfHFupHYN0OposoxzwkoS4odiCzMR9kx0HIuumdB1dRGgp75cZtWepOFqa55pAicWUsjXw","use":"enc","x5c":["MIICpzCCAY8CBgGYmGIhTDANBgkqhkiG9w0BAQsFADAXMRUwEwYDVQQDDAxlYXN5ZWJ1LW5tb3MwHhcNMjUwODExMDkwNTI0WhcNMzUwODExMDkwNzA0WjAXMRUwEwYDVQQDDAxlYXN5ZWJ1LW5tb3MwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC/Y3Bj+QZzBthGu2QF9zFtmDrL++JiD6x/bWfDi/PQIME3RY/itFSnUnzhkaR2cv7Xmvbsr/GQfm+ZgWpFhMa4x0r+rfBpBQ87wZO46apVQpQUpU/CYwD3IQqNkkUt+fwYnZK3TXF1CjadanqDwbS+5sxrnGN3Zql+9D9qTJ63bWM+kO6qjArzDacRNdEjWPUNJvUa/zhoTs9BHWQGh6QWWYNNQLmOW2aR/lsovv1eUP3hTUFQm9kheycdq+1w2AHwsfkpbymT3GdLJFgd8cW6kdg3Q6miyjHPCShLih2ILMxH2THQci66Z0HV1EaCnvlxm1Z6k4WprnmkCJxZSyNfAgMBAAEwDQYJKoZIhvcNAQELBQADggEBACO1wykWVX3s+9xrdhYIpjLllxMs0Q9uY6hTYi4TUo+7Xvz+2m7Tng1hUydaTiGu/SJX8YrkWA555r0ApGHBMqYov9TmdURkhPRhJO6QFsI0losP6T7JHqigOgSXKjhOS7svkiapvMmsMmuEuvy6mJvgursSWSQJS66C+0qiuz7L0u5AmODntqvW20anlDawptHLB38PVtnvnPM+g2qcnY+wx6NaK+B91jtbIMFVNJhs4EIPqDHAWSazqLSEgJx6Pis/RKd7z9SOxL5v2ZrukY//qyfNo8kO7PZ6Bvu+ZMwVs/Q3lqCj7UK95yK7JiNXCGo5YkKA32HGvf1eiTYS0LA="],"x5t":"7DmJeBmbUi26x1wt3a00o7JhJSE","x5t#S256":"a8KwsXr_oyrXaTYUO0luB5HzQt_QqpW06JxUnZ6tjo4"}
+2025-08-14 14:40:08.768: info: 136191018915392: JSON Web Token validator updated using an new set of public keys for https://keycloak.easyebu.com/realms/easyebu-nmos
+2025-08-14 14:40:08.768: more info: 136191018915392: Requesting authorization public keys (jwks) for about 3613 seconds
+2025-08-14 14:40:09.047: more info: 136190787249728: After DNSServiceBrowse, DNSServiceProcessResult timed out or was cancelled
+2025-08-14 14:40:09.047: info: 136190619395648: Discovered 1 Registration API(s)
+2025-08-14 14:40:09.047: more info: 136190619395648: Using the Registration API(s):
+	https://nmos-registry.easyebu.com@192.168.89.200:443/x-nmos/registration/v1.3
+2025-08-14 14:40:09.047: info: 136190619395648: Attempting initial registration
+2025-08-14 14:40:09.048: more info: 136190619395648: Retrieve bearer token from cache
+2025-08-14 14:40:09.048: info: 136190619395648: Registering nmos-cpp node with the Registration API at: https://nmos-registry.easyebu.com@192.168.89.200:443/x-nmos/registration/v1.3
+2025-08-14 14:40:09.048: info: 136190619395648: Requesting registration creation for node: 3a7c546e-2736-5602-9be7-9eb8527ee776
+2025-08-14 14:40:09.048: too much info: 136190619395648: Sending request
+2025-08-14 14:40:09.048: more info: 136190619395648: Load certification authorities
+2025-08-14 14:40:09.054: too much info: 136190703322688: Response received after 5.944ms (server-timing: proc;dur=1.828)
+2025-08-14 14:40:09.054: error: 136191010522688: Registration creation error: 401 Unauthorized
+2025-08-14 14:40:09.054: more info: 136190619395648: Waiting to retry Registration API discovery for about 0.741 seconds (current backoff limit: 1.000 seconds)
+2025-08-14 14:40:09.081: too much info: 136191027308096: Response received after 369.046ms
+2025-08-14 14:40:09.081: too much info: 136190845998656: Received bearer token
+2025-08-14 14:40:09.081: info: 136190845998656: 'registration' bearer token updated
+2025-08-14 14:40:09.081: more info: 136190845998656: Requesting 'registration' bearer token for about 150 seconds
+2025-08-14 14:40:09.795: more info: 136190619395648: Trying Registration API discovery
+2025-08-14 14:40:09.795: info: 136190619395648: Attempting discovery of a Registration API in domain: easyebu.com
+2025-08-14 14:40:09.795: more info: 136190694929984: DNSServiceBrowse for regtype: _nmos-register._tcp domain: easyebu.com on interface: 0
+2025-08-14 14:40:09.796: too much info: 136190694929984: DNSServiceProcessResult for 999ms
+2025-08-14 14:40:09.796: more info: 136190694929984: After DNSServiceBrowse, DNSServiceBrowseReply got service: reg-api-1 for regtype: _nmos-register._tcp. domain: easyebu.com. on interface: 0
+2025-08-14 14:40:09.796: more info: 136190871176768: DNSServiceResolve for name: reg-api-1 regtype: _nmos-register._tcp. domain: easyebu.com. on interface: 0
+2025-08-14 14:40:09.796: too much info: 136190871176768: DNSServiceProcessResult for 999ms
+2025-08-14 14:40:09.796: more info: 136190871176768: After DNSServiceResolve, DNSServiceResolveReply got host: nmos-registry.easyebu.com. port: 443
+2025-08-14 14:40:09.796: more info: 136190871176768: DNSServiceGetAddrInfo for hostname: nmos-registry.easyebu.com. on interface: 0
+2025-08-14 14:40:09.796: too much info: 136190871176768: DNSServiceProcessResult for 999ms
+2025-08-14 14:40:09.796: more info: 136190871176768: After DNSServiceGetAddrInfo, DNSServiceGetAddrInfoReply got address: 192.168.89.200 for host: nmos-registry.easyebu.com.
+2025-08-14 14:40:09.796: too much info: 136190871176768: After DNSServiceGetAddrInfo, DNSServiceProcessResult succeeded
+2025-08-14 14:40:09.797: too much info: 136190871176768: After DNSServiceResolve, DNSServiceProcessResult succeeded
+2025-08-14 14:40:09.797: too much info: 136190694929984: After DNSServiceBrowse, DNSServiceProcessResult succeeded
+2025-08-14 14:40:09.797: too much info: 136190694929984: DNSServiceProcessResult for 998ms
+2025-08-14 14:40:10.796: more info: 136190694929984: After DNSServiceBrowse, DNSServiceProcessResult timed out or was cancelled
+2025-08-14 14:40:10.796: info: 136190619395648: Discovered 1 Registration API(s)
+2025-08-14 14:40:10.797: more info: 136190619395648: Using the Registration API(s):
+	https://nmos-registry.easyebu.com@192.168.89.200:443/x-nmos/registration/v1.3
+2025-08-14 14:40:10.797: info: 136190619395648: Attempting initial registration
+2025-08-14 14:40:10.797: more info: 136190619395648: Retrieve bearer token from cache
+2025-08-14 14:40:10.798: info: 136190619395648: Registering nmos-cpp node with the Registration API at: https://nmos-registry.easyebu.com@192.168.89.200:443/x-nmos/registration/v1.3
+2025-08-14 14:40:10.798: info: 136190619395648: Requesting registration creation for node: 3a7c546e-2736-5602-9be7-9eb8527ee776
+2025-08-14 14:40:10.798: too much info: 136190619395648: Sending request
+2025-08-14 14:40:10.799: more info: 136190619395648: Load certification authorities
+2025-08-14 14:40:10.809: too much info: 136190820820544: Response received after 11.819ms (server-timing: proc;dur=1.526)
+2025-08-14 14:40:10.810: more info: 136190820820544: Registration created for node: 3a7c546e-2736-5602-9be7-9eb8527ee776
+2025-08-14 14:40:10.810: info: 136190619395648: Adopting registered operation
+2025-08-14 14:40:10.810: more info: 136190619395648: Retrieve bearer token from cache
+2025-08-14 14:40:10.810: info: 136190619395648: Attempting registration heartbeats with the Registration API at: https://nmos-registry.easyebu.com@192.168.89.200:443/x-nmos/registration/v1.3
+2025-08-14 14:40:10.810: too much info: 136190619395648: Posting registration heartbeat for node: 3a7c546e-2736-5602-9be7-9eb8527ee776
+2025-08-14 14:40:10.810: too much info: 136190619395648: Sending request
+2025-08-14 14:40:10.810: more info: 136190619395648: Load certification authorities
+2025-08-14 14:40:10.815: too much info: 136191010522688: Response received after 4.9ms (server-timing: proc;dur=1.008)
+2025-08-14 14:40:10.815: info: 136190728500800: Started registered operation with Registration API at: https://nmos-registry.easyebu.com@192.168.89.200:443/x-nmos/registration/v1.3
+2025-08-14 14:40:10.815: more info: 136190619395648: Retrieve bearer token from cache
+2025-08-14 14:40:10.815: more info: 136190619395648: Update registration client with new authorization token
+2025-08-14 14:40:10.815: info: 136190619395648: Requesting registration creation for device: 70953a20-6554-502e-8d89-530205abe758
+2025-08-14 14:40:10.815: too much info: 136190619395648: Sending request
+2025-08-14 14:40:10.815: more info: 136190619395648: Load certification authorities
+2025-08-14 14:40:10.820: too much info: 136190820820544: Response received after 5.42ms (server-timing: proc;dur=1.725)
+2025-08-14 14:40:10.820: more info: 136190753678912: Registration created for device: 70953a20-6554-502e-8d89-530205abe758
+2025-08-14 14:40:10.820: more info: 136190619395648: Retrieve bearer token from cache
+2025-08-14 14:40:10.820: info: 136190619395648: Requesting registration creation for source: 6f5aaa9a-3267-5283-83fb-d48ddcdb9310
+2025-08-14 14:40:10.820: too much info: 136190619395648: Sending request
+2025-08-14 14:40:10.823: too much info: 136190804035136: Response received after 2.254ms (server-timing: proc;dur=1.462)
+2025-08-14 14:40:10.823: more info: 136191010522688: Registration created for source: 6f5aaa9a-3267-5283-83fb-d48ddcdb9310
+2025-08-14 14:40:10.823: more info: 136190619395648: Retrieve bearer token from cache
+2025-08-14 14:40:10.823: info: 136190619395648: Requesting registration creation for source: bddf10e1-560e-50a6-8893-3c5bbf86d0ba
+2025-08-14 14:40:10.823: too much info: 136190619395648: Sending request
+2025-08-14 14:40:10.825: too much info: 136190720108096: Response received after 2.096ms (server-timing: proc;dur=1.429)
+2025-08-14 14:40:10.825: more info: 136190778857024: Registration created for source: bddf10e1-560e-50a6-8893-3c5bbf86d0ba
+2025-08-14 14:40:10.825: more info: 136190619395648: Retrieve bearer token from cache
+2025-08-14 14:40:10.825: info: 136190619395648: Requesting registration creation for source: 653cfd06-56ac-5656-b14f-60b32eeeb2ff
+2025-08-14 14:40:10.825: too much info: 136190619395648: Sending request
+2025-08-14 14:40:10.828: too much info: 136190787249728: Response received after 2.354ms (server-timing: proc;dur=1.613)
+2025-08-14 14:40:10.828: more info: 136191018915392: Registration created for source: 653cfd06-56ac-5656-b14f-60b32eeeb2ff
+2025-08-14 14:40:10.828: more info: 136190619395648: Retrieve bearer token from cache
+2025-08-14 14:40:10.828: info: 136190619395648: Requesting registration creation for flow: f0e04e63-502d-5698-987a-9e761eb9863d
+2025-08-14 14:40:10.828: too much info: 136190619395648: Sending request
+2025-08-14 14:40:10.830: too much info: 136190871176768: Response received after 2.202ms (server-timing: proc;dur=1.423)
+2025-08-14 14:40:10.830: more info: 136190703322688: Registration created for flow: f0e04e63-502d-5698-987a-9e761eb9863d
+2025-08-14 14:40:10.830: more info: 136190619395648: Retrieve bearer token from cache
+2025-08-14 14:40:10.830: info: 136190619395648: Requesting registration creation for flow: 298a6fbd-3889-5cd1-9f20-4b4a64cd162b
+2025-08-14 14:40:10.830: too much info: 136190619395648: Sending request
+2025-08-14 14:40:10.832: too much info: 136190694929984: Response received after 2.164ms (server-timing: proc;dur=1.44)
+2025-08-14 14:40:10.832: more info: 136190762071616: Registration created for flow: 298a6fbd-3889-5cd1-9f20-4b4a64cd162b
+2025-08-14 14:40:10.832: more info: 136190619395648: Retrieve bearer token from cache
+2025-08-14 14:40:10.832: info: 136190619395648: Requesting registration creation for sender: 0867149a-a7bf-54b4-b574-59f81e2ddc49
+2025-08-14 14:40:10.833: too much info: 136190619395648: Sending request
+2025-08-14 14:40:10.835: too much info: 136190854391360: Response received after 2.147ms (server-timing: proc;dur=1.443)
+2025-08-14 14:40:10.835: more info: 136190829213248: Registration created for sender: 0867149a-a7bf-54b4-b574-59f81e2ddc49
+2025-08-14 14:40:10.835: more info: 136190619395648: Retrieve bearer token from cache
+2025-08-14 14:40:10.835: info: 136190619395648: Requesting registration creation for sender: 8c13668a-90cf-51bc-a3ec-cc803696b9af
+2025-08-14 14:40:10.835: too much info: 136190619395648: Sending request
+2025-08-14 14:40:10.837: too much info: 136190669751872: Response received after 2.324ms (server-timing: proc;dur=1.494)
+2025-08-14 14:40:10.837: more info: 136190787249728: Registration created for sender: 8c13668a-90cf-51bc-a3ec-cc803696b9af
+2025-08-14 14:40:10.837: more info: 136190619395648: Retrieve bearer token from cache
+2025-08-14 14:40:10.837: info: 136190619395648: Requesting registration creation for receiver: 68ea88e6-54ff-516b-a442-cf53f3b781d4
+2025-08-14 14:40:10.837: too much info: 136190619395648: Sending request
+2025-08-14 14:40:10.840: too much info: 136190921532992: Response received after 2.37ms (server-timing: proc;dur=1.722)
+2025-08-14 14:40:10.840: more info: 136190703322688: Registration created for receiver: 68ea88e6-54ff-516b-a442-cf53f3b781d4
+2025-08-14 14:40:10.840: more info: 136190619395648: Retrieve bearer token from cache
+2025-08-14 14:40:10.840: info: 136190619395648: Requesting registration creation for receiver: 4bfc9732-e278-53f8-a8e4-832793a95635
+2025-08-14 14:40:10.840: too much info: 136190619395648: Sending request
+2025-08-14 14:40:10.842: too much info: 136190913140288: Response received after 2.378ms (server-timing: proc;dur=1.66)
+2025-08-14 14:40:10.842: more info: 136190845998656: Registration created for receiver: 4bfc9732-e278-53f8-a8e4-832793a95635
+2025-08-14 14:40:11.357: more info: 136190820820544: Temperature updated: 17.7 (number/temperature/C)
+2025-08-14 14:40:12.566: more info: 136190661359168: Temperature updated: 17.6 (number/temperature/C)
+2025-08-14 14:40:14.152: more info: 136190644573760: Temperature updated: 17.6 (number/temperature/C)
+2025-08-14 14:40:15.000: more info: 136190527272512: At 1755182452:303233, the node events' resources contains 0 resources (0 nodes, 0 devices, 0 sources, 0 flows, 0 senders, 0 receivers, 0 subscriptions, 0 grains), most recent update: 0:0, least health: 1755182452, 0 non-extant resources
+2025-08-14 14:40:15.444: more info: 136190795642432: Temperature updated: 17.7 (number/temperature/C)
+2025-08-14 14:40:15.810: more info: 136190745286208: Retrieve bearer token from cache
+2025-08-14 14:40:15.810: more info: 136190745286208: Update heartbeat client with new authorization token
+2025-08-14 14:40:15.810: too much info: 136190745286208: Posting registration heartbeat for node: 3a7c546e-2736-5602-9be7-9eb8527ee776
+2025-08-14 14:40:15.810: too much info: 136190745286208: Sending request
+2025-08-14 14:40:15.812: more info: 136190745286208: Load certification authorities
+2025-08-14 14:40:15.827: too much info: 136190862784064: Response received after 16.262ms (server-timing: proc;dur=3.096)

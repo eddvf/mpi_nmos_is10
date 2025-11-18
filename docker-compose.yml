@@ -1,0 +1,118 @@
+name: ${PROJECT_NAME}
+
+services:
+  bind9:
+    image: ${BIND_IMAGE}
+    hostname: dns1
+    restart: unless-stopped
+    volumes:
+      - ./bind/config/named.conf.options:/etc/bind/named.conf.options:ro
+      - ./bind/config/named.conf.local:/etc/bind/named.conf.local:ro
+      - ./bind/config/db.${DOMAIN}:/etc/bind/db.${DOMAIN}:ro
+      - ./bind/config/db.reverse:/etc/bind/db.reverse:ro
+    networks:
+      macnet:
+        ipv4_address: ${BIND_IP}
+
+  postgres:
+    image: ${POSTGRES_IMAGE}
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      macnet:
+        ipv4_address: ${PG_IP}
+
+  keycloak:
+    image: ${KEYCLOAK_IMAGE}
+    command: start
+    restart: unless-stopped
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://${PG_IP}:5432/${POSTGRES_DB}
+      KC_DB_USERNAME: ${POSTGRES_USER}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KC_PROXY_HEADERS: xforwarded
+      KC_HOSTNAME: ${KEYCLOAK_HOST}
+      KC_HOSTNAME_STRICT: "false"
+      KC_HTTP_ENABLED: "true"
+      KC_HTTP_PORT: "8080"
+      KC_FEATURES: token-exchange,admin-fine-grained-authz
+      KC_HEALTH_ENABLED: "true"
+    volumes:
+      - ./keycloak/themes:/opt/keycloak/themes
+      - ./nginx/certs:/opt/keycloak/certs:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      macnet:
+        ipv4_address: ${KEYCLOAK_IP}
+
+  nmos-registry:
+    image: ${NMOS_IMAGE}
+    environment:
+      RUN_NODE: "FALSE"
+    volumes:
+      - ./json_configs/registry.json:/home/registry.json:ro
+      - ./nginx/certs:/home/certs:ro
+    depends_on:
+      - keycloak
+    networks:
+      macnet:
+        ipv4_address: ${REGISTRY_IP}
+
+  nmos-virtnode:
+    image: ${NMOS_IMAGE}
+    environment:
+      RUN_NODE: "TRUE"
+    volumes:
+      - ./json_configs/node.json:/home/node.json:ro
+      - ./nginx/certs:/home/certs:ro
+    depends_on:
+      - nmos-registry
+    networks:
+      macnet:
+        ipv4_address: ${NODE_IP}
+
+  nginx:
+    image: ${NGINX_IMAGE}
+    restart: unless-stopped
+    ports:
+      - "${PUBLIC_HTTP_PORT}:80"
+      - "${PUBLIC_HTTPS_PORT}:443"
+    depends_on:
+      - keycloak
+      - nmos-registry
+      - nmos-virtnode
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+    networks:
+      macnet:
+        ipv4_address: ${PROXY_IP}
+
+networks:
+  macnet:
+    driver: macvlan
+    driver_opts:
+      parent: ${PARENT_IF}
+    ipam:
+      config:
+        - subnet: ${SUBNET}
+          gateway: ${GATEWAY}
+
+volumes:
+  postgres_data:
+    driver: local

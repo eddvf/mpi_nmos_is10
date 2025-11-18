@@ -1,0 +1,23 @@
+{
+  "logging_level": -40,
+  "client_secure": true,
+  "server_secure": false,
+  "host_name": "nmos-virtnode.easyebu.com",
+  "domain": "easyebu.com",
+  "label": "easy-nmos-node",
+  "how_many": 2,
+  "senders": ["v"],
+  "receivers": ["v"],
+  "http_port": 80,
+  "is04_versions": ["v1.3"],
+  "is10_versions": ["v1.0"],
+  "ca_certificate_file": "/home/certs/ca.pem",
+  "authorization_endpoint": "https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/auth",
+  "token_endpoint": "https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/token",
+  "jwks_uri": "https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/certs",
+  "client_authorization": true,
+  "server_authorization": true,
+  "authorization_flow": "client_credentials",
+  "authorization_scopes": ["registration"],
+  "token_endpoint_auth_method": "client_secret_basic"
+}
