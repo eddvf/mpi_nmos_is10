@@ -1,4 +1,4 @@
-# Secure NMOS Lab (IS-04 & IS-10)
+# Secure NMOS Lab (IS-10)
 
 This project deploys a fully containerized, secure NMOS environment featuring the Sony/NVIDIA NMOS C++ Registry and Node, secured by Nginx (TLS) and Keycloak (IS-10 Authorization).
 

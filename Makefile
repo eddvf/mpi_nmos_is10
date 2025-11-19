@@ -1,14 +1,22 @@
-.PHONY: render certs mac up down logs
+SHELL := /bin/bash
 
 render:
 	./scripts/render.sh
+
 certs:
 	./scripts/generate_certs.sh
+
 mac:
-	./scripts/macvlan_host.sh
+	sudo ./scripts/macvlan_host.sh
+
 up:
 	docker compose up -d
+
 down:
 	docker compose down
+
 logs:
 	docker compose logs -f
+
+ps:
+	docker compose ps
