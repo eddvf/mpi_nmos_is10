@@ -71,4 +71,4 @@ PUBLIC_HTTPS_PORT=443
 
 For a detailed breakdown of security risks, variable explanations, and critical infrastructure management, please consult the **Operational Guide**:
 
-👉 **[Read the Operational Best Practices & Risk Assessment](./OPERATIONAL_GUIDE.md)**
+👉 **[Read the Operational Best Practices & Risk Assessment](OPERATIONAL_GUIDE.md)**
