@@ -1,81 +1,19 @@
-# Secure NMOS Lab (IS-10)
-
-This project deploys a fully containerized, secure NMOS environment featuring the Sony/NVIDIA NMOS C++ Registry and Node, secured by Nginx (TLS) and Keycloak (IS-10 Authorization).
-
-The setup includes automatic generation of DNS records (Bind9) for IS-04 discovery and self-signed certificates for HTTPS communication.
-
-## 🏗 Architecture
-
-The stack runs on **Docker Compose** using the `macvlan` network driver to assign distinct IP addresses to containers, simulating real physical devices on your network.
-
-| Service | Function | Protocol/Port |
-| :--- | :--- | :--- |
-| **Nginx** | Reverse Proxy & TLS Termination | HTTPS (443) |
-| **Bind9** | IS-04 DNS-SD Discovery & DNS Resolution | UDP/TCP (53) |
-| **Keycloak** | IS-10 Authorization Server (OAuth2/OpenID) | HTTP (8080) internal |
-| **NMOS Registry** | IS-04 Registry Service | HTTP (80) internal |
-| **NMOS Node** | Virtual NMOS Node (simulating a device) | HTTP (80) internal |
-| **Postgres** | Database for Keycloak | TCP (5432) |
-
-## 📋 Prerequisites
-
-* **OS:** Linux (Required for Macvlan support).
-* **Docker** & **Docker Compose**.
-* **OpenSSL**: For certificate generation.
-* **gettext-base**: For the `envsubst` command used in templating.
-
-## ⚙️ Configuration
-
-This project relies heavily on environment variables. Create a `.env` file in the root directory before starting.
-
-### Sample `.env`
-```ini
-PROJECT_NAME=nmos_lab
-DOMAIN=easyebu.com
-
-# Network Configuration (Must match your physical network)
-PARENT_IF=eth0
-SUBNET=192.168.1.0/24
-GATEWAY=192.168.1.1
-
-# Static IPs for Containers (Must be unused IPs in your SUBNET)
-BIND_IP=192.168.1.50
-PROXY_IP=192.168.1.51
-REGISTRY_IP=192.168.1.52
-NODE_IP=192.168.1.53
-KEYCLOAK_IP=192.168.1.54
-PG_IP=192.168.1.55
-HOST_MACVLAN_IP=192.168.1.60
-
-# Hostnames (Mapped in DNS automatically)
-REGISTRY_HOST=nmos-registry.easyebu.com
-NODE_HOST=nmos-virtnode.easyebu.com
-KEYCLOAK_HOST=keycloak.easyebu.com
-
-# Keycloak / DB
-POSTGRES_DB=keycloak
-POSTGRES_USER=keycloak
-POSTGRES_PASSWORD=password123
-KEYCLOAK_REALM=nmos
-
-# Docker Images
-BIND_IMAGE=ubuntu/bind9
-POSTGRES_IMAGE=postgres:15
-KEYCLOAK_IMAGE=quay.io/keycloak/keycloak:22.0
-NMOS_IMAGE=nmos-cpp:latest
-NGINX_IMAGE=nginx:latest
-PUBLIC_HTTP_PORT=80
-PUBLIC_HTTPS_PORT=443
-
 # Operational Best Practices & Risk Assessment
 
-This document accompanies the primary `README.md`. While the README explains *how to build* the Secure NMOS Lab, this document explains *how to manage it*, detailing the impact of specific configurations and the security risks associated with each component.
+> **Note:** This document accompanies the primary `README.md`. While the README explains *how to build* the Secure NMOS Lab, this document explains *how to manage it*, detailing the impact of specific configurations and the security risks associated with each component.
 
 The architecture is categorized into three levels of importance based on the potential impact on security and availability.
 
+## 📑 Table of Contents
+1. [Level 1: Critical Infrastructure](#-level-1-critical-infrastructure-high-importance)
+2. [Level 2: Network & Transport](#-level-2-network--transport-medium-importance)
+3. [Level 3: Deployment & Support](#ℹ️-level-3-deployment--support-low-importance)
+4. [Troubleshooting](#-troubleshooting-what-goes-wrong)
 
+---
 
 ## 🚨 Level 1: Critical Infrastructure (High Importance)
+
 **Components:** Keycloak (IS-10 Auth), NMOS Registry, PKI/Certificates.
 
 These components represent the "Brain" and "Trust Anchor" of the system. Compromise or misconfiguration here results in total system failure or critical security breaches.
@@ -85,9 +23,9 @@ Keycloak is the Gatekeeper. It issues the JWTs (JSON Web Tokens) that allow devi
 
 | Variable | Description | Impact of Misconfiguration |
 | :--- | :--- | :--- |
-| `KEYCLOAK_ADMIN` | The Super-Admin username for the Identity Provider. | **Critical Risk.** If guessed or leaked, an attacker can delete the entire realm, revoke all keys, or create "backdoor" users to spy on the network. |
-| `KEYCLOAK_REALM` | The logical space where NMOS users/clients live. | Changing this after deployment will orphan all existing clients. [cite_start]They will lose access immediately[cite: 23, 25]. |
-| `POSTGRES_PASSWORD`| The database credentials for Keycloak. | **Data Breach.** Access to the DB allows an attacker to dump user sessions and offline tokens. |
+| `KEYCLOAK_ADMIN` | Super-Admin username. | **Critical Risk.** If leaked, an attacker can delete the realm, revoke keys, or create "backdoor" users. |
+| `KEYCLOAK_REALM` | The logical space for users. | Changing this after deployment will orphan all existing clients. They will lose access immediately. |
+| `POSTGRES_PASSWORD` | DB credentials for Keycloak. | **Data Breach.** Access to the DB allows an attacker to dump user sessions and offline tokens. |
 
 **🛡️ Best Practices:**
 * **Access Control:** Access to the Keycloak Admin Console (`/admin`) should be restricted to a specific Management VLAN or VPN. It should never be exposed to the general broadcast network.
@@ -99,8 +37,8 @@ The Registry maintains the live database of every camera, microphone, and switch
 
 | Variable | Description | Impact of Misconfiguration |
 | :--- | :--- | :--- |
-| `REGISTRY_HOST` | The FQDN (e.g., `nmos-registry.easyebu.com`). | [cite_start]**Discovery Failure.** If this does not match the SSL Certificate Common Name (CN), nodes will refuse to connect via HTTPS[cite: 2, 25]. |
-| `REGISTRY_IP` | The static IP of the registry container. | **System-Wide Outage.** If this IP changes, the DNS records in `bind/` will point to nowhere. No device will be able to register. |
+| `REGISTRY_HOST` | The FQDN (e.g., `nmos-registry.easyebu.com`). | **Discovery Failure.** If this does not match the SSL Certificate Common Name (CN), nodes will refuse to connect via HTTPS. |
+| `REGISTRY_IP` | The static IP of the registry. | **System-Wide Outage.** If this IP changes, the DNS records in `bind/` will point to nowhere. No device will be able to register. |
 
 **🛡️ Best Practices:**
 * **High Availability:** In a real facility, the Registry is never a single container. It should be deployed as a clustered set of 3+ nodes.
@@ -113,9 +51,10 @@ While not a single variable, the `nginx/certs` directory and `generate_certs.sh`
 * **Expired Certs:** If the certificates generated by the script expire (default 825 days), all HTTPS connections will fail instantly.
 * **Leaked CA Key:** If `ca.key` is stolen, an attacker can sign their own certificates that your nodes will trust. This enables Man-in-the-Middle (MitM) attacks to decrypt video control commands.
 
-
+---
 
 ## ⚠️ Level 2: Network & Transport (Medium Importance)
+
 **Components:** Nginx (Reverse Proxy), Bind9 (DNS), Macvlan settings.
 
 These components handle the traffic flow. Issues here usually result in connectivity problems rather than security breaches.
@@ -125,27 +64,28 @@ Nginx terminates the TLS (HTTPS) connection. The internal NMOS services speak HT
 
 | Variable | Description | Impact of Misconfiguration |
 | :--- | :--- | :--- |
-| `PROXY_IP` | The entry point for all HTTP traffic. | **Routing Loop/Timeout.** If set incorrectly, devices can resolve the DNS name but cannot connect to the port. |
-| `PUBLIC_HTTPS_PORT`| The listening port (Std: 443). | Non-standard ports require manual configuration on every physical device, which is error-prone. |
+| `PROXY_IP` | Entry point for all HTTP traffic. | **Routing Loop/Timeout.** If set incorrectly, devices can resolve the DNS name but cannot connect to the port. |
+| `PUBLIC_HTTPS_PORT` | Listening port (Std: 443). | Non-standard ports require manual configuration on every physical device, which is error-prone. |
 
 **🛡️ Best Practices:**
 * **TLS Versions:** Ensure Nginx is configured to reject old protocols (TLS 1.0/1.1) and only accept TLS 1.2 or 1.3 (as enforced by the `testssl` suite in this project).
-* [cite_start]**Force Redirect:** Always force HTTP -> HTTPS redirection (handled in `nginx.conf.tpl`) to prevent accidental unencrypted communication[cite: 22].
+* **Force Redirect:** Always force HTTP -> HTTPS redirection (handled in `nginx.conf.tpl`) to prevent accidental unencrypted communication.
 
 ### 2. Network Configuration (Macvlan)
 This project bridges containers directly to the physical network.
 
 | Variable | Description | Impact of Misconfiguration |
 | :--- | :--- | :--- |
-| `PARENT_IF` | The physical interface (e.g., `eth0`). | **Container Isolation.** If this is wrong, containers cannot talk to the outside world at all. |
-| `SUBNET` / `GATEWAY` | Your physical LAN details. | **IP Conflicts.** If the Subnet mask is wrong, the containers might try to route traffic incorrectly, making them unreachable from other VLANs. |
+| `PARENT_IF` | Physical interface (e.g., `eth0`). | **Container Isolation.** If this is wrong, containers cannot talk to the outside world at all. |
+| `SUBNET` / `GATEWAY` | LAN details. | **IP Conflicts.** If the Subnet mask is wrong, the containers might try to route traffic incorrectly, making them unreachable from other VLANs. |
 
 **🛡️ Best Practices:**
 * **IP Reservation:** The IPs chosen for `REGISTRY_IP`, `NODE_IP`, etc., **MUST** be excluded from your network's DHCP pool. If a laptop joins the network and grabs `192.168.1.52` (the Registry IP), the NMOS system will crash due to an IP conflict.
 
-
+---
 
 ## ℹ️ Level 3: Deployment & Support (Low Importance)
+
 **Components:** Docker Image Versions, Project Names.
 
 These affect the maintainability of the lab but rarely cause immediate outages.
@@ -153,26 +93,18 @@ These affect the maintainability of the lab but rarely cause immediate outages.
 | Variable | Description | Impact of Misconfiguration |
 | :--- | :--- | :--- |
 | `PROJECT_NAME` | Docker Compose project prefix. | Purely cosmetic; affects container names. |
-| `*_IMAGE` | The version tags (e.g., `postgres:15`). | **Compatibility Issues.** Using `:latest` is dangerous in production. An automatic update might break the database schema or change the API behavior. |
+| `*_IMAGE` | Version tags (e.g., `postgres:15`). | **Compatibility Issues.** Using `:latest` is dangerous in production. An automatic update might break the database schema or change the API behavior. |
 
 **🛡️ Best Practices:**
 * **Pin Versions:** Always specify exact version numbers (e.g., `nmos-cpp:v1.2.0` instead of `latest`) to ensure the lab behaves exactly the same way every time it is restarted.
 * **Environment Isolation:** Ensure the `.env` file is **never committed to Git**. It contains secrets. Use a `.env.example` file for the repository.
 
-
+---
 
 ## 🛑 Troubleshooting: "What Goes Wrong?"
 
-### Scenario A: "I can't log in to the Registry"
-* [cite_start]**Likely Cause:** Keycloak is down or the `authorization_endpoint` in `registry.json` is misconfigured[cite: 25].
-* **Variable to Check:** `KEYCLOAK_HOST` and `KEYCLOAK_IP`.
-* **Fix:** Check `docker logs keycloak` and verify DNS resolution with `dig keycloak.easyebu.com`.
-
-### Scenario B: "The Node starts but doesn't appear in the Registry"
-* **Likely Cause:** The Node cannot trust the Registry's certificate.
-* [cite_start]**Variable to Check:** `ca_certificate_file`[cite: 23].
-* **Fix:** Ensure the `ca.crt` generated by `generate_certs.sh` is mounted correctly in `docker-compose.yml` and matches the one used by Nginx.
-
-### Scenario C: "Host Unreachable"
-* **Likely Cause:** Macvlan security restriction.
-* **Fix:** The Host machine cannot ping Macvlan containers by design. You must run the provided `./scripts/macvlan_host.sh` script to create a bridge interface.
+| Scenario | Likely Cause | Variable to Check | Fix |
+| :--- | :--- | :--- | :--- |
+| **"I can't log in to the Registry"** | Keycloak is down or the endpoint is wrong. | `KEYCLOAK_HOST` | Check `docker logs keycloak` and verify DNS resolution. |
+| **"Node starts but is not discovered"** | Node cannot trust the Registry's certificate. | `ca_certificate_file` | Ensure `ca.crt` is mounted correctly and matches Nginx certs. |
+| **"Host Unreachable"** | Macvlan security restriction. | N/A | Run `./scripts/macvlan_host.sh` to create the host bridge. |
