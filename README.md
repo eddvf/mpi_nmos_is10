@@ -68,6 +68,52 @@ PUBLIC_HTTP_PORT=80
 PUBLIC_HTTPS_PORT=443
 ```
 
+## ⚙️ Configuration Variable Reference
+
+The `.env` file acts as the single source of truth for the entire lab. The variables below are categorized by their function to help you identify which settings must match your physical environment and which are logical choices.
+
+### 1. Physical Network Configuration (Critical)
+These variables **must** match the physical network your host machine is connected to. [cite_start]Because we use the `macvlan` driver, containers attach directly to your LAN like physical devices[cite: 16].
+
+
+
+| Variable | Description | How to find it |
+| :--- | :--- | :--- |
+| `PARENT_IF` | The physical network interface on your host machine that connects to the LAN (e.g., `eth0`, `enp3s0`). | Run `ip addr` (Linux) or `ifconfig` (Mac) to find the active interface. |
+| `SUBNET` | The CIDR subnet of your physical network. | Usually `192.168.1.0/24`. Ensure this matches your router's setting. |
+| `GATEWAY` | The IP address of your network router. | Usually `192.168.1.1`. |
+
+### 2. Static IP Allocation
+You must assign static IP addresses to each service. [cite_start]These IPs must be **inside** your `SUBNET` but **outside** your router's DHCP range (to avoid IP conflicts with other devices on your LAN)[cite: 15, 16].
+
+| Variable | Description |
+| :--- | :--- |
+| `BIND_IP` | IP for the Bind9 DNS server. [cite_start]All other containers use this to discover `_nmos` services[cite: 1, 15]. |
+| `PROXY_IP` | IP for the Nginx Reverse Proxy. [cite_start]This is the **primary** IP you connect to via HTTPS[cite: 15, 21]. |
+| `REGISTRY_IP` | [cite_start]Dedicated IP for the Sony/NVIDIA NMOS Registry[cite: 15]. |
+| `NODE_IP` | [cite_start]Dedicated IP for the Virtual NMOS Node[cite: 15]. |
+| `KEYCLOAK_IP` | [cite_start]Dedicated IP for the Authorization Server[cite: 15]. |
+| `HOST_MACVLAN_IP` | A virtual IP assigned to the Host machine. [cite_start]This allows the Host to communicate with the containers, bridging the Macvlan isolation[cite: 16]. |
+
+### 3. Logical Identities & Discovery
+[cite_start]These variables define how services identify themselves and discover each other via DNS-SD (IS-04)[cite: 1, 17].
+
+| Variable | Description |
+| :--- | :--- |
+| `DOMAIN` | The local DNS domain suffix (e.g., `easyebu.com`). Services are accessible at `hostname.domain`. |
+| `REGISTRY_HOST` | FQDN for the registry. [cite_start]Must match the Common Name (CN) in the SSL certificate[cite: 19]. |
+| `NODE_HOST` | [cite_start]FQDN for the virtual node[cite: 18]. |
+| `KEYCLOAK_HOST` | [cite_start]FQDN for the Keycloak server[cite: 21]. |
+
+### 4. Security & Application Secrets
+These variables control the IS-10 Authorization behavior and database access.
+
+| Variable | Description |
+| :--- | :--- |
+| `KEYCLOAK_REALM` | The logical workspace within Keycloak. [cite_start]The script imports configuration into this realm[cite: 18, 19]. |
+| `POSTGRES_USER` | [cite_start]Username for the Keycloak database[cite: 15]. |
+| `POSTGRES_PASSWORD`| Password for the Keycloak database. |
+
 ## 🛡️ Operational Guide
 
 For security critical behaviors, threat impact, and infrastructure risk assessment, see:
