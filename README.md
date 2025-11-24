@@ -67,8 +67,8 @@ NGINX_IMAGE=nginx:latest
 PUBLIC_HTTP_PORT=80
 PUBLIC_HTTPS_PORT=443
 
-## 🛡️ Operational Guide & Best Practices
+## 🛡️ Operational Guide
 
-For a detailed breakdown of security risks, variable explanations, and critical infrastructure management, please consult the **Operational Guide**:
+For security critical behaviors, threat impact, and infrastructure risk assessment, see:
 
-👉 **[Read the Operational Best Practices & Risk Assessment](OPERATIONAL_GUIDE.md)**
+📌 **[Operational Guide & Risk Assessment](operational_guide.md)**
