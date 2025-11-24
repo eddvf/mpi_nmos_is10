@@ -66,6 +66,7 @@ NMOS_IMAGE=nmos-cpp:latest
 NGINX_IMAGE=nginx:latest
 PUBLIC_HTTP_PORT=80
 PUBLIC_HTTPS_PORT=443
+```
 
 ## 🛡️ Operational Guide
 
