@@ -79,7 +79,7 @@ These variables **must** match the physical network your host machine is connect
 
 | Variable | Description | How to find it |
 | :--- | :--- | :--- |
-| `PARENT_IF` | The physical network interface on your host machine that connects to the LAN (e.g., `eth0`, `enp3s0`). | Run `ip addr` (Linux) or `ifconfig` (Mac) to find the active interface. |
+| `PARENT_IF` | The physical network interface on your host machine that connects to the LAN (e.g., `eth0`, `enp3s0`). | Run `ip addr` or `ifconfig` (Linux, Mac) to find the active interface. |
 | `SUBNET` | The CIDR subnet of your physical network. | Usually `192.168.1.0/24`. Ensure this matches your router's setting. |
 | `GATEWAY` | The IP address of your network router. | Usually `192.168.1.1`. |
 
