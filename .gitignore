@@ -1,6 +1,7 @@
 # User-specific config
 .env
 .env.*
+!.env.example
 
 # Certificates / keys
 nginx/certs/
