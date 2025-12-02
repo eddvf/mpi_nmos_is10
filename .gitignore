@@ -8,6 +8,14 @@ nginx/certs/
 *.pem
 *.srl
 
+# --- Generated Configuration (Do not commit) ---
+json_configs/
+keycloak/import/
+nginx/nginx.conf
+bind/config/db.*
+!bind/config/Dockerfile.bind9
+!bind/config/named.conf*
+
 # Keycloak / DB backups
 keycloak_backup*.sql
 postgres/data/
