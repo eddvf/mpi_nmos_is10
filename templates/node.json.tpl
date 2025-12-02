@@ -5,9 +5,6 @@
   "host_name": "${NODE_HOST}",
   "domain": "${DOMAIN}",
   "label": "easy-nmos-node",
-  "how_many": 2,
-  "senders": ["v"],
-  "receivers": ["v"],
   "http_port": 80,
   "is04_versions": ["v1.3"],
   "is10_versions": ["v1.0"],
@@ -15,9 +12,12 @@
   "authorization_endpoint": "https://${KEYCLOAK_HOST}/realms/${KEYCLOAK_REALM}/protocol/openid-connect/auth",
   "token_endpoint": "https://${KEYCLOAK_HOST}/realms/${KEYCLOAK_REALM}/protocol/openid-connect/token",
   "jwks_uri": "https://${KEYCLOAK_HOST}/realms/${KEYCLOAK_REALM}/protocol/openid-connect/certs",
+
   "client_authorization": true,
   "server_authorization": true,
+  "initial_access_token": "${NMOS_IAT}",  
   "authorization_flow": "client_credentials",
   "authorization_scopes": ["registration"],
-  "token_endpoint_auth_method": "client_secret_basic"
+  "token_endpoint_auth_method": "client_secret_basic",
+  "validate_openid_client": true
 }

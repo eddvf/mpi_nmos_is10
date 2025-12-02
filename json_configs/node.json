@@ -5,9 +5,6 @@
   "host_name": "nmos-virtnode.easyebu.com",
   "domain": "easyebu.com",
   "label": "easy-nmos-node",
-  "how_many": 2,
-  "senders": ["v"],
-  "receivers": ["v"],
   "http_port": 80,
   "is04_versions": ["v1.3"],
   "is10_versions": ["v1.0"],
@@ -15,9 +12,12 @@
   "authorization_endpoint": "https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/auth",
   "token_endpoint": "https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/token",
   "jwks_uri": "https://keycloak.easyebu.com/realms/easyebu-nmos/protocol/openid-connect/certs",
+
   "client_authorization": true,
   "server_authorization": true,
+  "initial_access_token": "eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJiMTI3NDVkMC1iZTI5LTRiOTUtYmEyYi0yOTg2NjMyYTI3YTUifQ.eyJleHAiOjE3NjcxODg3NjcsImlhdCI6MTc2NDU5Njc2NywianRpIjoiM2MwNjFiOTMtMTkyOC00NmZkLTg2MzktZTIwNTFkMGM3NDZmIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay5lYXN5ZWJ1LmNvbS9yZWFsbXMvZWFzeWVidS1ubW9zIiwiYXVkIjoiaHR0cHM6Ly9rZXljbG9hay5lYXN5ZWJ1LmNvbS9yZWFsbXMvZWFzeWVidS1ubW9zIiwidHlwIjoiSW5pdGlhbEFjY2Vzc1Rva2VuIn0.hQgHKMQKOvJlCqfOwyBGdRbZrTP_QLOTxyI0utRNBHy56W3jkq29IDujMnwsXdkwzX4Za9bSXv1VeyJnWAdTbA",  
   "authorization_flow": "client_credentials",
   "authorization_scopes": ["registration"],
-  "token_endpoint_auth_method": "client_secret_basic"
+  "token_endpoint_auth_method": "client_secret_basic",
+  "validate_openid_client": true
 }
