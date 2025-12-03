@@ -17,92 +17,152 @@ The stack runs on **Docker Compose** using the `macvlan` network driver to assig
 | **NMOS Node** | Virtual NMOS Node (simulating a device) | HTTP (80) internal |
 | **Postgres** | Database for Keycloak | TCP (5432) |
 
-## 📋 Prerequisites
-
-* **OS:** Linux (Required for Macvlan support).
-* **Docker** & **Docker Compose**.
-* **OpenSSL**: For certificate generation.
-* **gettext-base**: For the `envsubst` command used in templating.
 
 
-## 🚀 Quick Start & Installation
+## 🚀 Quick Start Guide
 
-### 1. Clone & Permissions
-If you are deploying this project in a protected directory (common for lab environments), you **must** ensure your user account has full ownership of the project files after cloning.
+### Prerequisites
+- Docker and Docker Compose installed
+- Git installed
+- Make command available
+- Root/sudo access for initial setup
 
-**Why?** The automation scripts (`generate_certs.sh`, `render.sh`) need to write new files to the disk. If the folder is owned by `root` (because you used `sudo` to create it), the scripts will crash with "Permission denied" errors.
+---
 
+### 📦 Step 1: Clone the Repository
 ```bash
-# 1. Clone the repository
+# Clone the repository
 git clone git@github.com:eddvf/mpi_nmos_is10.git
 cd mpi_nmos_is10
+```
+---
 
-# 2. (Critical) Take ownership of the files
-# This ensures your current user can execute scripts and generate configs
+### 🔐 Step 2: Fix File Permissions (Critical!)
+
+**⚠️ This step is essential to avoid "Permission denied" errors.**
+
+The automation scripts need write access to generate certificates and configuration files. If you cloned the repository using `sudo` or in a protected directory, you must change ownership:
+```bash
+# Grant your user full ownership of all project files
 sudo chown -R $USER:$(id -gn) .
+```
 
-## ⚙️ Configuration
+---
 
-This project relies heavily on environment variables. Create a `.env` file in the root directory before starting. Make sure you read the explanation of the .env variables and their meaning. 
+### ⚙️ Step 3: Configure Environment Variables
 
-# 1. Copy the example template
+The project uses a `.env` file to manage all configuration. You'll need to customize this file with your network settings.
+```bash
+# 1. Create your configuration file from the template
 cp .env.example .env
 
-# 2. Edit the file
-nano .env
-# or
-vim .env
-#or any other editor of your choice
+# 2. Open the file in your preferred editor
+nano .env    # or vim, code, etc.
+```
 
+#### 📋 Configuration Checklist
 
-# 1. Generate the local Certificate Authority and TLS certificates
-make certs
+When editing your `.env` file, ensure you update these critical settings:
 
-# 2. Render configuration files (Nginx, DNS, Keycloak) from templates
-make render
+| Variable | Description | Example |
+|----------|-------------|---------|
+| **PARENT_IF** | Your network interface name | `eth0`, `ens33`, `enp0s3` |
+| **SUBNET** | Your network subnet | `192.168.1.0/24` |
+| **GATEWAY** | Your network gateway | `192.168.1.1` |
+| **DOMAIN** | Your domain name | `yourlab.com` |
+| **Static IPs** | Unused IPs in your subnet | See sample below |
 
-# 3. Start the Docker infrastructure
-make up
+#### 📝 Sample `.env` Configuration
 
-### This is our own provided Sample `.env`but you must change the variables to fit your IPs and names. 
+Here's a complete example configuration. **You must modify the IP addresses and network settings to match your environment:**
 ```ini
+# Project Identification
 PROJECT_NAME=nmos_lab
-DOMAIN=easyebu.com
+DOMAIN=easyebu.com              # ← Change to your domain
 
-# Network Configuration (Must match your physical network)
-PARENT_IF=eth0
-SUBNET=192.168.1.0/24
-GATEWAY=192.168.1.1
+# Network Configuration (MUST match your physical network)
+PARENT_IF=eth0                  # ← Change to your network interface
+SUBNET=192.168.1.0/24          # ← Change to your subnet
+GATEWAY=192.168.1.1            # ← Change to your gateway
 
-# Static IPs for Containers (Must be unused IPs in your SUBNET)
-BIND_IP=192.168.1.50
-PROXY_IP=192.168.1.51
-REGISTRY_IP=192.168.1.52
-NODE_IP=192.168.1.53
-KEYCLOAK_IP=192.168.1.54
-PG_IP=192.168.1.55
-HOST_MACVLAN_IP=192.168.1.60
+# Container Static IPs (MUST be unused IPs in your subnet)
+BIND_IP=192.168.1.50           # DNS Server
+PROXY_IP=192.168.1.51          # Nginx Proxy
+REGISTRY_IP=192.168.1.52       # NMOS Registry
+NODE_IP=192.168.1.53           # NMOS Node
+KEYCLOAK_IP=192.168.1.54       # Auth Server
+PG_IP=192.168.1.55             # Database
+HOST_MACVLAN_IP=192.168.1.60   # Host Bridge
 
-# Hostnames (Mapped in DNS automatically)
+# Service Hostnames (automatically mapped in DNS)
 REGISTRY_HOST=nmos-registry.easyebu.com
 NODE_HOST=nmos-virtnode.easyebu.com
 KEYCLOAK_HOST=keycloak.easyebu.com
 
-# Keycloak / DB
+# Database Configuration
 POSTGRES_DB=keycloak
 POSTGRES_USER=keycloak
-POSTGRES_PASSWORD=password123
+POSTGRES_PASSWORD=password123   # ← Change in production!
 KEYCLOAK_REALM=nmos
 
-# Docker Images
+# Docker Images (keep defaults unless customizing)
 BIND_IMAGE=ubuntu/bind9
 POSTGRES_IMAGE=postgres:15
 KEYCLOAK_IMAGE=quay.io/keycloak/keycloak:22.0
 NMOS_IMAGE=nmos-cpp:latest
 NGINX_IMAGE=nginx:latest
+
+# Port Configuration
 PUBLIC_HTTP_PORT=80
 PUBLIC_HTTPS_PORT=443
 ```
+
+---
+
+### 🏗️ Step 4: Build and Deploy
+
+Once your `.env` file is configured, run these commands in order:
+```bash
+# 1. Generate Certificate Authority and TLS certificates
+make certs
+
+# 2. Generate configuration files from templates
+make render
+
+# 3. Start all services
+make up
+```
+
+#### 🎯 What Each Command Does:
+
+- **`make certs`** → Creates a local Certificate Authority and generates TLS certificates for secure communication
+- **`make render`** → Processes template files to create Nginx, DNS, and Keycloak configurations using your `.env` settings
+- **`make up`** → Launches the entire Docker infrastructure
+
+---
+
+### ✅ Verification
+
+After running `make up`, verify your deployment:
+```bash
+# Check if all containers are running
+docker ps
+
+# Access the services in your browser:
+# - Registry: https://nmos-registry.easyebu.com
+# - Keycloak: https://keycloak.easyebu.com
+```
+
+---
+
+### 🛠️ Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| Permission denied errors | Re-run Step 2 to fix ownership |
+| Port already in use | Change `PUBLIC_HTTP_PORT` or `PUBLIC_HTTPS_PORT` in `.env` |
+| Cannot resolve hostnames | Ensure BIND_IP is reachable and DNS is configured |
+| Network unreachable | Verify SUBNET, GATEWAY, and PARENT_IF match your network |
 
 ## ⚙️ Configuration Variable Reference
 
