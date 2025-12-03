@@ -24,11 +24,47 @@ The stack runs on **Docker Compose** using the `macvlan` network driver to assig
 * **OpenSSL**: For certificate generation.
 * **gettext-base**: For the `envsubst` command used in templating.
 
+
+## 🚀 Quick Start & Installation
+
+### 1. Clone & Permissions
+If you are deploying this project in a protected directory (common for lab environments), you **must** ensure your user account has full ownership of the project files after cloning.
+
+**Why?** The automation scripts (`generate_certs.sh`, `render.sh`) need to write new files to the disk. If the folder is owned by `root` (because you used `sudo` to create it), the scripts will crash with "Permission denied" errors.
+
+```bash
+# 1. Clone the repository
+git clone git@github.com:eddvf/mpi_nmos_is10.git
+cd mpi_nmos_is10
+
+# 2. (Critical) Take ownership of the files
+# This ensures your current user can execute scripts and generate configs
+sudo chown -R $USER:$(id -gn) .
+
 ## ⚙️ Configuration
 
-This project relies heavily on environment variables. Create a `.env` file in the root directory before starting.
+This project relies heavily on environment variables. Create a `.env` file in the root directory before starting. Make sure you read the explanation of the .env variables and their meaning. 
 
-### Sample `.env`
+# 1. Copy the example template
+cp .env.example .env
+
+# 2. Edit the file
+nano .env
+# or
+vim .env
+#or any other editor of your choice
+
+
+# 1. Generate the local Certificate Authority and TLS certificates
+make certs
+
+# 2. Render configuration files (Nginx, DNS, Keycloak) from templates
+make render
+
+# 3. Start the Docker infrastructure
+make up
+
+### This is our own provided Sample `.env`but you must change the variables to fit your IPs and names. 
 ```ini
 PROJECT_NAME=nmos_lab
 DOMAIN=easyebu.com
