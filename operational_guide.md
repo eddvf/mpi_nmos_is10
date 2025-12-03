@@ -229,6 +229,50 @@ Result: IP CONFLICT - Registry becomes unreachable
         Intermittent failures
 ```
 
+## ℹ️ Level 3: Deployment & Support (Low Importance)
+
+> **Impact Level:** Maintenance difficulties, version conflicts, or documentation issues
+
+These settings affect long-term maintainability rather than immediate functionality.
+
+### Configuration Variables and Risks
+
+| Variable | Purpose | What Happens If Misconfigured | Real-World Impact |
+|----------|---------|------------------------------|-------------------|
+| `PROJECT_NAME` | Container naming prefix | **✅ MINIMAL:** Cosmetic only | • Container names change<br>• No functional impact |
+| `*_IMAGE` versions | Software versions | **⚠️ MEDIUM:** Compatibility issues | • Unexpected behavior after updates<br>• Database schema mismatches<br>• API breaking changes |
+
+### Understanding Version Pinning
+
+**Bad Practice - Using 'latest':**
+```yaml
+services:
+  registry:
+    image: nmos-cpp:latest  # ❌ Dangerous
+    # Monday: Gets v1.0.0
+    # Tuesday: Auto-updates to v2.0.0
+    # Wednesday: Breaking changes cause outage
+```
+
+**Good Practice - Pinned Versions:**
+```yaml
+services:
+  registry:
+    image: nmos-cpp:v1.2.3  # ✅ Predictable
+    # Always gets exact same version
+    # Updates are intentional and tested
+```
+
+### 🛡️ Best Practices
+
+**Version Management Strategy:**
+```bash
+# 1. Document all versions in use
+```
+
+
+
+
 ## 📚 Additional Resources
 
 ### Official Documentation
