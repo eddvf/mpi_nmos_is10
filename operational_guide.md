@@ -1,110 +1,82 @@
-# Operational Best Practices & Risk Assessment
+# Operational Best Practices & Risk Assessment Guide
 
-> **Note:** This document accompanies the primary `README.md`. While the README explains *how to build* the Secure NMOS Lab, this document explains *how to manage it*, detailing the impact of specific configurations and the security risks associated with each component.
+> **Purpose:** This document explains how to **manage and secure** your NMOS IS-10 lab deployment. While the README shows you how to build the system, this guide helps you understand the security implications, operational risks, and best practices for running it safely.
 
-The architecture is categorized into three levels of importance based on the potential impact on security and availability.
+## 📚 Background: What Are We Securing?
+
+Before diving into configurations, let's understand what this system does:
+
+### SMPTE ST 2110 & NMOS Overview
+**SMPTE ST 2110** is a standard that allows professional broadcast equipment (cameras, audio mixers, video switchers) to communicate over IP networks instead of traditional SDI cables. Think of it as replacing physical video cables with network connections.
+
+**NMOS (Networked Media Open Specifications)** provides the control layer for ST 2110:
+- **IS-04:** Device discovery and registration (like a phone book for broadcast equipment)
+- **IS-05:** Device connection management (how devices connect to each other)
+- **IS-10:** Security authorization (who is allowed to control which devices)
+
+**Why Security Matters:** In a broadcast facility, unauthorized access could allow someone to:
+- Hijack live broadcast feeds
+- Inject false content into productions
+- Disable critical equipment during live events
+- Steal proprietary content before release
+
+---
 
 ## 📑 Table of Contents
-1. [Level 1: Critical Infrastructure](#-level-1-critical-infrastructure-high-importance)
-2. [Level 2: Network & Transport](#-level-2-network--transport-medium-importance)
-3. [Level 3: Deployment & Support](#ℹ️-level-3-deployment--support-low-importance)
-4. [Troubleshooting](#-troubleshooting-what-goes-wrong)
+1. [Key Security Concepts](#-key-security-concepts-explained)
+2. [Level 1: Critical Infrastructure](#-level-1-critical-infrastructure-high-importance)
+3. [Level 2: Network & Transport](#-level-2-network--transport-medium-importance)
+4. [Level 3: Deployment & Support](#ℹ️-level-3-deployment--support-low-importance)
+5. [Common Attack Scenarios](#-common-attack-scenarios--mitigations)
+6. [Troubleshooting Guide](#-troubleshooting-guide)
+7. [Production Deployment Checklist](#-production-deployment-checklist)
+
+---
+
+## 🔑 Key Security Concepts Explained
+
+### Essential Terms for This Project
+
+| Term | What It Means | Why It Matters |
+|------|---------------|----------------|
+| **JWT (JSON Web Token)** | A digital "pass" that proves who you are | Like a backstage pass at a concert - if someone steals it, they can access restricted areas |
+| **PKI (Public Key Infrastructure)** | System for creating and managing digital certificates | Like a passport office - it issues trusted IDs that others can verify |
+| **TLS/SSL Certificate** | Digital ID card for servers | Ensures you're talking to the real server, not an imposter |
+| **Backdoor** | Hidden access method that bypasses normal security | Like a secret entrance that lets someone into your system without proper credentials |
+| **Man-in-the-Middle (MitM)** | Attack where someone secretly intercepts communications | Like someone listening to your phone calls by tapping the line |
+| **CA (Certificate Authority)** | Entity that issues digital certificates | Like a government office that issues driver's licenses |
+| **FQDN (Fully Qualified Domain Name)** | Complete address of a server (e.g., nmos-registry.lab.com) | Like a complete mailing address vs. just a house number |
+| **Realm (in Keycloak)** | Isolated space for users and permissions | Like separate buildings in a campus - each has its own security |
 
 ---
 
 ## 🚨 Level 1: Critical Infrastructure (High Importance)
 
-**Components:** Keycloak (IS-10 Auth), NMOS Registry, PKI/Certificates.
+> **Impact Level:** System-wide failure or complete security breach if misconfigured
 
-These components represent the "Brain" and "Trust Anchor" of the system. Compromise or misconfiguration here results in total system failure or critical security breaches.
+These components are the foundation of your secure NMOS system. Think of them as the locks, alarms, and security cameras of your broadcast facility.
 
-### 1. Identity & Authorization (Keycloak)
-Keycloak is the Gatekeeper. It issues the JWTs (JSON Web Tokens) that allow devices to talk to each other.
+### 1. Identity & Authorization (Keycloak) - The Security Guard
 
-| Variable | Description | Impact of Misconfiguration |
-| :--- | :--- | :--- |
-| `KEYCLOAK_ADMIN` | Super-Admin username. | **Critical Risk.** If leaked, an attacker can delete the realm, revoke keys, or create "backdoor" users. |
-| `KEYCLOAK_REALM` | The logical space for users. | Changing this after deployment will orphan all existing clients. They will lose access immediately. |
-| `POSTGRES_PASSWORD` | DB credentials for Keycloak. | **Data Breach.** Access to the DB allows an attacker to dump user sessions and offline tokens. |
+**What It Does:** Keycloak acts as the security guard at the entrance, checking everyone's ID and issuing temporary passes (JWTs) that allow access to specific areas (NMOS devices).
 
-**🛡️ Best Practices:**
-* **Access Control:** Access to the Keycloak Admin Console (`/admin`) should be restricted to a specific Management VLAN or VPN. It should never be exposed to the general broadcast network.
-* **Secret Rotation:** Client Secrets (used by the Registry and Node to log in) should be rotated periodically.
-* **Production Change:** In this lab, we use a local Postgres instance. In production, use a managed database with automated backups and point-in-time recovery.
+#### Configuration Variables and Risks
 
-### 2. The NMOS Registry (IS-04)
-The Registry maintains the live database of every camera, microphone, and switcher on the network.
+| Variable | Purpose | What Happens If Misconfigured | Real-World Impact |
+|----------|---------|------------------------------|-------------------|
+| `KEYCLOAK_ADMIN` | Master administrator username | **🔴 CRITICAL:** If leaked, attacker gains "master key" access | • Can create fake admin accounts ("backdoors")<br>• Can delete all user accounts<br>• Can disable security entirely<br>• Like giving someone the master key to every room |
+| `KEYCLOAK_ADMIN_PASSWORD` | Master admin password | **🔴 CRITICAL:** Complete system compromise | • Full control over who can access your broadcast equipment<br>• Could lock out legitimate operators during live events |
+| `KEYCLOAK_REALM` | Logical grouping of users/permissions | **⚠️ HIGH:** All devices lose access if changed | • Like changing all the locks without telling anyone<br>• Every device must be reconfigured manually |
+| `POSTGRES_PASSWORD` | Database password storing all auth data | **🔴 CRITICAL:** Database breach | • Attacker can steal session tokens<br>• Can see who accessed what and when<br>• Can impersonate any user |
 
-| Variable | Description | Impact of Misconfiguration |
-| :--- | :--- | :--- |
-| `REGISTRY_HOST` | The FQDN (e.g., `nmos-registry.easyebu.com`). | **Discovery Failure.** If this does not match the SSL Certificate Common Name (CN), nodes will refuse to connect via HTTPS. |
-| `REGISTRY_IP` | The static IP of the registry. | **System-Wide Outage.** If this IP changes, the DNS records in `bind/` will point to nowhere. No device will be able to register. |
+#### What is a "Backdoor" in This Context?
+A **backdoor** here means creating unauthorized admin accounts that persist even after the breach is discovered. For example:
+1. Attacker gains admin access
+2. Creates a new admin user called "systemservice" (looks legitimate)
+3. Even if you change the main admin password, the backdoor account remains
+4. Attacker maintains access indefinitely
 
-**🛡️ Best Practices:**
-* **High Availability:** In a real facility, the Registry is never a single container. It should be deployed as a clustered set of 3+ nodes.
-* **Trust:** Only allowing authorized devices to write to the Registry prevents "Rogue Node" attacks (where a hacker inserts a fake camera feed into the production workflow).
+#### 🛡️ Security Best Practices
 
-### 3. Public Key Infrastructure (Certificates)
-While not a single variable, the `nginx/certs` directory and `generate_certs.sh` script are critical.
-
-**⚠️ What Goes Wrong:**
-* **Expired Certs:** If the certificates generated by the script expire (default 825 days), all HTTPS connections will fail instantly.
-* **Leaked CA Key:** If `ca.key` is stolen, an attacker can sign their own certificates that your nodes will trust. This enables Man-in-the-Middle (MitM) attacks to decrypt video control commands.
-
----
-
-## ⚠️ Level 2: Network & Transport (Medium Importance)
-
-**Components:** Nginx (Reverse Proxy), Bind9 (DNS), Macvlan settings.
-
-These components handle the traffic flow. Issues here usually result in connectivity problems rather than security breaches.
-
-### 1. Reverse Proxy (Nginx)
-Nginx terminates the TLS (HTTPS) connection. The internal NMOS services speak HTTP, but Nginx ensures the network sees only HTTPS.
-
-| Variable | Description | Impact of Misconfiguration |
-| :--- | :--- | :--- |
-| `PROXY_IP` | Entry point for all HTTP traffic. | **Routing Loop/Timeout.** If set incorrectly, devices can resolve the DNS name but cannot connect to the port. |
-| `PUBLIC_HTTPS_PORT` | Listening port (Std: 443). | Non-standard ports require manual configuration on every physical device, which is error-prone. |
-
-**🛡️ Best Practices:**
-* **TLS Versions:** Ensure Nginx is configured to reject old protocols (TLS 1.0/1.1) and only accept TLS 1.2 or 1.3 (as enforced by the `testssl` suite in this project).
-* **Force Redirect:** Always force HTTP -> HTTPS redirection (handled in `nginx.conf.tpl`) to prevent accidental unencrypted communication.
-
-### 2. Network Configuration (Macvlan)
-This project bridges containers directly to the physical network.
-
-| Variable | Description | Impact of Misconfiguration |
-| :--- | :--- | :--- |
-| `PARENT_IF` | Physical interface (e.g., `eth0`). | **Container Isolation.** If this is wrong, containers cannot talk to the outside world at all. |
-| `SUBNET` / `GATEWAY` | LAN details. | **IP Conflicts.** If the Subnet mask is wrong, the containers might try to route traffic incorrectly, making them unreachable from other VLANs. |
-
-**🛡️ Best Practices:**
-* **IP Reservation:** The IPs chosen for `REGISTRY_IP`, `NODE_IP`, etc., **MUST** be excluded from your network's DHCP pool. If a laptop joins the network and grabs `192.168.1.52` (the Registry IP), the NMOS system will crash due to an IP conflict.
-
----
-
-## ℹ️ Level 3: Deployment & Support (Low Importance)
-
-**Components:** Docker Image Versions, Project Names.
-
-These affect the maintainability of the lab but rarely cause immediate outages.
-
-| Variable | Description | Impact of Misconfiguration |
-| :--- | :--- | :--- |
-| `PROJECT_NAME` | Docker Compose project prefix. | Purely cosmetic; affects container names. |
-| `*_IMAGE` | Version tags (e.g., `postgres:15`). | **Compatibility Issues.** Using `:latest` is dangerous in production. An automatic update might break the database schema or change the API behavior. |
-
-**🛡️ Best Practices:**
-* **Pin Versions:** Always specify exact version numbers (e.g., `nmos-cpp:v1.2.0` instead of `latest`) to ensure the lab behaves exactly the same way every time it is restarted.
-* **Environment Isolation:** Ensure the `.env` file is **never committed to Git**. It contains secrets. Use a `.env.example` file for the repository.
-
----
-
-## 🛑 Troubleshooting: "What Goes Wrong?"
-
-| Scenario | Likely Cause | Variable to Check | Fix |
-| :--- | :--- | :--- | :--- |
-| **"I can't log in to the Registry"** | Keycloak is down or the endpoint is wrong. | `KEYCLOAK_HOST` | Check `docker logs keycloak` and verify DNS resolution. |
-| **"Node starts but is not discovered"** | Node cannot trust the Registry's certificate. | `ca_certificate_file` | Ensure `ca.crt` is mounted correctly and matches Nginx certs. |
-| **"Host Unreachable"** | Macvlan security restriction. | N/A | Run `./scripts/macvlan_host.sh` to create the host bridge. |
+**Immediate Actions:**
+```bash
