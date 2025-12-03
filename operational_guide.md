@@ -20,18 +20,6 @@ Before diving into configurations, let's understand what this system does:
 - Disable critical equipment during live events
 - Steal proprietary content before release
 
----
-
-## 📑 Table of Contents
-1. [Key Security Concepts](#-key-security-concepts-explained)
-2. [Level 1: Critical Infrastructure](#-level-1-critical-infrastructure-high-importance)
-3. [Level 2: Network & Transport](#-level-2-network--transport-medium-importance)
-4. [Level 3: Deployment & Support](#ℹ️-level-3-deployment--support-low-importance)
-5. [Common Attack Scenarios](#-common-attack-scenarios--mitigations)
-6. [Troubleshooting Guide](#-troubleshooting-guide)
-7. [Production Deployment Checklist](#-production-deployment-checklist)
-
----
 
 ## 🔑 Key Security Concepts Explained
 
