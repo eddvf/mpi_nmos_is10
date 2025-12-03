@@ -103,9 +103,6 @@ Without IS-10 security:
 3. Production switches to fake camera feed
 4. Attacker injects inappropriate content into live broadcast
 
-#### 🛡️ Security Best Practices
-
-
 
 ### 3. Public Key Infrastructure (PKI) - The Trust Foundation
 
