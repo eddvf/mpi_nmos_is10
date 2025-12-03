@@ -25,14 +25,14 @@ Before diving into configurations, let's understand what this system does:
 
 ### Essential Terms for This Project
 
-| Term | What It Means | Why It Matters |
-|------|---------------|----------------|
+| Term | What It Means | 
+|------|---------------|
 | **JWT (JSON Web Token)** | A digital "pass" that proves who you are | 
 | **PKI (Public Key Infrastructure)** | System for creating and managing digital certificates |
-| **TLS/SSL Certificate** | Digital ID card for servers | Ensures you're talking to the real server, not an imposter |
+| **TLS/SSL Certificate** | Digital ID card for servers |
 | **Backdoor** | Hidden access method that bypasses normal security |
-| **Man-in-the-Middle (MitM)** | Attack where someone secretly intercepts communications | Like someone listening to your phone calls by tapping the line |
-| **CA (Certificate Authority)** | Entity that issues digital certificates | Like a government office that issues driver's licenses |
+| **Man-in-the-Middle (MitM)** | Attack where someone secretly intercepts communications |
+| **CA (Certificate Authority)** | Entity that issues digital certificates |
 | **FQDN (Fully Qualified Domain Name)** | Complete address of a server (e.g., nmos-registry.lab.com) |
 | **Realm (in Keycloak)** | Isolated space for users and permissions |
 
