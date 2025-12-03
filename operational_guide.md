@@ -81,25 +81,16 @@ A **backdoor** here means creating unauthorized admin accounts that persist even
 **Immediate Actions:**
 ```bash
 # 1. Change default passwords immediately after deployment
-KEYCLOAK_ADMIN_PASSWORD=$(openssl rand -base64 32)
-
+KEYCLOAK_ADMIN_PASSWORD=Strong Password
 # 2. Store passwords in a secure vault, never in plain text
-# Use tools like HashiCorp Vault, AWS Secrets Manager, or Azure Key Vault
-
 # 3. Enable audit logging
-docker exec keycloak /opt/keycloak/bin/kcadm.sh update events/config \
-  -s eventsEnabled=true \
-  -s adminEventsEnabled=true
+
 ```
 
 **Network Isolation:**
 - Place Keycloak admin interface on a separate management VLAN
 - Use firewall rules to restrict access:
-```bash
-# Example: Only allow admin access from management network
-iptables -A INPUT -p tcp --dport 8443 -s 10.0.100.0/24 -j ACCEPT
-iptables -A INPUT -p tcp --dport 8443 -j DROP
-```
+
 
 **Regular Maintenance:**
 - Rotate client secrets monthly
@@ -126,32 +117,7 @@ Without IS-10 security:
 
 #### 🛡️ Security Best Practices
 
-**Prevent Rogue Devices:**
-```bash
-# Configure Registry to require authentication
-export REGISTRY_AUTH_MODE=oauth2
-export REGISTRY_OAUTH_ISSUER=https://keycloak.lab.com/realms/nmos
 
-# Implement device allowlisting
-export REGISTRY_DEVICE_ALLOWLIST=/config/approved_devices.json
-```
-
-**High Availability Setup:**
-```yaml
-# docker-compose.yml excerpt for clustered registry
-services:
-  registry-1:
-    image: nmos-cpp:latest
-    environment:
-      - REGISTRY_CLUSTER_MODE=true
-      - REGISTRY_PEERS=registry-2,registry-3
-  
-  registry-2:
-    # ... similar configuration
-  
-  registry-3:
-    # ... similar configuration
-```
 
 ### 3. Public Key Infrastructure (PKI) - The Trust Foundation
 
@@ -178,21 +144,6 @@ Day 0    -----> Day 825 (Default) -----> SYSTEM FAILURE
 
 #### 🛡️ Security Best Practices
 
-**Secure Certificate Storage:**
-```bash
-# 1. Protect the CA private key
-chmod 400 nginx/certs/ca.key
-chown root:root nginx/certs/ca.key
-
-# 2. Store CA key offline after certificate generation
-# Move to hardware security module (HSM) or encrypted USB
-mv nginx/certs/ca.key /secure-offline-storage/
-
-# 3. Monitor certificate expiration
-cat > /etc/cron.d/cert-monitor << EOF
-0 9 * * 1 /usr/local/bin/check-cert-expiry.sh
-EOF
-```
 
 **Certificate Rotation Process:**
 ```bash
@@ -268,36 +219,7 @@ server {
 | `BIND_IP` | DNS server address | **⚠️ HIGH:** Complete name resolution failure | • No device can find any service<br>• Must use IP addresses directly<br>• Like removing all street signs |
 | `DOMAIN` | Your lab domain | **⚠️ MEDIUM:** Certificate mismatch | • SSL errors if doesn't match certificates<br>• Devices may refuse connections |
 
-#### DNS Poisoning Attack Scenario
-```
-Normal Flow:
-Device asks: "Where is nmos-registry.lab.com?"
-DNS responds: "192.168.1.52" ✅
 
-Attack Flow:
-Attacker intercepts DNS
-Device asks: "Where is nmos-registry.lab.com?"
-Attacker responds: "192.168.1.100" (malicious server) ❌
-Device connects to fake registry
-```
-
-#### 🛡️ Security Best Practices
-
-**DNS Security Configuration:**
-```bash
-# Enable DNSSEC for authentication
-dnssec-enable yes;
-dnssec-validation yes;
-
-# Restrict zone transfers
-allow-transfer { none; };
-
-# Rate limiting
-rate-limit {
-    responses-per-second 10;
-    errors-per-second 5;
-};
-```
 
 ### 3. Network Configuration (Macvlan) - The Network Bridge
 
@@ -321,200 +243,6 @@ Result: IP CONFLICT - Registry becomes unreachable
         Random packet loss
         Intermittent failures
 ```
-
-#### 🛡️ Security Best Practices
-
-**Network Planning:**
-```bash
-# 1. Reserve IP ranges in DHCP server
-# Example for ISC DHCP:
-subnet 192.168.1.0 netmask 255.255.255.0 {
-    range 192.168.1.100 192.168.1.200;  # DHCP range
-    # .50-.99 reserved for NMOS static IPs
-}
-
-# 2. Document IP allocations
-cat > /etc/nmos/ip-allocations.txt << EOF
-192.168.1.50  - DNS Server (Bind9)
-192.168.1.51  - Reverse Proxy (Nginx)
-192.168.1.52  - NMOS Registry
-192.168.1.53  - NMOS Node
-192.168.1.54  - Keycloak Auth
-192.168.1.55  - PostgreSQL Database
-192.168.1.60  - Host Bridge
-192.168.1.61-99 - Reserved for expansion
-EOF
-
-# 3. Monitor for conflicts
-arp-scan --local | grep -i "dup"
-```
-
----
-
-## ℹ️ Level 3: Deployment & Support (Low Importance)
-
-> **Impact Level:** Maintenance difficulties, version conflicts, or documentation issues
-
-These settings affect long-term maintainability rather than immediate functionality.
-
-### Configuration Variables and Risks
-
-| Variable | Purpose | What Happens If Misconfigured | Real-World Impact |
-|----------|---------|------------------------------|-------------------|
-| `PROJECT_NAME` | Container naming prefix | **✅ MINIMAL:** Cosmetic only | • Container names change<br>• No functional impact |
-| `*_IMAGE` versions | Software versions | **⚠️ MEDIUM:** Compatibility issues | • Unexpected behavior after updates<br>• Database schema mismatches<br>• API breaking changes |
-
-### Understanding Version Pinning
-
-**Bad Practice - Using 'latest':**
-```yaml
-services:
-  registry:
-    image: nmos-cpp:latest  # ❌ Dangerous
-    # Monday: Gets v1.0.0
-    # Tuesday: Auto-updates to v2.0.0
-    # Wednesday: Breaking changes cause outage
-```
-
-**Good Practice - Pinned Versions:**
-```yaml
-services:
-  registry:
-    image: nmos-cpp:v1.2.3  # ✅ Predictable
-    # Always gets exact same version
-    # Updates are intentional and tested
-```
-
-### 🛡️ Best Practices
-
-**Version Management Strategy:**
-```bash
-# 1. Document all versions in use
-cat > VERSION_MANIFEST.txt << EOF
-Component     | Current Version | Tested With
---------------|-----------------|-------------
-NMOS Registry | v1.2.3         | IS-04 v1.3
-NMOS Node     | v1.2.3         | IS-05 v1.1
-Keycloak      | 22.0.1         | OIDC 1.0
-PostgreSQL    | 15.3           | -
-Nginx         | 1.24.0         | -
-Bind9         | 9.18.12        | -
-EOF
-
-# 2. Test updates in staging
-docker-compose -f docker-compose.staging.yml up -d
-
-# 3. Maintain rollback plan
-docker tag nmos-cpp:v1.2.3 nmos-cpp:v1.2.3-backup
-```
-
----
-
-## 🚫 Common Attack Scenarios & Mitigations
-
-### Scenario 1: Unauthorized Operator Access
-**Attack:** Disgruntled employee tries to disrupt live broadcast
-```
-1. Attacker knows operator credentials
-2. Logs into NMOS Controller
-3. Reroutes camera feeds during live event
-4. Causes broadcast interruption
-```
-
-**Mitigation:**
-- Implement role-based access control (RBAC)
-- Use time-limited sessions
-- Enable audit logging
-- Require 2FA for production changes
-
-### Scenario 2: Rogue Device Injection
-**Attack:** Attacker connects unauthorized device to network
-```
-1. Attacker brings laptop with NMOS node software
-2. Device auto-registers with Registry
-3. Advertises as legitimate source (e.g., "Camera_01")
-4. Production accidentally uses fake source
-```
-
-**Mitigation:**
-- Enable IS-10 authorization
-- Implement device allowlisting
-- Monitor for unknown devices
-- Use network access control (NAC/802.1X)
-
-### Scenario 3: Man-in-the-Middle Attack
-**Attack:** Attacker intercepts control commands
-```
-1. Attacker compromises network position
-2. Intercepts NMOS control traffic
-3. Modifies commands in transit
-4. Changes routing without authorization
-```
-
-**Mitigation:**
-- Enforce TLS for all communications
-- Implement certificate pinning
-- Use network segmentation
-- Deploy intrusion detection systems (IDS)
-
-### Scenario 4: Certificate Expiration During Live Event
-**Attack:** Not malicious, but devastating timing
-```
-1. Certificates expire during major broadcast
-2. All secure connections fail instantly
-3. Devices can't authenticate
-4. Complete system failure during critical moment
-```
-
-**Mitigation:**
-- Monitor expiration dates (90, 60, 30, 7 days warning)
-- Maintain hot-standby certificates
-- Practice certificate rotation procedures
-- Keep emergency bypass procedures
-
----
-
-## 🔧 Troubleshooting Guide
-
-### Quick Diagnosis Table
-
-| Symptom | Check These First | Common Solutions |
-|---------|------------------|------------------|
-| **"Cannot login to Registry"** | 1. Keycloak status<br>2. DNS resolution<br>3. Certificate validity | • `docker logs keycloak`<br>• `nslookup keycloak.lab.com`<br>• `openssl s_client -connect keycloak.lab.com:443` |
-| **"Node not discovered"** | 1. Registry reachability<br>2. Authentication token<br>3. Network connectivity | • `curl https://registry.lab.com/x-nmos/registration/v1.3/health`<br>• Check JWT expiration<br>• `ping registry.lab.com` |
-| **"Certificate errors"** | 1. Certificate expiration<br>2. Hostname mismatch<br>3. CA trust | • `openssl x509 -in cert.pem -text -noout`<br>• Verify CN matches FQDN<br>• Check ca.crt is distributed |
-| **"Intermittent failures"** | 1. IP conflicts<br>2. DNS cache<br>3. Network congestion | • `arp -a | grep duplicate`<br>• `systemctl restart systemd-resolved`<br>• Check bandwidth utilization |
-| **"Permission denied"** | 1. File ownership<br>2. OAuth2 scopes<br>3. RBAC policies | • `ls -la` check ownership<br>• Verify token scopes<br>• Review Keycloak roles |
-
-### Diagnostic Commands Toolbox
-```bash
-# Network Diagnostics
-docker exec nmos-node ping -c 4 nmos-registry
-docker exec nmos-node nslookup nmos-registry.lab.com
-docker exec nginx curl -k https://localhost/health
-
-# Certificate Validation
-openssl x509 -in nginx/certs/registry.crt -text -noout | grep -E "Subject:|Not After"
-openssl verify -CAfile nginx/certs/ca.crt nginx/certs/registry.crt
-
-# Authentication Testing
-curl -X POST https://keycloak.lab.com/realms/nmos/protocol/openid-connect/token \
-  -d "client_id=nmos-registry" \
-  -d "client_secret=$SECRET" \
-  -d "grant_type=client_credentials"
-
-# Container Health
-docker-compose ps
-docker stats --no-stream
-docker logs --tail 50 -f keycloak
-
-# System Resources
-df -h
-free -m
-netstat -tulpn | grep -E ":(80|443|5432|8080)"
-```
-
----
 
 ## ✅ Production Deployment Checklist
 
@@ -558,44 +286,8 @@ netstat -tulpn | grep -E ":(80|443|5432|8080)"
   - [ ] Confirm authentication works
   - [ ] Validate certificate chain
 
-### Post-Deployment (Operations Phase)
 
-- [ ] **Monitoring Setup**
-  - [ ] Certificate expiration monitoring
-  - [ ] Service health checks
-  - [ ] Log aggregation configured
-  - [ ] Alert notifications enabled
 
-- [ ] **Documentation**
-  - [ ] Network diagram created
-  - [ ] Runbook procedures written
-  - [ ] Emergency contacts listed
-  - [ ] Change log maintained
-
-- [ ] **Regular Maintenance**
-  - [ ] Weekly: Review audit logs
-  - [ ] Monthly: Rotate secrets
-  - [ ] Quarterly: Security audit
-  - [ ] Annually: Disaster recovery test
-
-### Emergency Procedures
-
-**In Case of Security Breach:**
-1. Isolate affected systems
-2. Revoke all authentication tokens
-3. Rotate all secrets and certificates
-4. Review audit logs for impact assessment
-5. Implement additional monitoring
-6. Document lessons learned
-
-**In Case of Certificate Expiration:**
-1. Use pre-generated backup certificates
-2. Restart affected services
-3. Verify all connections restored
-4. Investigate why monitoring failed
-5. Update rotation schedule
-
----
 
 ## 📚 Additional Resources
 
@@ -604,32 +296,15 @@ netstat -tulpn | grep -E ":(80|443|5432|8080)"
 - [NMOS IS-10 Authorization](https://specs.amwa.tv/is-10/)
 - [Keycloak Documentation](https://www.keycloak.org/documentation)
 - [SMPTE ST 2110 Standards](https://www.smpte.org/standards)
-
-### Security Tools
-- [testssl.sh](https://testssl.sh/) - TLS/SSL tester
-- [OWASP ZAP](https://www.zaproxy.org/) - Security scanner
-- [Fail2ban](https://www.fail2ban.org/) - Intrusion prevention
-
-### Monitoring Solutions
-- [Prometheus](https://prometheus.io/) + [Grafana](https://grafana.com/) - Metrics
-- [ELK Stack](https://www.elastic.co/elk-stack) - Log analysis
-- [Nagios](https://www.nagios.org/) - Infrastructure monitoring
-
+- [BIND9 AMWA](https://specs.amwa.tv/info-004/branches/main/docs/Example_HOWTO.html)
+- [NGINX Documentation](https://nginx.org/en/docs/index.html)
+- [Code for NMOS Registry and Node](https://github.com/sony/nmos-cpp/)
 ---
 
 ## 🤝 Contributing
 
-This is an open-source project. If you identify security improvements or best practices, please:
-
-1. Fork the repository
-2. Create a feature branch
-3. Document your changes thoroughly
-4. Submit a pull request with clear explanation
-
-For security vulnerabilities, please report privately to avoid public disclosure before patches are available.
+This is an ongoing project meant for training purposes and it is not production ready. If you identify security improvements or best practices, please report privately to avoid public disclosure before patches are available.
 
 ---
 
-**Last Updated:** December 2024  
-**Maintainers:** NMOS Lab Team  
-**License:** Apache 2.0
+**Last Updated:** December 2025
