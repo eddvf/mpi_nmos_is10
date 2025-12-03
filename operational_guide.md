@@ -7,7 +7,7 @@
 Before diving into configurations, let's understand what this system does:
 
 ### SMPTE ST 2110 & NMOS Overview
-**SMPTE ST 2110** is a standard that allows professional broadcast equipment (cameras, audio mixers, video switchers) to communicate over IP networks instead of traditional SDI cables. Think of it as replacing physical video cables with network connections.
+**SMPTE ST 2110** is a standard that allows professional broadcast equipment (cameras, audio mixers, video switchers) to communicate over IP networks instead of traditional SDI cables.
 
 **NMOS (Networked Media Open Specifications)** provides the control layer for ST 2110:
 - **IS-04:** Device discovery and registration (like a phone book for broadcast equipment)
@@ -39,14 +39,14 @@ Before diving into configurations, let's understand what this system does:
 
 | Term | What It Means | Why It Matters |
 |------|---------------|----------------|
-| **JWT (JSON Web Token)** | A digital "pass" that proves who you are | Like a backstage pass at a concert - if someone steals it, they can access restricted areas |
-| **PKI (Public Key Infrastructure)** | System for creating and managing digital certificates | Like a passport office - it issues trusted IDs that others can verify |
+| **JWT (JSON Web Token)** | A digital "pass" that proves who you are | 
+| **PKI (Public Key Infrastructure)** | System for creating and managing digital certificates |
 | **TLS/SSL Certificate** | Digital ID card for servers | Ensures you're talking to the real server, not an imposter |
-| **Backdoor** | Hidden access method that bypasses normal security | Like a secret entrance that lets someone into your system without proper credentials |
+| **Backdoor** | Hidden access method that bypasses normal security |
 | **Man-in-the-Middle (MitM)** | Attack where someone secretly intercepts communications | Like someone listening to your phone calls by tapping the line |
 | **CA (Certificate Authority)** | Entity that issues digital certificates | Like a government office that issues driver's licenses |
-| **FQDN (Fully Qualified Domain Name)** | Complete address of a server (e.g., nmos-registry.lab.com) | Like a complete mailing address vs. just a house number |
-| **Realm (in Keycloak)** | Isolated space for users and permissions | Like separate buildings in a campus - each has its own security |
+| **FQDN (Fully Qualified Domain Name)** | Complete address of a server (e.g., nmos-registry.lab.com) |
+| **Realm (in Keycloak)** | Isolated space for users and permissions |
 
 ---
 
