@@ -1,6 +1,6 @@
 {
   "id" : "8acce5ac-a92e-4e39-8ad3-67d4affe4b0f",
-  "realm" : "${KEYCLOAK_REALM}",
+  "realm" : "easyebu-nmos",
   "displayName" : "",
   "displayNameHtml" : "",
   "notBefore" : 0,
@@ -51,14 +51,14 @@
     "realm" : [ {
       "id" : "5097d1f8-4716-4ccb-890d-4c0b80aef8bf",
       "name" : "uma_authorization",
-      "description" : "${role_uma_authorization}",
+      "description" : "",
       "composite" : false,
       "clientRole" : false,
       "containerId" : "8acce5ac-a92e-4e39-8ad3-67d4affe4b0f",
       "attributes" : { }
     }, {
       "id" : "e69387c4-d00b-413c-ba93-922b1ee9be1b",
-      "name" : "default-roles-${KEYCLOAK_REALM}",
+      "name" : "default-roles-easyebu-nmos",
       "description" : "${role_default-roles}",
       "composite" : true,
       "composites" : {
@@ -91,7 +91,7 @@
       }, {
         "id" : "7c723d28-0a4a-4041-b29b-eed6abd09df3",
         "name" : "impersonation",
-        "description" : "${role_impersonation}",
+        "description" : "",
         "composite" : false,
         "clientRole" : true,
         "containerId" : "d42a054c-681d-4d02-a21b-c0d9fb4f80d2",
@@ -156,7 +156,7 @@
         "composite" : true,
         "composites" : {
           "client" : {
-            "realm-management" : [ "view-realm", "impersonation", "manage-authorization", "view-users", "manage-identity-providers", "manage-events", "query-clients", "view-authorization", "view-events", "query-realms", "query-groups", "manage-users", "manage-clients", "query-users", "manage-realm", "view-clients", "create-client", "view-identity-providers" ]
+            "realm-management" : [ "view-realm", "impersonation", "manage-authorization", "view-users", "manage-identity-providers", "manage-events", "query-clients", "view-authorization", "view-events", "query-groups", "query-realms", "manage-clients", "manage-users", "query-users", "manage-realm", "view-clients", "create-client", "view-identity-providers" ]
           }
         },
         "clientRole" : true,
@@ -340,7 +340,7 @@
   "groups" : [ ],
   "defaultRole" : {
     "id" : "e69387c4-d00b-413c-ba93-922b1ee9be1b",
-    "name" : "default-roles-${KEYCLOAK_REALM}",
+    "name" : "default-roles-easyebu-nmos",
     "description" : "${role_default-roles}",
     "composite" : true,
     "clientRole" : false,
@@ -391,14 +391,14 @@
   "clients" : [ {
     "id" : "256e3603-670f-45ac-8b24-5bfe9cfff0c4",
     "clientId" : "account",
-    "name" : "${client_account}",
-    "rootUrl" : "${authBaseUrl}",
-    "baseUrl" : "/realms/${KEYCLOAK_REALM}/account/",
+    "name" : "",
+    "rootUrl" : "",
+    "baseUrl" : "/realms/easyebu-nmos/account/",
     "surrogateAuthRequired" : false,
     "enabled" : true,
     "alwaysDisplayInConsole" : false,
     "clientAuthenticatorType" : "client-secret",
-    "redirectUris" : [ "/realms/${KEYCLOAK_REALM}/account/*" ],
+    "redirectUris" : [ "/realms/easyebu-nmos/account/*" ],
     "webOrigins" : [ ],
     "notBefore" : 0,
     "bearerOnly" : false,
@@ -423,13 +423,13 @@
     "id" : "867b5172-7551-4932-88fa-64c6b9d66b39",
     "clientId" : "account-console",
     "name" : "${client_account-console}",
-    "rootUrl" : "${authBaseUrl}",
-    "baseUrl" : "/realms/${KEYCLOAK_REALM}/account/",
+    "rootUrl" : "",
+    "baseUrl" : "/realms/easyebu-nmos/account/",
     "surrogateAuthRequired" : false,
     "enabled" : true,
     "alwaysDisplayInConsole" : false,
     "clientAuthenticatorType" : "client-secret",
-    "redirectUris" : [ "/realms/${KEYCLOAK_REALM}/account/*" ],
+    "redirectUris" : [ "/realms/easyebu-nmos/account/*" ],
     "webOrigins" : [ ],
     "notBefore" : 0,
     "bearerOnly" : false,
@@ -481,7 +481,8 @@
     "protocol" : "openid-connect",
     "attributes" : {
       "realm_client" : "false",
-      "client.use.lightweight.access.token.enabled" : "true"
+      "client.use.lightweight.access.token.enabled" : "true",
+      "post.logout.redirect.uris" : "+"
     },
     "authenticationFlowBindingOverrides" : { },
     "fullScopeAllowed" : true,
@@ -491,7 +492,7 @@
   }, {
     "id" : "91cdda38-ae5b-4f6a-8581-2f4e1d58c6e8",
     "clientId" : "broker",
-    "name" : "${client_broker}",
+    "name" : "",
     "surrogateAuthRequired" : false,
     "enabled" : true,
     "alwaysDisplayInConsole" : false,
@@ -509,7 +510,8 @@
     "frontchannelLogout" : false,
     "protocol" : "openid-connect",
     "attributes" : {
-      "realm_client" : "true"
+      "realm_client" : "true",
+      "post.logout.redirect.uris" : "+"
     },
     "authenticationFlowBindingOverrides" : { },
     "fullScopeAllowed" : false,
@@ -537,7 +539,8 @@
     "frontchannelLogout" : false,
     "protocol" : "openid-connect",
     "attributes" : {
-      "realm_client" : "true"
+      "realm_client" : "true",
+      "post.logout.redirect.uris" : "+"
     },
     "authenticationFlowBindingOverrides" : { },
     "fullScopeAllowed" : false,
@@ -548,13 +551,13 @@
     "id" : "35b627fe-5e98-4b50-883d-13b7d19bc05c",
     "clientId" : "security-admin-console",
     "name" : "${client_security-admin-console}",
-    "rootUrl" : "${authAdminUrl}",
-    "baseUrl" : "/admin/${KEYCLOAK_REALM}/console/",
+    "rootUrl" : "",
+    "baseUrl" : "/admin/easyebu-nmos/console/",
     "surrogateAuthRequired" : false,
     "enabled" : true,
     "alwaysDisplayInConsole" : false,
     "clientAuthenticatorType" : "client-secret",
-    "redirectUris" : [ "/admin/${KEYCLOAK_REALM}/console/*" ],
+    "redirectUris" : [ "/admin/easyebu-nmos/console/*" ],
     "webOrigins" : [ "+" ],
     "notBefore" : 0,
     "bearerOnly" : false,
@@ -643,7 +646,7 @@
     "description" : "OpenID Connect built-in scope: offline_access",
     "protocol" : "openid-connect",
     "attributes" : {
-      "consent.screen.text" : "${offlineAccessScopeConsentText}",
+      "consent.screen.text" : "",
       "display.on.consent.screen" : "true"
     }
   }, {
@@ -666,9 +669,10 @@
       "config" : {
         "id.token.claim" : "false",
         "lightweight.claim" : "false",
-        "access.token.claim" : "true",
         "introspection.token.claim" : "true",
-        "included.custom.audience" : "*.${DOMAIN}"
+        "access.token.claim" : "true",
+        "included.custom.audience" : "*.easyebu.com",
+        "userinfo.token.claim" : "false"
       }
     }, {
       "id" : "75dfed14-db67-4549-ad93-a7b037b3ebb6",
@@ -726,7 +730,7 @@
       "subType" : "authenticated",
       "subComponents" : { },
       "config" : {
-        "allowed-protocol-mapper-types" : [ "saml-user-attribute-mapper", "saml-user-property-mapper", "oidc-full-name-mapper", "oidc-usermodel-property-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-usermodel-attribute-mapper", "oidc-address-mapper", "saml-role-list-mapper" ]
+        "allowed-protocol-mapper-types" : [ "saml-user-property-mapper", "oidc-sha256-pairwise-sub-mapper", "saml-role-list-mapper", "oidc-address-mapper", "oidc-full-name-mapper", "oidc-usermodel-property-mapper", "oidc-usermodel-attribute-mapper", "saml-user-attribute-mapper" ]
       }
     }, {
       "id" : "a8dbde37-bbfd-48d6-91a9-9b5ff22efea3",
@@ -1466,8 +1470,8 @@
   "attributes" : {
     "cibaBackchannelTokenDeliveryMode" : "poll",
     "cibaAuthRequestedUserHint" : "login_hint",
-    "oauth2DevicePollingInterval" : "5",
     "clientOfflineSessionMaxLifespan" : "0",
+    "oauth2DevicePollingInterval" : "5",
     "clientSessionIdleTimeout" : "0",
     "actionTokenGeneratedByUserLifespan.verify-email" : "",
     "actionTokenGeneratedByUserLifespan.idp-verify-account-via-email" : "",
@@ -1480,7 +1484,7 @@
     "saml.signature.algorithm" : "",
     "parRequestUriLifespan" : "60",
     "clientSessionMaxLifespan" : "0",
-    "frontendUrl" : "https://keycloak.${DOMAIN}",
+    "frontendUrl" : "https://keycloak.easyebu.com",
     "acr.loa.map" : "{}",
     "shortVerificationUri" : "",
     "actionTokenGeneratedByUserLifespan.reset-credentials" : ""

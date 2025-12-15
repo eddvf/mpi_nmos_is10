@@ -34,7 +34,7 @@ services:
 
   keycloak:
     image: ${KEYCLOAK_IMAGE}
-    command: start
+    command: ["start", "--import-realm"]
     restart: unless-stopped
     environment:
       KEYCLOAK_ADMIN: admin
@@ -53,12 +53,14 @@ services:
     volumes:
       - ./keycloak/themes:/opt/keycloak/themes
       - ./nginx/certs:/opt/keycloak/certs:ro
+      - ./keycloak/import:/opt/keycloak/data/import:ro  
     depends_on:
       postgres:
         condition: service_healthy
     networks:
       macnet:
         ipv4_address: ${KEYCLOAK_IP}
+
 
   nmos-registry:
     image: ${NMOS_IMAGE}
